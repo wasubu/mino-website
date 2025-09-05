@@ -6,7 +6,7 @@
   }
 
   .filter-gray {
-    filter: invert(41%) sepia(0%) saturate(0%) hue-rotate(193deg) brightness(95%) contrast(90%);
+    filter: invert(41%) sepia(0%) saturate(0%) hue-rotate(193deg) brightness(120%) contrast(90%);
   }
 
   .hero-button {
@@ -14,10 +14,14 @@
   }
 
   .project-card {
-    @apply min-w-[250px] bg-white rounded-xl shadow-md flex-shrink-0 p-4
+    @apply min-w-[250px] bg-white rounded-xl shadow-md flex-shrink-0 p-4 mb-4
   }
 
   .project-image-div {
     @apply max-h-40 rounded-md mb-4 w-full aspect-[4/3] overflow-hidden
+  }
+
+  .project-desc {
+    @apply text-gray-600 text-sm mt-1 mb-30 sm:mb-1
   }
 }

@@ -783,7 +783,7 @@
     width: 300px;
   }
   .filter-gray {
-    filter: invert(41%) sepia(0%) saturate(0%) hue-rotate(193deg) brightness(95%) contrast(90%);
+    filter: invert(41%) sepia(0%) saturate(0%) hue-rotate(193deg) brightness(120%) contrast(90%);
   }
   .hero-button {
     display: flex;
@@ -802,6 +802,7 @@
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
   .project-card {
+    margin-bottom: calc(var(--spacing) * 4);
     min-width: 250px;
     flex-shrink: 0;
     border-radius: var(--radius-xl);
@@ -817,6 +818,16 @@
     width: 100%;
     overflow: hidden;
     border-radius: var(--radius-md);
+  }
+  .project-desc {
+    margin-top: calc(var(--spacing) * 1);
+    margin-bottom: calc(var(--spacing) * 30);
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    color: var(--color-gray-600);
+    @media (width >= 40rem) {
+      margin-bottom: calc(var(--spacing) * 1);
+    }
   }
 }
 @property --tw-rotate-x {
