@@ -1,0 +1,201 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wasubu</title>
+    <meta name="description"
+        content="Wasubu is my portfolio website showcasing projects, creative work, and interactive experiments.">
+    <link href="./output.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="sticky top-0 border-b-2 border-gray-400 bg-white shadow-sm">
+        <div class="flex justify-between mx-3">
+            <div class="flex items-center p-1.5 space-x-2.5">
+                <img class="h-7 w-7 rounded-full" src="assets/logo.webp" alt="logo">
+                <h1 class="text-[20px]">Wasubu Minoco</h1>
+            </div>
+            <button class="p-2 rounded-full hover:bg-gray-200 hover:cursor-pointer transition block md:hidden">
+                <img class="h-6 w-6" src="assets/hamburger.svg" alt="show more">
+            </button>
+        </div>
+    </nav>
+    <aside
+        class="fixed top-14 bottom-5 left-3 w-60 border-2 border-gray-300 rounded-xl bg-white shadow-xl hidden md:block">
+        <div class="flex flex-col items-center p-6 space-y-6">
+            <!-- Logo & Name -->
+            <div class="flex flex-col items-center space-y-2">
+                <img src="assets/logo.webp" alt="logo" class="h-20 w-20 rounded-full shadow-md">
+                <h1 class="text-2xl font-bold">Wasubu Minoco</h1>
+            </div>
+            <!-- Social Links -->
+            <nav class="flex flex-col space-y-3 w-full">
+                <!-- YouTube Expand-on-hover card -->
+                <div
+                    class="group relative w-full overflow-hidden rounded-lg shadow-md transition-all duration-300 bg-red-500 hover:h-40 h-14 pt-[4px]">
+                    <a href="https://youtube.com/" target="_blank"
+                        class="flex flex-col items-center justify-start h-full text-white px-4 py-2">
+                        <!-- Always visible top row -->
+                        <div class="flex items-center space-x-3">
+                            <img class="h-8 w-8" src="assets/youtube.svg" alt="youtube">
+                            <span class="font-semibold text-lg">YouTube</span>
+                        </div>
+                        <!-- Extra info (hidden until hover) -->
+                        <div
+                            class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-2 text-sm text-center">
+                            I post mostly retro gadgets stuff, sorry if I'm inactive
+                            <div class="mt-1 underline">watch →</div>
+                        </div>
+                    </a>
+                </div>
+                <!-- Instagram -->
+                <a href="https://instagram.com/" target="_blank"
+                    class="flex items-center justify-center space-x-3 bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg shadow-md transition transform hover:scale-105">
+                    <img class="h-8 w-8" src="assets/insta.svg" alt="instagram">
+                    <span class="font-semibold">Instagram</span>
+                </a>
+                <!-- Ko-fi -->
+                <div
+                    class="group relative w-full overflow-hidden rounded-lg shadow-md transition-all duration-300 bg-orange-500 hover:h-40 h-14 pt-[4px]">
+                    <a href="https://youtube.com/" target="_blank"
+                        class="flex flex-col items-center justify-start h-full text-white px-4 py-2">
+                        <!-- Always visible top row -->
+                        <div class="flex items-center space-x-3">
+                            <img class="h-8 w-8" src="assets/kofi.svg" alt="youtube">
+                            <span class="font-semibold text-lg">Ko-fi</span>
+                        </div>
+                        <!-- Extra info (hidden until hover) -->
+                        <div
+                            class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-2 text-sm text-center">
+                            making content takes a lot of time, consider buying me a coffee.
+                            <div class="mt-1 underline">donate →</div>
+                        </div>
+                    </a>
+                </div>
+                <!-- GitHub -->
+                <a href="https://github.com/" target="_blank"
+                    class="flex items-center justify-center space-x-3 bg-gray-800 hover:bg-gray-900 text-white py-3 rounded-lg shadow-md transition transform hover:scale-105">
+                    <img class="h-8 w-8" src="assets/github.svg" alt="instagram">
+                    <span class="font-semibold">GitHub</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+    <main class="md:ml-[265px] px-8 flex-1 pt-[56px]">
+        <!-- Hero Header -->
+        <div class="mb-12 text-center space-y-4 grid">
+            <div class="rounded-2xl overflow-hidden w-full h-40 xl:h-56">
+                <img class="w-full h-full object-cover" src="assets/thumb.webp" alt="Wasubu Minoco">
+            </div>
+            <h2 class="text-5xl font-bold mt-5">Welcome to My Website!</h2>
+            <p class="text-gray-700 text-xl">
+                Explore my work and learn more about me. (^ᴗ^)ﾉ
+            </p>
+        </div>
+        <!-- Bento Box / Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- RG Docs -->
+            <a href="/docs" class="hero-button bg-blue-500 hover:bg-blue-600">
+                <span class="text-2xl font-bold">RG Docs</span>
+                <span class="mt-2 text-white/80">Documentation & Guides</span>
+            </a>
+            <!-- Projects -->
+            <a href="/projects"
+                class="bg-green-500 hover:bg-green-600 hero-button border-green-600 hover:border-green-700">
+                <span class="text-2xl font-bold">Projects</span>
+                <span class="mt-2 text-white/80">My Work & Experiments</span>
+            </a>
+            <!-- Blogs -->
+            <a href="/blogs" class="bg-purple-500 hover:bg-purple-600 hero-button">
+                <span class="text-2xl font-bold">Blogs</span>
+                <span class="mt-2 text-white/80">Articles & Thoughts</span>
+            </a>
+            <!-- About Me -->
+            <a href="/about" class="bg-yellow-500 hover:bg-yellow-600 hero-button">
+                <span class="text-2xl font-bold">Hack Tools</span>
+                <span class="mt-2 text-white/80">Interact with state of the art tools</span>
+            </a>
+        </div>
+        <!-- Projects Section -->
+        <section class="bg-gray-100 py-12 px-6 mt-8 rounded-xl">
+            <h2 class="text-3xl font-bold mb-6">My Projects</h2>
+            <div class="flex space-x-6 overflow-x-auto">
+                <!-- Project Card 1 -->
+                <div class="min-w-[250px] bg-white rounded-xl shadow-md flex-shrink-0 p-4">
+                    <img src="assets/project1.webp" alt="Project 1" class="rounded-md mb-4 w-full h-40 object-cover">
+                    <h3 class="font-semibold text-lg">Project One</h3>
+                    <p class="text-gray-600 text-sm mt-1">Short description of the project goes here.</p>
+                </div>
+                <!-- Project Card 2 -->
+                <div class="min-w-[250px] bg-white rounded-xl shadow-md flex-shrink-0 p-4">
+                    <img src="assets/project2.webp" alt="Project 2" class="rounded-md mb-4 w-full h-40 object-cover">
+                    <h3 class="font-semibold text-lg">Project Two</h3>
+                    <p class="text-gray-600 text-sm mt-1">Short description of the project goes here.</p>
+                </div>
+                <!-- Project Card 3 -->
+                <div class="min-w-[250px] bg-white rounded-xl shadow-md flex-shrink-0 p-4">
+                    <img src="assets/project3.webp" alt="Project 3" class="rounded-md mb-4 w-full h-40 object-cover">
+                    <h3 class="font-semibold text-lg">Project Three</h3>
+                    <p class="text-gray-600 text-sm mt-1">Short description of the project goes here.</p>
+                </div>
+                <!-- Project Card 3 -->
+                <div class="min-w-[250px] bg-white rounded-xl shadow-md flex-shrink-0 p-4">
+                    <img src="assets/project4.webp" alt="Project 3" class="rounded-md mb-4 w-full h-40 object-cover">
+                    <h3 class="font-semibold text-lg">Project Three</h3>
+                    <p class="text-gray-600 text-sm mt-1">Short description of the project goes here.</p>
+                </div>
+                <!-- Add more cards as needed -->
+            </div>
+        </section>
+        <footer class="bg-gray-100 mt-12 rounded-t-xl">
+            <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col items-center justify-between space-y-4 ">
+
+                <!-- Left: Logo + Name -->
+                <div class="flex items-center space-x-3">
+                    <img class="h-10 w-10 rounded-full shadow md:hidden block" src="assets/logo.webp" alt="Wasubu logo">
+                    <span class="font-semibold text-lg md:hidden block">Wasubu Minoco</span>
+                </div>
+
+                <!-- Center: Navigation -->
+                <nav class="flex space-x-6 text-gray-600 text-sm">
+                    <a href="/projects" class="hover:text-gray-900 transition">Repo</a>
+                    <a href="/blogs" class="hover:text-gray-900 transition">Donate</a>
+                    <a href="/about" class="hover:text-gray-900 transition">About</a>
+                    <a href="/contact" class="hover:text-gray-900 transition">Contact</a>
+                </nav>
+
+                <!-- Right: Socials -->
+                <div class="flex space-x-4">
+                    <a href="https://github.com/" target="_blank">
+                        <img src="assets/github.svg" alt="GitHub"
+                            class="h-6 w-6 hover:opacity-80 transition filter-gray">
+                    </a>
+                    <a href="https://youtube.com/" target="_blank">
+                        <img src="assets/youtube.svg" alt="YouTube"
+                            class="h-6 w-6 hover:opacity-80 transition filter-gray">
+                    </a>
+                    <a href="https://instagram.com/" target="_blank">
+                        <img src="assets/insta.svg" alt="Instagram"
+                            class="h-6 w-6 hover:opacity-80 transition filter-gray">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-300 text-center text-sm text-gray-500 py-4">
+                © <span id="year"></span> Wasubu Minoco. All rights reserved.
+            </div>
+        </footer>
+
+        <script>
+            // Auto-update year
+            document.getElementById("year").textContent = new Date().getFullYear();
+        </script>
+
+    </main>
+</body>
+
+</html>

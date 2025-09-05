@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@layer components {
+  .sidebar {
+    @apply hidden w-[300px] fixed
+  }
+
+  .filter-gray {
+    filter: invert(41%) sepia(0%) saturate(0%) hue-rotate(193deg) brightness(95%) contrast(90%);
+  }
+
+  .hero-button {
+    @apply text-white rounded-lg p-8 flex flex-col items-center justify-center shadow-lg transition border-x-6
+  }
+}
