@@ -18,10 +18,10 @@
   }
 
   .project-image-div {
-    @apply max-h-40 rounded-md mb-4 w-full aspect-[4/3] overflow-hidden
+    @apply sm:max-h-40 max-h-30 rounded-md mb-4 w-full aspect-[4/3] overflow-hidden
   }
 
   .project-desc {
-    @apply text-gray-600 text-sm mt-1 mb-30 sm:mb-1
+    @apply text-gray-600 text-sm mt-1 mb-1
   }
 }

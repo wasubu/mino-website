@@ -12,10 +12,10 @@
 </head>
 
 <body>
-    <nav class="sticky top-0 border-b-2 border-gray-400 bg-white shadow-sm">
+    <nav class="sticky top-0 border-b-2 border-gray-400 bg-white shadow-sm z-999">
         <div class="flex justify-between mx-3">
             <div class="flex items-center p-1.5 space-x-2.5">
-                <img class="h-7 w-7 rounded-full" src="assets/logo.webp" alt="logo">
+                <img class="h-7 w-7 rounded-full " src="assets/logo.webp" alt="logo">
                 <h1 class="text-[20px]">Wasubu Minoco</h1>
             </div>
             <button class="p-2 rounded-full hover:bg-gray-200 hover:cursor-pointer transition block md:hidden">
@@ -23,8 +23,13 @@
             </button>
         </div>
     </nav>
+    <div id="mobile-menu">
+        <ul>
+            <li></li>
+        </ul>
+    </div>
     <aside
-        class="fixed top-14 bottom-5 left-3 w-60 border-2 border-gray-300 rounded-xl bg-white shadow-xl hidden md:block">
+        class="fixed top-14 bottom-5 left-3 w-60 border-2 border-gray-300 rounded-xl bg-white shadow-xl hidden md:block z-1">
         <div class="flex flex-col items-center p-6 space-y-6">
             <!-- Logo & Name -->
             <div class="flex flex-col items-center space-y-2">
