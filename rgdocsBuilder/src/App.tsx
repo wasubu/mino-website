@@ -7,7 +7,7 @@ import RealityChip from "./pages/modules/misc/RealityChip";
 
 const App: React.FC = () => {
     return (
-        <Router>
+        <Router basename="/rgdocs">
             <div className="flex flex-col h-screen">
                 {/* Navbar spans full width */}
                 <Navbar />
