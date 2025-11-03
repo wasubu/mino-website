@@ -1,1 +1,5 @@
+# Force www domain
 https://wasubu.com/*  https://www.wasubu.com/:splat  301!
+
+# Let React Router handle all internal RG Docs routes
+/rgdocs/*   /rgdocs/index.html   200
