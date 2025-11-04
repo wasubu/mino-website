@@ -1,11 +1,15 @@
 import myIcon from "../assets/logo.webp"
 import hamburgSVG from "../assets/hamburger.svg"
+import rgDocsLogo from "../assets/docsSmLogo.webp"
 
 const Navbar: React.FC = () => {
     return (
         <header className="sticky top-0 z-50 bg-white text-black shadow-sm">
             <div className="flex justify-between items-center h-[46px]">
-                <h1 className="hidden sm:block text-xl font-bold px-3">RGdocs</h1>
+                <div className="flex items-center px-4.5 gap-1.5 hover:bg-gray-200 transition-colors h-full">
+                    <img src={rgDocsLogo} className="h-5.5 " alt="rgDocs" />
+                    <h1 className="hidden sm:block text-[21px] font-semibold italic">RGdocs</h1>
+                </div>
                 <div className="hover:bg-gray-300 rounded-full mx-1.5 p-1.5">
                     <img src={hamburgSVG} className="sm:hidden block h-6" alt="hamburg" />
                 </div>
