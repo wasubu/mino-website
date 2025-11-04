@@ -2,9 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Welcome from "./pages/Welcome";
-import Cpu from "./pages/modules/misc/Cpu";
-import RealityChip from "./pages/modules/misc/RealityChip";
-import Modules from "./pages/modules/Modules";
+import Cpu from "./pages/miscModules/Cpu";
+import RealityChip from "./pages/miscModules/RealityChip";
+import Modules from "./pages/miscModules/MiscModules";
 
 const App: React.FC = () => {
     return (
@@ -22,9 +22,9 @@ const App: React.FC = () => {
                     <main className="xl:py-12 xl:px-50 flex-1 py-6 px-10 overflow-auto min-h-0">
                         <Routes>
                             <Route path="/" element={<Welcome />} />
-                            <Route path="/modules/misc/cpu" element={<Cpu />} />
-                            <Route path="/modules/misc/realitychip" element={<RealityChip />} />
-                            <Route path="/modules" element={<Modules />} />
+                            <Route path="/cpu" element={<Cpu />} />
+                            <Route path="/realitychip" element={<RealityChip />} />
+                            <Route path="/misc-modules" element={<Modules />} />
                         </Routes>
                     </main>
                 </div>

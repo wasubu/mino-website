@@ -1,4 +1,4 @@
-const Modules: React.FC = () => {
+const MiscModules: React.FC = () => {
     return (
         <div>
             <h2 className="text-2xl font-bold">Reality Module</h2>
@@ -9,4 +9,4 @@ const Modules: React.FC = () => {
     );
 };
 
-export default Modules;
+export default MiscModules;
