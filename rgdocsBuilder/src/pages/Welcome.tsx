@@ -1,5 +1,11 @@
 const Welcome: React.FC = () => {
-    return <h2 className="text-2xl font-bold">Welcome to Wasubu Docs!</h2>;
-};
+    return (
+        <div className="flex flex-col">
+            <h2 className="text-2xl font-bold">Welcome to Retro Gadgets Docs!</h2>
+            <h1>sorry this site is still under construction</h1>
+            <h1>but meanwhile watch this site grow as I add/build things in this website</h1>
+        </div>
+    )
+}
 
 export default Welcome;
