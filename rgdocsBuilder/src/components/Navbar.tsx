@@ -1,8 +1,21 @@
+import myIcon from "../assets/logo.webp"
+import hamburgSVG from "../assets/hamburger.svg"
+
 const Navbar: React.FC = () => {
     return (
-        <header className="sticky w-full bg-white text-black shadow-sm py-2 px-5 z-50">
-            <h1 className="text-xl font-bold">RGdocs</h1>
+        <header className="sticky top-0 z-50 bg-white text-black shadow-sm">
+            <div className="flex justify-between items-center h-[46px]">
+                <h1 className="hidden sm:block text-xl font-bold px-3">RGdocs</h1>
+                <div className="hover:bg-amber-500 rounded-full mx-2 p-1">
+                    <img src={hamburgSVG} className="sm:hidden block h-6" alt="hamburg" />
+                </div>
+                <div className="flex items-center h-[46px] px-3 hover:bg-gray-200 transition-colors cursor-pointer">
+                    <h1 className="text-[20px] mr-2 leading-none">Wasubu Minoco</h1>
+                    <img src={myIcon} alt="myIcon" className="h-7 w-7 rounded-full object-cover" />
+                </div>
+            </div>
         </header>
+
     );
 };
 
