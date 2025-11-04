@@ -6,7 +6,7 @@ const Sidebar: React.FC = () => {
     const linkClass = ({ isActive }: { isActive: boolean }) =>
         `${linkClassCommon} ${isActive ? "bg-gray-200 font-semibold" : ""}`;
     const linkClassBold = ({ isActive }: { isActive: boolean }) =>
-        `${linkClassCommon} font-semibold ${isActive ? "bg-gray-200" : ""}`;
+        `${linkClassCommon} font-semibold ${isActive ? "bg-gray-200 font-bold" : ""}`;
 
     return (
         <div className="relative w-64 h-screen overflow-hidden bg-gray-100">
