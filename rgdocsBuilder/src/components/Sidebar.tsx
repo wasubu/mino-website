@@ -1,12 +1,8 @@
 import { NavLink } from "react-router-dom";
 import logo from "../assets/RGdocLogo.webp"
+import type React from "react";
 
 const Sidebar: React.FC = () => {
-    const linkClassCommon = "block px-3 py-2 rounded-md "
-    const linkClass = ({ isActive }: { isActive: boolean }) =>
-        `${linkClassCommon} border-l-2 hover:bg-blue-100 hover:border-blue-300 ${isActive ? "bg-gray-200 font-semibold border-gray-400" : "border-gray-200"}`;
-    const linkClassBold = ({ isActive }: { isActive: boolean }) =>
-        `${linkClassCommon} font-semibold hover:bg-blue-100 ${isActive ? "bg-gray-200 font-bold" : ""}`;
     const indentedItems = "ml-4 space-y-1"
 
     return (
@@ -18,44 +14,35 @@ const Sidebar: React.FC = () => {
                 <ul className="space-y-1">
                     <ParentElement to="/">Welcome!</ParentElement>
                     <ParentElement to="/retro-gadget-tutorials">Retro Gadget Tutorials</ParentElement>
-                    <li className="space-y-1">
-                        <ParentElement to="/misc-modules">Misc Modules</ParentElement>
+                    <ElementGroup><ParentElement to="/misc-modules">Misc Modules</ParentElement>
                         <ul className={indentedItems}>
                             <IndentedElement to="/cpu">CPU</IndentedElement>
                             <IndentedElement to="/realitychip">Reality Chip</IndentedElement>
                         </ul>
-                    </li>
-                    <li className="space-y-1">
-                        <ParentElement to="/output-modules">Output Modules</ParentElement>
-                        <ul className="ml-4 space-y-1">
+                    </ElementGroup>
+                    <ElementGroup><ParentElement to="/output-modules">Output Modules</ParentElement>
+                        <ul className={indentedItems}>
                             <IndentedElement to="/led">Led</IndentedElement>
                             <IndentedElement to="/speaker">Speaker</IndentedElement>
                         </ul>
-                    </li>
-                    <li className="space-y-1">
-                        <NavLink to="/input-modules" className={linkClassBold} end>
-                            Input Modules
-                        </NavLink>
-                        <ul className="ml-4 space-y-1">
+                    </ElementGroup>
+                    <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
+                        <ul className={indentedItems}>
                             <li>
-                                <NavLink to="/dpad" className={linkClass}>
-                                    DPad
-                                </NavLink>
+                                <IndentedElement to="/dpad">Dpad</IndentedElement>
                             </li>
                             <li>
-                                <NavLink to="/slider" className={linkClass}>
-                                    Slider
-                                </NavLink>
+                                <IndentedElement to="/slider">Slider</IndentedElement>
                             </li>
                         </ul>
-                    </li>
+                    </ElementGroup>
                 </ul>
             </nav >
         </div>
     );
 };
 
-function IndentedElement({ to, children }: { to: string; children?: React.ReactNode }) {
+function IndentedElement({ to, children }: { to: string; children: React.ReactNode }) {
     const linkClassCommon = "block px-3 py-2 rounded-md "
     const linkClass = ({ isActive }: { isActive: boolean }) =>
         `${linkClassCommon} border-l-2 hover:bg-blue-100 hover:border-blue-300 ${isActive ? "bg-gray-200 font-semibold border-gray-400" : "border-gray-200"}`;
@@ -68,7 +55,7 @@ function IndentedElement({ to, children }: { to: string; children?: React.ReactN
     )
 }
 
-function ParentElement({ to, children }: { to: string; children?: React.ReactNode }) {
+function ParentElement({ to, children }: { to: string; children: React.ReactNode }) {
     const linkClassCommon = "block px-3 py-2 rounded-md "
     const linkClassBold = ({ isActive }: { isActive: boolean }) =>
         `${linkClassCommon} font-semibold hover:bg-blue-100 ${isActive ? "bg-gray-200 font-bold" : ""}`;
@@ -77,7 +64,10 @@ function ParentElement({ to, children }: { to: string; children?: React.ReactNod
             {children}
         </NavLink>
     )
+}
 
+function ElementGroup({ children }: { children: React.ReactNode }) {
+    return <li className="space-y-1">{children}</li>
 }
 
 export default Sidebar;
