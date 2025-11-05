@@ -2,11 +2,15 @@ import { NavLink } from "react-router-dom";
 import logo from "../assets/RGdocLogo.webp"
 import type React from "react";
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
     const indentedItems = "ml-4 space-y-1"
+    //  className={`fixed xl:static top-0 left-0 h-screen bg-gray-100 transform transition-transform duration-300 ease-in-out z-20
+    //         ${isOpen ? "translate-x-0" : "-translate-x-full"} 
+    //         w-64 overflow-hidden shadow-lg`}
+    const sidebarStyle = `text-nowrap bg-gray-100 relative h-screen overflow-hidden transition-all duration-400 ${isOpen ? "translate-x-0 w-64" : "-translate-x-full w-0"}`
 
     return (
-        <div className="relative w-64 h-screen overflow-hidden bg-gray-100">
+        <div className={sidebarStyle}>
             <div className="absolute top-0 left-0 right-[15px] z-10 flex justify-center bg-gray-100/80 backdrop-blur-sm">
                 <img src={logo} alt="logo" className="mt-7 mb-7 w-50 h-fit " />
             </div>
@@ -24,56 +28,6 @@ const Sidebar: React.FC = () => {
                         <ul className={indentedItems}>
                             <IndentedElement to="/led">Led</IndentedElement>
                             <IndentedElement to="/speaker">Speaker</IndentedElement>
-                        </ul>
-                    </ElementGroup>
-                    <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
-                        <ul className={indentedItems}>
-                            <li>
-                                <IndentedElement to="/dpad">Dpad</IndentedElement>
-                            </li>
-                            <li>
-                                <IndentedElement to="/slider">Slider</IndentedElement>
-                            </li>
-                        </ul>
-                    </ElementGroup>
-                    <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
-                        <ul className={indentedItems}>
-                            <li>
-                                <IndentedElement to="/dpad">Dpad</IndentedElement>
-                            </li>
-                            <li>
-                                <IndentedElement to="/slider">Slider</IndentedElement>
-                            </li>
-                        </ul>
-                    </ElementGroup>
-                    <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
-                        <ul className={indentedItems}>
-                            <li>
-                                <IndentedElement to="/dpad">Dpad</IndentedElement>
-                            </li>
-                            <li>
-                                <IndentedElement to="/slider">Slider</IndentedElement>
-                            </li>
-                        </ul>
-                    </ElementGroup>
-                    <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
-                        <ul className={indentedItems}>
-                            <li>
-                                <IndentedElement to="/dpad">Dpad</IndentedElement>
-                            </li>
-                            <li>
-                                <IndentedElement to="/slider">Slider</IndentedElement>
-                            </li>
-                        </ul>
-                    </ElementGroup>
-                    <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
-                        <ul className={indentedItems}>
-                            <li>
-                                <IndentedElement to="/dpad">Dpad</IndentedElement>
-                            </li>
-                            <li>
-                                <IndentedElement to="/slider">Slider</IndentedElement>
-                            </li>
                         </ul>
                     </ElementGroup>
                     <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>

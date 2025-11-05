@@ -16,21 +16,25 @@ import Speaker from "./pages/outputModules/Speaker";
 import InputModules from "./pages/inputModules/InputModules";
 import DPad from "./pages/inputModules/DPad";
 import Slider from "./pages/inputModules/Slider";
+import { useState } from "react";
 
 const App: React.FC = () => {
+    const [sidebarOpen, setSidebarOpen] = useState(true)
+    const mainStyle = `xl:py-12 xl:px-50 flex-1 py-6 px-10 overflow-auto min-h-0 ${sidebarOpen ? "" : "row-span-1"}`
+
     return (
         <Router basename="/rgdocs">
             <div className="flex flex-col h-screen overflow-hidden">
                 {/* Navbar spans full width */}
-                <Navbar />
+                <Navbar toggleSidebar={() => setSidebarOpen(sidebarOpen => !sidebarOpen)} />
 
                 {/* Flex container for sidebar + content */}
                 <div className="flex flex-1 min-h-0">
                     {/* Sidebar scrolls independently */}
-                    <Sidebar />
+                    <Sidebar isOpen={sidebarOpen} />
 
                     {/* Main content scrolls independently */}
-                    <main className="xl:py-12 xl:px-50 flex-1 py-6 px-10 overflow-auto min-h-0">
+                    <main className={mainStyle}>
                         <Routes>
                             <Route path="/" element={<Welcome />} />
                             <Route path="/retro-gadget-tutorials" element={<RetroGadgetTutorials />} />
