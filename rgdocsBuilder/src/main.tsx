@@ -3,10 +3,15 @@ todos:
 [x] - fix the folder structure of cpu and reality chip
 [x] - rename Modules to Misc Modules
 [x] - hamburg menu breaking on smaller screens
-[ ] - make the sidebar be able to open and close
-[ ] - customize the scrollbar https://preline.co/docs/custom-scrollbar.html
+[x] - make the sidebar be able to open and close
+[x] - make Input modules independent from Misc Modules
+[ ] - customize the scrollbar of sidebar https://preline.co/docs/custom-scrollbar.html
 [ ] - bento grid module in welcome!
-[ ] - make Input modules independent from Misc Modules
+[ ] - Cpu and other modules say gdt.Cpu0
+[ ] - work on the footer
+[ ] - include every module on the sidebar
+[ ] - maybe on mobile the sidebar is just a pop up over the main
+[ ] - make small images have smaller resolution for faster loading
 */
 
 import React from "react";
