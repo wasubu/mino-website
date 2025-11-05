@@ -36,6 +36,56 @@ const Sidebar: React.FC = () => {
                             </li>
                         </ul>
                     </ElementGroup>
+                    <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
+                        <ul className={indentedItems}>
+                            <li>
+                                <IndentedElement to="/dpad">Dpad</IndentedElement>
+                            </li>
+                            <li>
+                                <IndentedElement to="/slider">Slider</IndentedElement>
+                            </li>
+                        </ul>
+                    </ElementGroup>
+                    <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
+                        <ul className={indentedItems}>
+                            <li>
+                                <IndentedElement to="/dpad">Dpad</IndentedElement>
+                            </li>
+                            <li>
+                                <IndentedElement to="/slider">Slider</IndentedElement>
+                            </li>
+                        </ul>
+                    </ElementGroup>
+                    <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
+                        <ul className={indentedItems}>
+                            <li>
+                                <IndentedElement to="/dpad">Dpad</IndentedElement>
+                            </li>
+                            <li>
+                                <IndentedElement to="/slider">Slider</IndentedElement>
+                            </li>
+                        </ul>
+                    </ElementGroup>
+                    <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
+                        <ul className={indentedItems}>
+                            <li>
+                                <IndentedElement to="/dpad">Dpad</IndentedElement>
+                            </li>
+                            <li>
+                                <IndentedElement to="/slider">Slider</IndentedElement>
+                            </li>
+                        </ul>
+                    </ElementGroup>
+                    <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
+                        <ul className={indentedItems}>
+                            <li>
+                                <IndentedElement to="/dpad">Dpad</IndentedElement>
+                            </li>
+                            <li>
+                                <IndentedElement to="/slider">Slider</IndentedElement>
+                            </li>
+                        </ul>
+                    </ElementGroup>
                 </ul>
             </nav >
         </div>
