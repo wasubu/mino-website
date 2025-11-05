@@ -16,55 +16,34 @@ const Sidebar: React.FC = () => {
             </div>
             <nav className="h-full overflow-y-auto py-4 px-4 pt-37">
                 <ul className="space-y-1">
-                    <NavLink to="/" className={linkClassBold}>
-                        Welcome!
-                    </NavLink>
+                    <ParentElement to="/">Welcome!</ParentElement>
+                    <ParentElement to="/retro-gadget-tutorials">Retro Gadget Tutorials</ParentElement>
                     <li className="space-y-1">
-                        <NavLink to="/misc-modules" className={linkClassBold} end>
-                            Misc Modules
-                        </NavLink>
+                        <ParentElement to="/misc-modules">Misc Modules</ParentElement>
                         <ul className={indentedItems}>
-                            <li>
-                                <NavLink to="/cpu" className={linkClass}>
-                                    CPU
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/realitychip" className={linkClass}>
-                                    Reality Chip
-                                </NavLink>
-                            </li>
+                            <IndentedElement to="/cpu">CPU</IndentedElement>
+                            <IndentedElement to="/realitychip">Reality Chip</IndentedElement>
                         </ul>
                     </li>
                     <li className="space-y-1">
-                        <NavLink to="/misc-modules" className={linkClassBold} end>
-                            Output Modules
-                        </NavLink>
+                        <ParentElement to="/output-modules">Output Modules</ParentElement>
                         <ul className="ml-4 space-y-1">
-                            <li>
-                                <NavLink to="/cpu" className={linkClass}>
-                                    Led
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/realitychip" className={linkClass}>
-                                    Speaker
-                                </NavLink>
-                            </li>
+                            <IndentedElement to="/led">Led</IndentedElement>
+                            <IndentedElement to="/speaker">Speaker</IndentedElement>
                         </ul>
                     </li>
                     <li className="space-y-1">
-                        <NavLink to="/misc-modules" className={linkClassBold} end>
+                        <NavLink to="/input-modules" className={linkClassBold} end>
                             Input Modules
                         </NavLink>
                         <ul className="ml-4 space-y-1">
                             <li>
-                                <NavLink to="/cpu" className={linkClass}>
+                                <NavLink to="/dpad" className={linkClass}>
                                     DPad
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/realitychip" className={linkClass}>
+                                <NavLink to="/slider" className={linkClass}>
                                     Slider
                                 </NavLink>
                             </li>
@@ -75,5 +54,30 @@ const Sidebar: React.FC = () => {
         </div>
     );
 };
+
+function IndentedElement({ to, children }: { to: string; children?: React.ReactNode }) {
+    const linkClassCommon = "block px-3 py-2 rounded-md "
+    const linkClass = ({ isActive }: { isActive: boolean }) =>
+        `${linkClassCommon} border-l-2 hover:bg-blue-100 hover:border-blue-300 ${isActive ? "bg-gray-200 font-semibold border-gray-400" : "border-gray-200"}`;
+    return (
+        <li>
+            <NavLink to={to} className={linkClass}>
+                {children}
+            </NavLink>
+        </li>
+    )
+}
+
+function ParentElement({ to, children }: { to: string; children?: React.ReactNode }) {
+    const linkClassCommon = "block px-3 py-2 rounded-md "
+    const linkClassBold = ({ isActive }: { isActive: boolean }) =>
+        `${linkClassCommon} font-semibold hover:bg-blue-100 ${isActive ? "bg-gray-200 font-bold" : ""}`;
+    return (
+        <NavLink to={to} className={linkClassBold} end>
+            {children}
+        </NavLink>
+    )
+
+}
 
 export default Sidebar;

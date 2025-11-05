@@ -1,11 +1,12 @@
 /*
 todos:
+[x] - fix the folder structure of cpu and reality chip
+[x] - rename Modules to Misc Modules
 [x] - hamburg menu breaking on smaller screens
 [ ] - make the sidebar be able to open and close
-[ ] - fix the folder structure of cpu and reality chip
-[ ] - rename Modules to Misc Modules
 [ ] - customize the scrollbar https://preline.co/docs/custom-scrollbar.html
 [ ] - bento grid module in welcome!
+[ ] - make Input modules independent from Misc Modules
 */
 
 import React from "react";
