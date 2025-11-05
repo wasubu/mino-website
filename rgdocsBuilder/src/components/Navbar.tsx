@@ -8,7 +8,7 @@ const Navbar: React.FC<{ toggleSidebar: () => void }> = ({ toggleSidebar }) => {
             <div className="flex justify-between items-center h-[46px]">
                 <div onClick={toggleSidebar} className="hover:cursor-pointer hidden sm:flex items-center px-4.5 gap-1.5 hover:bg-gray-200 transition-colors h-full">
                     <img src={rgDocsLogo} className="h-5.5" alt="rgDocs" />
-                    <h1 className="text-[21px] font-semibold italic">RGdocs</h1>
+                    <h1 className="select-none text-[21px] font-semibold italic">RGdocs</h1>
                 </div>
                 <div onClick={toggleSidebar} className="hover:bg-gray-200 transition-colors rounded-full mx-1.5 p-1.5">
                     <img src={hamburgSVG} className="sm:hidden block h-6" alt="hamburg" />

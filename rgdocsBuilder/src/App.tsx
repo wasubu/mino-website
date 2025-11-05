@@ -20,7 +20,7 @@ import { useState } from "react";
 
 const App: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true)
-    const mainStyle = `xl:py-12 xl:px-50 flex-1 py-6 px-10 overflow-auto min-h-0 ${sidebarOpen ? "" : ""}`
+    const mainStyle = `xl:py-12 xl:px-50 2xl:px-60 flex-1 py-6 px-10 overflow-auto min-h-0 ${sidebarOpen ? "" : ""}`
 
     return (
         <Router basename="/rgdocs">
