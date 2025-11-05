@@ -7,7 +7,7 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
     //  className={`fixed xl:static top-0 left-0 h-screen bg-gray-100 transform transition-transform duration-300 ease-in-out z-20
     //         ${isOpen ? "translate-x-0" : "-translate-x-full"} 
     //         w-64 overflow-hidden shadow-lg`}
-    const sidebarStyle = `text-nowrap bg-gray-100 relative h-screen overflow-hidden transition-all duration-400 ${isOpen ? "translate-x-0 w-64" : "-translate-x-full w-0"}`
+    const sidebarStyle = ` sm:shadow shadow-xl text-nowrap bg-gray-100 relative h-screen overflow-hidden transition-all duration-400 ${isOpen ? "translate-x-0 w-64 text-black" : "-translate-x-full w-0 text-black/0"}`
 
     return (
         <div className={sidebarStyle}>

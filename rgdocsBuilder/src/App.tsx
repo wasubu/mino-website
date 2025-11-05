@@ -20,18 +20,23 @@ import { useState } from "react";
 
 const App: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true)
-    const mainStyle = `xl:py-12 xl:px-50 2xl:px-60 flex-1 py-6 px-10 overflow-auto min-h-0 ${sidebarOpen ? "" : ""}`
+    const mainStyle = `duration-300 xl:py-12 xl:px-50 2xl:px-60 flex-1 py-6 px-10 overflow-auto min-h-0 ${sidebarOpen ? "max-sm:backdrop-brightness-90 max-sm:blur-lg " : ""}`
 
     return (
         <Router basename="/rgdocs">
             <div className="flex flex-col h-screen overflow-hidden">
                 {/* Navbar spans full width */}
                 <Navbar toggleSidebar={() => setSidebarOpen(sidebarOpen => !sidebarOpen)} />
+                <div className="fixed top-[46px] sm:hidden z-10 ">
+                    <Sidebar isOpen={sidebarOpen} />
+                </div>
 
                 {/* Flex container for sidebar + content */}
                 <div className="flex flex-1 min-h-0">
                     {/* Sidebar scrolls independently */}
-                    <Sidebar isOpen={sidebarOpen} />
+                    <div className="max-sm:hidden">
+                        <Sidebar isOpen={sidebarOpen} />
+                    </div>
 
                     {/* Main content scrolls independently */}
                     <main className={mainStyle}>
