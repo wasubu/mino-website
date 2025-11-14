@@ -1,5 +1,13 @@
 /*
-todos:
+RGdocs streghts:
+not bloated - the site is kept simple and free of ads.
+begginner free - very intuitive documentation while jam packed of information
+interactive - easy to grasp concepts with interactive components
+responsive - lightning fast performance and small screen friendly
+quick navigation - find docs with less hesitation
+built from scratch - avoid bulky libaries and embraces custom components
+
+To do list:
 [x] - fix the folder structure of cpu and reality chip
 [x] - rename Modules to Misc Modules
 [x] - hamburg menu breaking on smaller screens
@@ -12,9 +20,8 @@ todos:
 [x] - make navbar elements not able to be selected
 [x] - add metadata for seo
 [x] - eliminate the very small shadow on the sidebar
+[x] - customize the scrollbar of sidebar https://preline.co/docs/custom-scrollbar.html
 [ ] - populate the sidebar
-[ ] - make a example json for storing all routes off pages
-[ ] - customize the scrollbar of sidebar https://preline.co/docs/custom-scrollbar.html
 [ ] - modules page
 [ ] - openning the sidebar would shift the main content slightly
 [ ] - new sidebar tab where you can search
@@ -29,6 +36,7 @@ todos:
 [ ] - no videos/gif but overing on them plays an animation, smooth in and out 
 [ ] - make a custom breakpoint, after-breakpoint and before-breakpoint
 [ ] - Cpu and other modules say gdt.Cpu0
+[ ] - in the interactive code inlude, obj.Type
 [ ] - make small images have smaller resolution for faster loading
 [ ] - change icon to my icon
 [ ] - hear me out. Module icon in the left and on the right it says like codeblock update() gdt.Slider0.Value == 100, and sliding the slider would change the value 
