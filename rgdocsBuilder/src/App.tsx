@@ -38,7 +38,7 @@ const App: React.FC = () => {
                 </div>
 
                 {/* Flex container for sidebar + content */}
-                <div className="flex flex-1 min-h-@ 6xl:px-50">
+                <div className="flex flex-1 min-h-0 6xl:px-50">
                     {/* Sidebar scrolls independently */}
                     <div className="max-sm:hidden">
                         <Sidebar isOpen={sidebarOpen} />

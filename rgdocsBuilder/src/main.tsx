@@ -8,6 +8,9 @@ quick navigation - find docs with less hesitation
 built from scratch - avoid bulky libaries and embraces custom components
 
 To do list:
+[-] - docutmentRoutes.json contains each element. element has to: name: component:
+[-] - smaller screens, clicking an item in the sidebar would close it
+[-] - make a custom breakpoint, after-breakpoint and before-breakpoint
 [x] - fix the folder structure of cpu and reality chip
 [x] - rename Modules to Misc Modules
 [x] - hamburg menu breaking on smaller screens
@@ -21,20 +24,18 @@ To do list:
 [x] - add metadata for seo
 [x] - eliminate the very small shadow on the sidebar
 [x] - customize the scrollbar of sidebar https://preline.co/docs/custom-scrollbar.html
+[x] - main screens contents sizes based of the parent not the viewport Container queries
 [ ] - populate the sidebar
 [ ] - modules page
 [ ] - openning the sidebar would shift the main content slightly
 [ ] - new sidebar tab where you can search
+[ ] - when sidebar is open in smaller screens, clicking on the main will close the sidebar
 [ ] - bento grid module in welcome!
 [ ] - lua will be included in the docs, luau too
-[ ] - docutmentRoutes.json contains each element. element has to: name: component:
 [ ] - don't use canvas or pixijs, just use react for interactive components
-[ ] - main screens contents sizes based of the parent not the viewport Container queries
 [ ] - work on the footer
 [ ] - include every module on the sidebar
-[ ] - smaller screens, clicking an item in the sidebar would close it
 [ ] - no videos/gif but overing on them plays an animation, smooth in and out 
-[ ] - make a custom breakpoint, after-breakpoint and before-breakpoint
 [ ] - Cpu and other modules say gdt.Cpu0
 [ ] - in the interactive code inlude, obj.Type
 [ ] - make small images have smaller resolution for faster loading
