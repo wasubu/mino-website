@@ -20,7 +20,13 @@ import { useState } from "react";
 
 const App: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true)
-    const mainStyle = `duration-300 xl:py-12 xl:px-50 2xl:px-60 flex-1 py-6 px-10 overflow-auto min-h-0 ${sidebarOpen ? "max-sm:backdrop-brightness-90 max-sm:blur-lg " : ""}`
+    const mainBreakPoints = [
+        "@4xl:px-25 @4xl:py-6",
+        "@6xl:px-50 @6xl:py-8",
+        "@8xl:px-80 @8xl:py-8",
+    ]
+    const mainWinResponse = `${mainBreakPoints.join(" ")} duration-300`
+    const mainStyle = `@container duration-300 flex-1 py-6 px-10 overflow-auto min-h-0 ${sidebarOpen ? "max-sm:backdrop-brightness-90 max-sm:blur-lg " : ""}`
 
     return (
         <Router basename="/rgdocs">
@@ -32,7 +38,7 @@ const App: React.FC = () => {
                 </div>
 
                 {/* Flex container for sidebar + content */}
-                <div className="flex flex-1 min-h-0">
+                <div className="flex flex-1 min-h-@ 6xl:px-50">
                     {/* Sidebar scrolls independently */}
                     <div className="max-sm:hidden">
                         <Sidebar isOpen={sidebarOpen} />
@@ -40,27 +46,25 @@ const App: React.FC = () => {
 
                     {/* Main content scrolls independently */}
                     <main className={mainStyle}>
-                        <Routes>
-                            <Route path="/" element={<Welcome />} />
-                            <Route path="/retro-gadget-tutorials" element={<RetroGadgetTutorials />} />
-
-                            <Route path="/misc-modules" element={<MiscModules />} />
-                            <Route path="/cpu" element={<Cpu />} />
-                            <Route path="/realitychip" element={<RealityChip />} />
-
-                            <Route path="/output-modules" element={<OutputModules />} />
-                            <Route path="/led" element={<Led />} />
-                            <Route path="/speaker" element={<Speaker />} />
-
-                            <Route path="/input-modules" element={<InputModules />} />
-                            <Route path="/dpad" element={<DPad />} />
-                            <Route path="/slider" element={<Slider />} />
-
-                        </Routes>
+                        <div className={mainWinResponse}>
+                            <Routes>
+                                <Route path="/" element={<Welcome />} />
+                                <Route path="/retro-gadget-tutorials" element={<RetroGadgetTutorials />} />
+                                <Route path="/misc-modules" element={<MiscModules />} />
+                                <Route path="/cpu" element={<Cpu />} />
+                                <Route path="/realitychip" element={<RealityChip />} />
+                                <Route path="/output-modules" element={<OutputModules />} />
+                                <Route path="/led" element={<Led />} />
+                                <Route path="/speaker" element={<Speaker />} />
+                                <Route path="/input-modules" element={<InputModules />} />
+                                <Route path="/dpad" element={<DPad />} />
+                                <Route path="/slider" element={<Slider />} />
+                            </Routes>
+                        </div>
                     </main>
                 </div>
-            </div>
-        </Router>
+            </div >
+        </Router >
     );
 };
 
