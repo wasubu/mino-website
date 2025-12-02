@@ -17,6 +17,7 @@ import InputModules from "./pages/inputModules/InputModules";
 import DPad from "./pages/inputModules/DPad";
 import Slider from "./pages/inputModules/Slider";
 import { useState } from "react";
+import Introductory from "./pages/Introductory";
 
 const App: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -49,6 +50,7 @@ const App: React.FC = () => {
                         <div className={mainWinResponse}>
                             <Routes>
                                 <Route path="/" element={<Welcome />} />
+                                <Route path="/introductory" element={<Introductory />} />
                                 <Route path="/retro-gadget-tutorials" element={<RetroGadgetTutorials />} />
                                 <Route path="/misc-modules" element={<MiscModules />} />
                                 <Route path="/cpu" element={<Cpu />} />

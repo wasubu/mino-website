@@ -19,6 +19,7 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
             <nav className={`h-full overflow-y-auto py-4 px-4 pt-37 ${scrollbarStyle}`}>
                 <ul className="space-y-1">
                     <ParentElement to="/">Welcome!</ParentElement>
+                    <ParentElement to="/introductory">Introductory</ParentElement>
                     <ParentElement to="/retro-gadget-tutorials">Retro Gadget Tutorials</ParentElement>
                     <ElementGroup><ParentElement to="/misc-modules">Misc Modules</ParentElement>
                         <ul className={indentedItems}>
@@ -42,8 +43,8 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
                             </li>
                         </ul>
                     </ElementGroup>
-                    <Dummy></Dummy>
-                    <Dummy></Dummy>
+                    {/* <Dummy></Dummy>
+                    <Dummy></Dummy> */}
                 </ul>
             </nav >
         </div>
