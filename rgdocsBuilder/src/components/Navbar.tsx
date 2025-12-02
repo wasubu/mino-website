@@ -9,6 +9,9 @@ const Navbar: React.FC<{ toggleSidebar: () => void }> = ({ toggleSidebar }) => {
                 <div onClick={toggleSidebar} className="hover:cursor-pointer hidden sm:flex items-center px-4.5 gap-1.5 hover:bg-gray-200 transition-colors h-full">
                     <img src={rgDocsLogo} className="h-5.5" alt="rgDocs" />
                     <h1 className="text-[21px] font-semibold italic">RGdocs</h1>
+                    <div className="px-1 rounded-md h-6 flex flex-col justify-center">
+                        <h1 className="text-black">community</h1>
+                    </div>
                 </div>
                 <div onClick={toggleSidebar} className="hover:bg-gray-200 transition-colors rounded-full mx-1.5 p-1.5">
                     <img src={hamburgSVG} className="sm:hidden block h-6" alt="hamburg" />
