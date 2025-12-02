@@ -26,8 +26,11 @@ const App: React.FC = () => {
         "@6xl:px-50 @6xl:py-8",
         "@8xl:px-80 @8xl:py-8",
     ]
-    const mainWinResponse = `${mainBreakPoints.join(" ")} duration-300`
-    const mainStyle = `@container duration-300 flex-1 py-6 px-10 overflow-auto min-h-0 ${sidebarOpen ? "max-sm:backdrop-brightness-90 max-sm:blur-lg " : ""}`
+    const mainWinResponse = `${mainBreakPoints.join(" ")} duration-300 ${sidebarOpen ? "max-sm:blur-lg" : ""}`
+    const mainStyle = (
+        `@container duration-400 flex-1 py-6 px-10 overflow-auto min-h-0 
+        ${sidebarOpen ? "max-sm:pointer-events-none max-sm:translate-x-10" : ""}`
+    )
 
     return (
         <Router basename="/rgdocs">
@@ -41,12 +44,13 @@ const App: React.FC = () => {
                 {/* Flex container for sidebar + content */}
                 <div className="flex flex-1 min-h-0 6xl:px-50">
                     {/* Sidebar scrolls independently */}
-                    <div className="max-sm:hidden">
+                    <div className="max-sm:hidden z-10">
                         <Sidebar isOpen={sidebarOpen} />
                     </div>
 
                     {/* Main content scrolls independently */}
                     <main className={mainStyle}>
+                        {/* <div className={`duration-400 absolute inset-2 pointer-events-none z-10 ${sidebarOpen ? "max-sm:bg-black/20" : "bg-black/0"}`}></div> */}
                         <div className={mainWinResponse}>
                             <Routes>
                                 <Route path="/" element={<Welcome />} />
@@ -63,6 +67,7 @@ const App: React.FC = () => {
                                 <Route path="/slider" element={<Slider />} />
                             </Routes>
                         </div>
+                        <div className={`inset-0 absolute duration-400 pointer-events-none ${sidebarOpen ? "max-sm:bg-black/10" : ""}`}></div>
                     </main>
                 </div>
             </div >
