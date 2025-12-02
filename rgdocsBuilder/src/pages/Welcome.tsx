@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react"
 
 const RetroGadgetTutorials: React.FC = () => {
-    const mainBreakPoints = [
-        "@4xl:bg-green-100",
-        "@6xl:bg-green-200",
-        "@8xl:bg-green-300",
-    ]
     const moduleResponse = "grid gap-2 @5xl:grid-cols-[repeat(4,1fr)] @2xl:grid-cols-[repeat(4,1fr)] @xl:grid-cols-[repeat(3,1fr)] grid-cols-[repeat(2,1fr)] justify-center items-center"
     const containerOfModules = `mt-1 bg-gray-100 shadow-sm p-4 rounded-md w-full h-auto ${moduleResponse}`
 
@@ -69,7 +64,7 @@ function RGModule({ text, children }: { text: string; children?: React.ReactNode
                 <div className={moduleContainer}>
                     <div className={moduleArtContainer}>
                         {/* {children} */}
-                        <RainbowBG animated={hovered}></RainbowBG>
+                        <RainbowBG animated={hovered}>{children}</RainbowBG>
                     </div>
                     <div className={moduleTextContainer}>
                         <h1 className="">{text}</h1>
@@ -80,7 +75,7 @@ function RGModule({ text, children }: { text: string; children?: React.ReactNode
     )
 }
 
-function RainbowBG({ animated }: { animated: boolean }) {
+function RainbowBG({ animated, children }: { animated: boolean; children?: React.ReactNode }) {
     const [hue, setHue] = useState(() => Math.floor(Math.random() * 360));
 
     useEffect(() => {
@@ -99,7 +94,8 @@ function RainbowBG({ animated }: { animated: boolean }) {
             style={{
                 backgroundColor: `hsl(${hue}, 45%, 65%)`,
             }}
-        />
+        >{children}
+        </div>
     );
 }
 

@@ -43,8 +43,8 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
                             </li>
                         </ul>
                     </ElementGroup>
-                    {/* <Dummy></Dummy>
-                    <Dummy></Dummy> */}
+                    <Dummy></Dummy>
+                    <Dummy></Dummy>
                 </ul>
             </nav >
         </div>

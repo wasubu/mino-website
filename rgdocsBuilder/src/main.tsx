@@ -25,6 +25,7 @@ To do list:
 [x] - eliminate the very small shadow on the sidebar
 [x] - customize the scrollbar of sidebar https://preline.co/docs/custom-scrollbar.html
 [x] - main screens contents sizes based of the parent not the viewport Container queries
+
 [ ] - populate the sidebar
 [ ] - modules page
 [ ] - openning the sidebar would shift the main content slightly
