@@ -6,7 +6,7 @@ const RetroGadgetTutorials: React.FC = () => {
         "@6xl:bg-green-200",
         "@8xl:bg-green-300",
     ]
-    const moduleResponse = "grid gap-2 @5xl:grid-cols-[repeat(4,1fr)] @2xl:grid-cols-[repeat(4,1fr)] grid-cols-[repeat(2,1fr)] justify-center items-center"
+    const moduleResponse = "grid gap-2 @5xl:grid-cols-[repeat(4,1fr)] @2xl:grid-cols-[repeat(4,1fr)] @xl:grid-cols-[repeat(3,1fr)] grid-cols-[repeat(2,1fr)] justify-center items-center"
     const containerOfModules = `mt-1 bg-gray-100 shadow-sm p-4 rounded-md w-full h-auto ${moduleResponse}`
 
     return (
@@ -15,10 +15,8 @@ const RetroGadgetTutorials: React.FC = () => {
             <h1>sorry this site is still under construction</h1>
             <h1>but meanwhile watch this site grow as I add/build things in this website</h1>
             <div className={containerOfModules}>
-                <RGModule text="screen">
-                </RGModule>
-                <RGModule text="slider">
-                </RGModule>
+                <RGModule text="screen"> </RGModule>
+                <RGModule text="slider"> </RGModule>
                 <RGModule text="led"> </RGModule>
                 <RGModule text="Led Strip"> </RGModule>
                 <RGModule text="Speaker"> </RGModule>
