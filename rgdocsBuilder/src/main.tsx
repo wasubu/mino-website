@@ -29,6 +29,7 @@ To do list:
 [ ] - modules page
 [ ] - openning the sidebar would shift the main content slightly
 [ ] - new sidebar tab where you can search
+[ ] - "how to play" section, this section is special cause it's a slideshow
 [ ] - when sidebar is open in smaller screens, clicking on the main will close the sidebar
 [ ] - bento grid module in welcome!
 [ ] - lua will be included in the docs, luau too
