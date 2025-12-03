@@ -23,26 +23,20 @@ import Introductory from "./pages/Introductory";
 const App: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true)
     const mainBreakPoints = [
-        "@4xl:px-25 @4xl:py-6",
-        "@6xl:px-50 @6xl:py-8",
-        "@8xl:px-80 @8xl:py-8",
-    ]
-    const footerBreakPoints = [
-        "@4xl:px-25",
-        "@6xl:px-50",
-        "@8xl:px-80",
+        "@4xl:px-25 @4xl:pt-6",
+        "@6xl:px-50 @6xl:pt-8",
+        "@8xl:px-80 @8xl:pt-8",
     ]
     const mainWinResponse = `${mainBreakPoints.join(" ")} duration-300 ${sidebarOpen ? "" : ""}`
     const mainStyle = (
-        `@container duration-400 flex-1 py-6 px-10 overflow-auto min-h-0 
+        `@container duration-400 flex-1 pt-6 px-10 overflow-auto min-h-0 
         ${sidebarOpen ? "max-sm:pointer-events-none max-sm:translate-x-10 max-sm:blur-lg" : ""}`
     )
-    const footerStyle = `${footerBreakPoints.join(" ")} duration-300`
 
     return (
         <Router basename="/rgdocs">
             <div className="flex flex-col h-screen overflow-hidden">
-                {/* Navbar spans full width */}
+                {/* Show this Navbar when over sm */}
                 <Navbar toggleSidebar={() => setSidebarOpen(sidebarOpen => !sidebarOpen)} />
                 <div className="fixed top-[46px] sm:hidden z-10 ">
                     <Sidebar isOpen={sidebarOpen} />
@@ -55,24 +49,25 @@ const App: React.FC = () => {
                         <Sidebar isOpen={sidebarOpen} />
                     </div>
 
-                    {/* Main content scrolls independently */}
                     <main className={mainStyle}>
-                        {/* <div className={`duration-400 absolute inset-2 pointer-events-none z-10 ${sidebarOpen ? "max-sm:bg-black/20" : "bg-black/0"}`}></div> */}
-                        <div className={mainWinResponse}>
-                            <Routes>
-                                <Route path="/" element={<Welcome />} />
-                                <Route path="/introductory" element={<Introductory />} />
-                                <Route path="/retro-gadget-tutorials" element={<RetroGadgetTutorials />} />
-                                <Route path="/misc-modules" element={<MiscModules />} />
-                                <Route path="/cpu" element={<Cpu />} />
-                                <Route path="/realitychip" element={<RealityChip />} />
-                                <Route path="/output-modules" element={<OutputModules />} />
-                                <Route path="/led" element={<Led />} />
-                                <Route path="/speaker" element={<Speaker />} />
-                                <Route path="/input-modules" element={<InputModules />} />
-                                <Route path="/dpad" element={<DPad />} />
-                                <Route path="/slider" element={<Slider />} />
-                            </Routes>
+                        <div className={mainWinResponse}> {/*to make it scroll*/}
+                            <div className="min-h-[calc(100vh-120px)]">
+                                <Routes>
+                                    <Route path="/" element={<Welcome />} />
+                                    <Route path="/introductory" element={<Introductory />} />
+                                    <Route path="/retro-gadget-tutorials" element={<RetroGadgetTutorials />} />
+                                    <Route path="/misc-modules" element={<MiscModules />} />
+                                    <Route path="/cpu" element={<Cpu />} />
+                                    <Route path="/realitychip" element={<RealityChip />} />
+                                    <Route path="/output-modules" element={<OutputModules />} />
+                                    <Route path="/led" element={<Led />} />
+                                    <Route path="/speaker" element={<Speaker />} />
+                                    <Route path="/input-modules" element={<InputModules />} />
+                                    <Route path="/dpad" element={<DPad />} />
+                                    <Route path="/slider" element={<Slider />} />
+                                </Routes>
+                            </div>
+                            <Footer></Footer>
                         </div>
                         <div className={`inset-0 absolute duration-400 pointer-events-none ${sidebarOpen ? "max-sm:bg-black/10" : ""}`}></div>
                     </main>

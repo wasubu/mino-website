@@ -7,8 +7,8 @@ const Footer: React.FC = () => {
 
                 {/* <!-- Left: Logo + Name --> */}
                 <div className="flex items-center space-x-3">
-                    <img className="h-10 w-10 rounded-full shadow md:hidden block" src={logo} alt="Wasubu logo" />
-                    <span className="font-semibold text-lg md:hidden block">Wasubu Minoco</span>
+                    <img className="h-10 w-10 rounded-full shadow " src={logo} alt="Wasubu logo" />
+                    <span className="font-semibold text-lg ">Wasubu Minoco</span>
                 </div>
 
                 {/* <!-- Center: Navigation --> */}
@@ -38,8 +38,8 @@ const Footer: React.FC = () => {
             </div>
 
             {/* <!-- Bottom Bar --> */}
-            <div className="border-t border-gray-300 text-center text-sm text-gray-500 py-4">
-                © <span id="year"></span> Wasubu Minoco. All rights reserved.
+            <div className="border-t border-gray-300 text-center text-sm text-gray-500 py-4 px-5">
+                © <span id="year"></span> Wasubu Minoco. This is an unofficial version of the RetroGadgets documentation.
             </div>
         </footer>
     )
