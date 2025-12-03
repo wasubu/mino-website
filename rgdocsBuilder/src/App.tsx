@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import Footer from "./components/Footer";
 
 import Welcome from "./pages/Welcome";
 import RetroGadgetTutorials from "./pages/RetroGadgetTutorials"
@@ -26,11 +27,17 @@ const App: React.FC = () => {
         "@6xl:px-50 @6xl:py-8",
         "@8xl:px-80 @8xl:py-8",
     ]
-    const mainWinResponse = `${mainBreakPoints.join(" ")} duration-300 ${sidebarOpen ? "max-sm:blur-lg" : ""}`
+    const footerBreakPoints = [
+        "@4xl:px-25",
+        "@6xl:px-50",
+        "@8xl:px-80",
+    ]
+    const mainWinResponse = `${mainBreakPoints.join(" ")} duration-300 ${sidebarOpen ? "" : ""}`
     const mainStyle = (
         `@container duration-400 flex-1 py-6 px-10 overflow-auto min-h-0 
-        ${sidebarOpen ? "max-sm:pointer-events-none max-sm:translate-x-10" : ""}`
+        ${sidebarOpen ? "max-sm:pointer-events-none max-sm:translate-x-10 max-sm:blur-lg" : ""}`
     )
+    const footerStyle = `${footerBreakPoints.join(" ")} duration-300`
 
     return (
         <Router basename="/rgdocs">
@@ -69,6 +76,7 @@ const App: React.FC = () => {
                         </div>
                         <div className={`inset-0 absolute duration-400 pointer-events-none ${sidebarOpen ? "max-sm:bg-black/10" : ""}`}></div>
                     </main>
+                    <div className={`inset-0 absolute duration-400 pointer-events-none ${sidebarOpen ? "max-sm:bg-black/10" : ""}`}></div>
                 </div>
             </div >
         </Router >

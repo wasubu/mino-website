@@ -25,14 +25,17 @@ To do list:
 [x] - eliminate the very small shadow on the sidebar
 [x] - customize the scrollbar of sidebar https://preline.co/docs/custom-scrollbar.html
 [x] - main screens contents sizes based of the parent not the viewport Container queries
+[x] - openning the sidebar would shift the main content slightly
+[x] - bento grid module in welcome!
+[x] - bento grid module in welcome!
 
 [ ] - populate the sidebar
-[ ] - modules page
-[ ] - openning the sidebar would shift the main content slightly
+[ ] - lazy load integration
+[ ] - module dedicated page
+[ ] - welcome modules but instead of breakpoint xl to three - make it lg
 [ ] - new sidebar tab where you can search
 [ ] - "how to play" section, this section is special cause it's a slideshow
 [ ] - when sidebar is open in smaller screens, clicking on the main will close the sidebar
-[ ] - bento grid module in welcome!
 [ ] - lua will be included in the docs, luau too
 [ ] - don't use canvas or pixijs, just use react for interactive components
 [ ] - work on the footer
