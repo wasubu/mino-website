@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 const RetroGadgetTutorials: React.FC = () => {
-    const moduleResponse = "grid gap-2 @5xl:grid-cols-[repeat(4,1fr)] @2xl:grid-cols-[repeat(4,1fr)] @xl:grid-cols-[repeat(3,1fr)] grid-cols-[repeat(2,1fr)] justify-center items-center"
+    const moduleResponse = "grid gap-2 @5xl:grid-cols-[repeat(4,1fr)] @2xl:grid-cols-[repeat(4,1fr)] @lg:grid-cols-[repeat(3,1fr)] grid-cols-[repeat(2,1fr)] justify-center items-center"
     const containerOfModules = `mt-1 bg-gray-100 shadow-sm p-4 rounded-md w-full h-auto ${moduleResponse}`
 
     return (

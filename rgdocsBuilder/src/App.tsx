@@ -69,9 +69,10 @@ const App: React.FC = () => {
                             </div>
                             <Footer></Footer>
                         </div>
-                        <div className={`inset-0 absolute duration-400 pointer-events-none ${sidebarOpen ? "max-sm:bg-black/10" : ""}`}></div>
                     </main>
-                    <div className={`inset-0 absolute duration-400 pointer-events-none ${sidebarOpen ? "max-sm:bg-black/10" : ""}`}></div>
+                    <div className={`sm:hidden inset-0 absolute duration-400 ${sidebarOpen ? "max-sm:bg-black/10" : "pointer-events-none"}`}
+                        onClick={() => setSidebarOpen(false)}
+                    ></div>
                 </div>
             </div >
         </Router >
