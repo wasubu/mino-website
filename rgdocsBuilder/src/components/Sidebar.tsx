@@ -76,11 +76,9 @@ function IndentedElement({ to, children }: { to: string; children: React.ReactNo
     const linkClass = ({ isActive }: { isActive: boolean }) =>
         `${linkClassCommon} border-l-2 hover:bg-blue-100 hover:border-blue-300 ${isActive ? "bg-gray-200 font-semibold border-gray-400" : "border-gray-200"}`;
     return (
-        <li>
-            <NavLink to={to} className={linkClass}>
-                {children}
-            </NavLink>
-        </li>
+        <NavLink to={to} className={linkClass}>
+            {children}
+        </NavLink>
     )
 }
 
