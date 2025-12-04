@@ -4,3 +4,27 @@
     --container-8xl: 88rem;
     --breakpoint-sm: 45rem;
 }
+
+@layer utilities {
+    .skeleton-box {
+        @apply bg-gray-100 relative overflow-hidden;
+    }
+
+    .skeleton-box::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.7) 50%,
+                transparent 100%);
+        transform: translateX(-100%);
+        animation: shimmer 0.9s infinite linear;
+    }
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
