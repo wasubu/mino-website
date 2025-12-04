@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react"
+import { lazy, Suspense, useEffect, useRef, useState } from "react"
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
 
 import Navbar from "./components/Navbar"
@@ -38,6 +38,7 @@ const App: React.FC = () => {
 
     return (
         <Router basename="/rgdocs">
+            <UseOnNavigate onNavigate={() => { setSidebarOpen(false) }}></UseOnNavigate>
             <div className="flex flex-col h-screen overflow-hidden">
                 {/* Show this Navbar when over sm */}
                 <Navbar toggleSidebar={() => setSidebarOpen(sidebarOpen => !sidebarOpen)} />
@@ -70,20 +71,34 @@ const App: React.FC = () => {
     );
 };
 
-function ScrollToTop() {
-    const { pathname } = useLocation()
+function UseOnNavigate({ onNavigate }: { onNavigate?: () => void }) {
+    const { pathname } = useLocation();
+    const prevPath = useRef<string | null>(null);
 
     useEffect(() => {
-        const el = document.getElementById("scroll-container");
-        if (!el) return;
+        if (prevPath.current === pathname) return; // only trigger when path changes
+        prevPath.current = pathname;
 
+        // Only trigger on small screens (<sm breakpoint)
+        if (window.innerWidth < 720) { // Tailwind 'sm' is 640px
+            onNavigate?.();
+        }
+    }, [pathname, onNavigate]);
+
+    return null;
+}
+
+function ScrollToTop() {
+    const { pathname } = useLocation()
+    useEffect(() => {
+        const el = document.getElementById("scroll-container");
+        if (!el) return
+        if (el.scrollTop === 0) return
         const timer = setTimeout(() => {
             el.scrollTo({ top: 0, behavior: "smooth" });
         }, 60);
-
         return () => clearTimeout(timer);
     }, [pathname]);
-
     return null
 }
 
