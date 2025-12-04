@@ -39,13 +39,45 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
                             </li>
                         </ul>
                     </ElementGroup>
-                    <Dummy></Dummy>
-                    <Dummy></Dummy>
                 </ul>
             </nav >
         </div>
     );
 };
+
+/*
+* [ ] screen
+* [x] slider
+* [x] led
+* [ ] Led Strip
+* [x] Speaker
+* [ ] Analog Guage
+* [x] Reality Chip
+* [ ] Knob
+* [ ] Analog Stick
+* [x] CPU Chip
+* [ ] Keypad
+* [ ] Led Button
+* [ ] Webcam
+* [ ] Lcd Display
+* [ ] Led Matrix
+* [ ] Flash Memory
+* [ ] Serial
+* [ ] Power Button
+* [ ] ROM
+* [ ] Video Chip
+* [ ] Keyboard Chip
+* [x] DPad
+* [ ] ScreenButton
+* [ ] Switch
+* [ ] Segment Display
+* [ ] Audio Chip
+* [ ] Decoration
+* [ ] Gamepad Chip
+* [ ] Magnetic Connector
+* [ ] Security Chip
+* [ ] Wifi Chip
+*/
 
 function Dummy() {
     const indentedItems = "ml-4 space-y-1"

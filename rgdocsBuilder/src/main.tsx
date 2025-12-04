@@ -28,18 +28,20 @@ To do list:
 [x] - openning the sidebar would shift the main content slightly
 [x] - bento grid module in welcome!
 [x] - bento grid module in welcome!
+[x] - lazy load integration
+[x] - welcome modules but instead of breakpoint xl to three - make it lg
+[x] - when sidebar is open in smaller screens, clicking on the main will close the sidebar
+[x] - work on the footer
 
-[ ] - populate the sidebar
-[ ] - lazy load integration
 [ ] - module dedicated page
-[ ] - welcome modules but instead of breakpoint xl to three - make it lg
 [ ] - new sidebar tab where you can search
-[ ] - "how to play" section, this section is special cause it's a slideshow
-[ ] - when sidebar is open in smaller screens, clicking on the main will close the sidebar
-[ ] - lua will be included in the docs, luau too
-[ ] - don't use canvas or pixijs, just use react for interactive components
-[ ] - work on the footer
 [ ] - include every module on the sidebar
+[ ] - maybe make nav bar transparent?
+[ ] - on the welcome's module, try to make the slider animate
+[ ] - "how to play" section, this section is special cause it's a slideshow
+[ ] - lua will be included in the docs, luau too
+[ ] - finalize footer
+[ ] - don't use canvas or pixijs, just use react for interactive components
 [ ] - no videos/gif but overing on them plays an animation, smooth in and out 
 [ ] - Cpu and other modules say gdt.Cpu0
 [ ] - in the interactive code inlude, obj.Type
