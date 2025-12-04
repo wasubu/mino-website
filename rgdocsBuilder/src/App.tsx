@@ -1,5 +1,5 @@
-import { lazy, Suspense, useState } from "react"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { lazy, Suspense, useEffect, useState } from "react"
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
 
 import Navbar from "./components/Navbar"
 import Sidebar from "./components/Sidebar"
@@ -52,7 +52,7 @@ const App: React.FC = () => {
                         <Sidebar isOpen={sidebarOpen} />
                     </div>
 
-                    <main className={mainStyle}>
+                    <main className={mainStyle} id="scroll-container">
                         <div className={mainWinResponse}> {/*to make it scroll*/}
                             <div className="min-h-[calc(100vh-120px)]">
                                 <DocumentRoutes></DocumentRoutes>
@@ -65,9 +65,27 @@ const App: React.FC = () => {
                     ></div>
                 </div>
             </div >
+            <ScrollToTop></ScrollToTop>
         </Router >
     );
 };
+
+function ScrollToTop() {
+    const { pathname } = useLocation()
+
+    useEffect(() => {
+        const el = document.getElementById("scroll-container");
+        if (!el) return;
+
+        const timer = setTimeout(() => {
+            el.scrollTo({ top: 0, behavior: "smooth" });
+        }, 60);
+
+        return () => clearTimeout(timer);
+    }, [pathname]);
+
+    return null
+}
 
 function DocumentRoutes() {
     return (
