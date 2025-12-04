@@ -52,20 +52,7 @@ const App: React.FC = () => {
                     <main className={mainStyle}>
                         <div className={mainWinResponse}> {/*to make it scroll*/}
                             <div className="min-h-[calc(100vh-120px)]">
-                                <Routes>
-                                    <Route path="/" element={<Welcome />} />
-                                    <Route path="/introductory" element={<Introductory />} />
-                                    <Route path="/retro-gadget-tutorials" element={<RetroGadgetTutorials />} />
-                                    <Route path="/misc-modules" element={<MiscModules />} />
-                                    <Route path="/cpu" element={<Cpu />} />
-                                    <Route path="/realitychip" element={<RealityChip />} />
-                                    <Route path="/output-modules" element={<OutputModules />} />
-                                    <Route path="/led" element={<Led />} />
-                                    <Route path="/speaker" element={<Speaker />} />
-                                    <Route path="/input-modules" element={<InputModules />} />
-                                    <Route path="/dpad" element={<DPad />} />
-                                    <Route path="/slider" element={<Slider />} />
-                                </Routes>
+                                <DocumentRoutes></DocumentRoutes>
                             </div>
                             <Footer></Footer>
                         </div>
@@ -78,5 +65,24 @@ const App: React.FC = () => {
         </Router >
     );
 };
+
+function DocumentRoutes() {
+    return (
+        <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/introductory" element={<Introductory />} />
+            <Route path="/retro-gadget-tutorials" element={<RetroGadgetTutorials />} />
+            <Route path="/misc-modules" element={<MiscModules />} />
+            <Route path="/cpu" element={<Cpu />} />
+            <Route path="/realitychip" element={<RealityChip />} />
+            <Route path="/output-modules" element={<OutputModules />} />
+            <Route path="/led" element={<Led />} />
+            <Route path="/speaker" element={<Speaker />} />
+            <Route path="/input-modules" element={<InputModules />} />
+            <Route path="/dpad" element={<DPad />} />
+            <Route path="/slider" element={<Slider />} />
+        </Routes>
+    )
+}
 
 export default App;
