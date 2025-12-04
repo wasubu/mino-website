@@ -1,24 +1,27 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
-import Footer from "./components/Footer";
+import { lazy, Suspense, useState } from "react"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
-import Welcome from "./pages/Welcome";
-import RetroGadgetTutorials from "./pages/RetroGadgetTutorials"
+import Navbar from "./components/Navbar"
+import Sidebar from "./components/Sidebar"
+import Footer from "./components/Footer"
 
-import MiscModules from "./pages/miscModules/MiscModules";
-import Cpu from "./pages/miscModules/Cpu";
-import RealityChip from "./pages/miscModules/RealityChip";
+// Lazy-loaded pages
+import Welcome from "./pages/Welcome"
+const RetroGadgetTutorials = lazy(() => import("./pages/RetroGadgetTutorials"));
 
-import OutputModules from "./pages/outputModules/OutputModules";
-import Led from "./pages/outputModules/Led";
-import Speaker from "./pages/outputModules/Speaker";
+const MiscModules = lazy(() => import("./pages/miscModules/MiscModules"));
+const Cpu = lazy(() => import("./pages/miscModules/Cpu"));
+const RealityChip = lazy(() => import("./pages/miscModules/RealityChip"));
 
-import InputModules from "./pages/inputModules/InputModules";
-import DPad from "./pages/inputModules/DPad";
-import Slider from "./pages/inputModules/Slider";
-import { useState } from "react";
-import Introductory from "./pages/Introductory";
+const OutputModules = lazy(() => import("./pages/outputModules/OutputModules"));
+const Led = lazy(() => import("./pages/outputModules/Led"));
+const Speaker = lazy(() => import("./pages/outputModules/Speaker"));
+
+const InputModules = lazy(() => import("./pages/inputModules/InputModules"));
+const DPad = lazy(() => import("./pages/inputModules/DPad"));
+const Slider = lazy(() => import("./pages/inputModules/Slider"));
+
+const Introductory = lazy(() => import("./pages/Introductory"));
 
 const App: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -68,20 +71,22 @@ const App: React.FC = () => {
 
 function DocumentRoutes() {
     return (
-        <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route path="/introductory" element={<Introductory />} />
-            <Route path="/retro-gadget-tutorials" element={<RetroGadgetTutorials />} />
-            <Route path="/misc-modules" element={<MiscModules />} />
-            <Route path="/cpu" element={<Cpu />} />
-            <Route path="/realitychip" element={<RealityChip />} />
-            <Route path="/output-modules" element={<OutputModules />} />
-            <Route path="/led" element={<Led />} />
-            <Route path="/speaker" element={<Speaker />} />
-            <Route path="/input-modules" element={<InputModules />} />
-            <Route path="/dpad" element={<DPad />} />
-            <Route path="/slider" element={<Slider />} />
-        </Routes>
+        <Suspense fallback={<div className="p-10 text-gray-400 bg-amber-400">Loading…</div>}>
+            <Routes>
+                <Route path="/" element={<Welcome />} />
+                <Route path="/introductory" element={<Introductory />} />
+                <Route path="/retro-gadget-tutorials" element={<RetroGadgetTutorials />} />
+                <Route path="/misc-modules" element={<MiscModules />} />
+                <Route path="/cpu" element={<Cpu />} />
+                <Route path="/realitychip" element={<RealityChip />} />
+                <Route path="/output-modules" element={<OutputModules />} />
+                <Route path="/led" element={<Led />} />
+                <Route path="/speaker" element={<Speaker />} />
+                <Route path="/input-modules" element={<InputModules />} />
+                <Route path="/dpad" element={<DPad />} />
+                <Route path="/slider" element={<Slider />} />
+            </Routes>
+        </Suspense>
     )
 }
 
