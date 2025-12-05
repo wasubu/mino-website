@@ -7,6 +7,7 @@ import Footer from "./components/Footer"
 
 // Lazy-loaded pages
 import Welcome from "./pages/Welcome"
+const Experiment = lazy(() => import("./pages/Experiment"))
 const RetroGadgetTutorials = lazy(() => import("./pages/RetroGadgetTutorials"));
 
 const MiscModules = lazy(() => import("./pages/miscModules/MiscModules"));
@@ -30,7 +31,7 @@ const App: React.FC = () => {
         "@6xl:px-50 @6xl:pt-8",
         "@8xl:px-80 @8xl:pt-8",
     ]
-    const mainWinResponse = `${mainBreakPoints.join(" ")} duration-300 ${sidebarOpen ? "" : ""}`
+    const mainWinResponse = `${mainBreakPoints.join(" ")} bg-amber-100 duration-300 ${sidebarOpen ? "" : ""}`
     const mainStyle = (
         `@container duration-400 flex-1 pt-6 px-10 overflow-auto min-h-0 
         ${sidebarOpen ? "max-sm:pointer-events-none max-sm:translate-x-10 max-sm:blur-lg" : ""}`
@@ -71,6 +72,48 @@ const App: React.FC = () => {
     );
 };
 
+function DocumentRoutes() {
+    return (
+        <SuspenseOfDocs>
+            <Routes>
+                <Route path="/" element={<Welcome />} />
+                <Route path="/introductory" element={<Introductory />} />
+                <Route path="/experiment" element={<Experiment />} />
+                <Route path="/retro-gadget-tutorials" element={<RetroGadgetTutorials />} />
+                <Route path="/misc-modules" element={<MiscModules />} />
+                <Route path="/cpu" element={<Cpu />} />
+                <Route path="/realitychip" element={<RealityChip />} />
+                <Route path="/output-modules" element={<OutputModules />} />
+                <Route path="/led" element={<Led />} />
+                <Route path="/speaker" element={<Speaker />} />
+                <Route path="/input-modules" element={<InputModules />} />
+                <Route path="/dpad" element={<DPad />} />
+                <Route path="/slider" element={<Slider />} />
+            </Routes>
+        </SuspenseOfDocs>
+    )
+}
+
+function SuspenseOfDocs({ children }: { children: React.ReactNode }) {
+    return (
+        <Suspense
+            fallback={
+                <div className="py-2 px-1 flex flex-col gap-y-2 animate-[skeleton_1.3s_infinite_linear]">
+                    <div className="w-33 h-7 rounded-2xl  skeleton-box"></div>
+                    <div className="w-[80%] h-4 rounded-2xl  skeleton-box"></div>
+                    <div className="w-[50%] h-4 rounded-2xl skeleton-box"></div>
+                    <div className="w-[66%] h-4 rounded-2xl skeleton-box"></div>
+                    <div className="w-[66%] h-4 rounded-2xl"></div>
+                    <div className="w-[40%] h-4 rounded-2xl skeleton-box"></div>
+                    <div className="w-[30%] h-4 rounded-2xl skeleton-box"></div>
+                    <div className="w-[35%] h-4 rounded-2xl skeleton-box"></div>
+                    <div className="w-full h-30 rounded-xl skeleton-box"></div>
+                </div>
+            }
+        > {children} </Suspense>
+    )
+}
+
 function UseOnNavigate({ onNavigate }: { onNavigate?: () => void }) {
     const { pathname } = useLocation();
     const prevPath = useRef<string | null>(null);
@@ -100,41 +143,6 @@ function ScrollToTop() {
         return () => clearTimeout(timer);
     }, [pathname]);
     return null
-}
-
-function DocumentRoutes() {
-    return (
-        <Suspense
-            fallback={
-                <div className="py-2 px-1 flex flex-col gap-y-2 animate-[skeleton_1.3s_infinite_linear]">
-                    <div className="w-33 h-7 rounded-2xl  skeleton-box"></div>
-                    <div className="w-[80%] h-4 rounded-2xl  skeleton-box"></div>
-                    <div className="w-[50%] h-4 rounded-2xl skeleton-box"></div>
-                    <div className="w-[66%] h-4 rounded-2xl skeleton-box"></div>
-                    <div className="w-[66%] h-4 rounded-2xl"></div>
-                    <div className="w-[40%] h-4 rounded-2xl skeleton-box"></div>
-                    <div className="w-[30%] h-4 rounded-2xl skeleton-box"></div>
-                    <div className="w-[35%] h-4 rounded-2xl skeleton-box"></div>
-                    <div className="w-full h-30 rounded-xl skeleton-box"></div>
-                </div>
-            }
-        >
-            <Routes>
-                <Route path="/" element={<Welcome />} />
-                <Route path="/introductory" element={<Introductory />} />
-                <Route path="/retro-gadget-tutorials" element={<RetroGadgetTutorials />} />
-                <Route path="/misc-modules" element={<MiscModules />} />
-                <Route path="/cpu" element={<Cpu />} />
-                <Route path="/realitychip" element={<RealityChip />} />
-                <Route path="/output-modules" element={<OutputModules />} />
-                <Route path="/led" element={<Led />} />
-                <Route path="/speaker" element={<Speaker />} />
-                <Route path="/input-modules" element={<InputModules />} />
-                <Route path="/dpad" element={<DPad />} />
-                <Route path="/slider" element={<Slider />} />
-            </Routes>
-        </Suspense>
-    )
 }
 
 export default App;

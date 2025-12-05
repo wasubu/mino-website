@@ -16,11 +16,21 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
                 <ul className="space-y-1">
                     <ParentElement to="/">Welcome!</ParentElement>
                     <ParentElement to="/introductory">Introductory</ParentElement>
+                    <ParentElement to="/experiment">Experiment</ParentElement>
                     <ParentElement to="/retro-gadget-tutorials">Retro Gadget Tutorials</ParentElement>
                     <ElementGroup><ParentElement to="/misc-modules">Misc Modules</ParentElement>
                         <ul className={indentedItems}>
                             <IndentedElement to="/cpu">CPU</IndentedElement>
+                            <IndentedElement to="/videochip">Video Chip</IndentedElement>
+                            <IndentedElement to="/wifichip">Wifi Chip</IndentedElement>
+                            <IndentedElement to="/audiochip">Audio Chip</IndentedElement>
+                            <IndentedElement to="/rom">ROM</IndentedElement>
                             <IndentedElement to="/realitychip">Reality Chip</IndentedElement>
+                            <IndentedElement to="/keyboardchip">Keyboard Chip</IndentedElement>
+                            <IndentedElement to="/gamepadchip">Gamepad Chip</IndentedElement>
+                            <IndentedElement to="/magneticconnector">Magnetic Connector</IndentedElement>
+                            <IndentedElement to="/securitychip">Security Chip</IndentedElement>
+                            <IndentedElement to="/serial">Serial</IndentedElement>
                         </ul>
                     </ElementGroup>
                     <ElementGroup><ParentElement to="/output-modules">Output Modules</ParentElement>
@@ -46,37 +56,40 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
 };
 
 /*
-* [ ] screen
-* [x] slider
-* [x] led
-* [ ] Led Strip
-* [x] Speaker
-* [ ] Analog Guage
+Misc:
 * [x] Reality Chip
+* [x] CPU Chip
+* [x] Video Chip
+* [x] ROM
+* [x] Audio Chip
+* [x] Keyboard Chip
+* [x] Gamepad Chip
+* [x] Magnetic Connector
+* [x] Security Chip
+* [x] Serial
+* [ ] Wifi Chip
+* [ ] Decoration
+Input:
+* [x] DPad
+* [x] slider
+* [ ] Switch
 * [ ] Knob
 * [ ] Analog Stick
-* [x] CPU Chip
 * [ ] Keypad
 * [ ] Led Button
 * [ ] Webcam
-* [ ] Lcd Display
+* [ ] ScreenButton
+Output:
+* [x] Speaker
+* [x] led
+* [ ] screen
 * [ ] Led Matrix
 * [ ] Flash Memory
-* [ ] Serial
 * [ ] Power Button
-* [ ] ROM
-* [ ] Video Chip
-* [ ] Keyboard Chip
-* [x] DPad
-* [ ] ScreenButton
-* [ ] Switch
+* [ ] Led Strip
 * [ ] Segment Display
-* [ ] Audio Chip
-* [ ] Decoration
-* [ ] Gamepad Chip
-* [ ] Magnetic Connector
-* [ ] Security Chip
-* [ ] Wifi Chip
+* [ ] Analog Guage
+* [ ] Lcd Display
 */
 
 function Dummy() {
