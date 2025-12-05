@@ -1,8 +1,14 @@
+import { useLocation } from "react-router-dom";
 import logo from "../assets/logo.webp"
 
 const Footer: React.FC = () => {
+    const { pathname } = useLocation()
+    const footerMarginOfPages: Record<string, string> = {
+        "/experiment": "mx-2",
+    }
     return (
-        <footer className="bg-gray-100 mt-12 rounded-t-xl">
+        <footer className={`bg-gray-100 mt-12 rounded-t-xl
+        ${pathname in footerMarginOfPages ? footerMarginOfPages[pathname] : ""}`}>
             <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col items-center justify-between space-y-4 ">
 
                 {/* <!-- Left: Logo + Name --> */}
