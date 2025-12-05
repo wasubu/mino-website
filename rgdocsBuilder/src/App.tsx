@@ -25,33 +25,52 @@ const Slider = lazy(() => import("./pages/inputModules/Slider"));
 const Introductory = lazy(() => import("./pages/Introductory"));
 
 const App: React.FC = () => {
-    const [sidebarOpen, setSidebarOpen] = useState(true)
+    const [isSidebarOpen, setSidebarOpen] = useState(true)
+    const [isPutPadding, setPutPadding] = useState(true)
+
+    const noPaddingPages = new Set(["/experiment"])
+
     const mainBreakPoints = [
         "@4xl:px-25 @4xl:pt-6",
         "@6xl:px-50 @6xl:pt-8",
         "@8xl:px-80 @8xl:pt-8",
     ]
-    const mainWinResponse = `${mainBreakPoints.join(" ")} bg-amber-100 duration-300 ${sidebarOpen ? "" : ""}`
+    const mainWinResponse = (
+        ` bg-amber-100 duration-300 
+        ${isSidebarOpen ? "" : ""}
+        ${isPutPadding ? `${mainBreakPoints.join(" ")}` : ""}`
+    )
     const mainStyle = (
-        `@container duration-400 flex-1 pt-6 px-10 overflow-auto min-h-0 
-        ${sidebarOpen ? "max-sm:pointer-events-none max-sm:translate-x-10 max-sm:blur-lg" : ""}`
+        `@container duration-400 flex-1 overflow-auto min-h-0 
+        ${isSidebarOpen ? "max-sm:pointer-events-none max-sm:translate-x-10 max-sm:blur-lg" : ""}
+        ${isPutPadding ? "pt-6 px-10" : ""}`
     )
 
     return (
         <Router basename="/rgdocs">
-            <UseOnNavigate onNavigate={() => { setSidebarOpen(false) }}></UseOnNavigate>
+            <UseOnNavigate onNavigateMaxSm={() => {
+                setSidebarOpen(false)
+            }} onNavigateAll={
+                (path) => {
+                    if (noPaddingPages.has(path)) {
+                        setPutPadding(false)
+                    } else {
+                        setPutPadding(true)
+                    }
+                }
+            }></UseOnNavigate>
             <div className="flex flex-col h-screen overflow-hidden">
                 {/* Show this Navbar when over sm */}
                 <Navbar toggleSidebar={() => setSidebarOpen(sidebarOpen => !sidebarOpen)} />
                 <div className="fixed top-[46px] sm:hidden z-10 ">
-                    <Sidebar isOpen={sidebarOpen} />
+                    <Sidebar isOpen={isSidebarOpen} />
                 </div>
 
                 {/* Flex container for sidebar + content */}
                 <div className="flex flex-1 min-h-0 6xl:px-50">
                     {/* Sidebar scrolls independently */}
                     <div className="max-sm:hidden z-10">
-                        <Sidebar isOpen={sidebarOpen} />
+                        <Sidebar isOpen={isSidebarOpen} />
                     </div>
 
                     <main className={mainStyle} id="scroll-container">
@@ -62,7 +81,7 @@ const App: React.FC = () => {
                             <Footer></Footer>
                         </div>
                     </main>
-                    <div className={`sm:hidden inset-0 absolute duration-400 ${sidebarOpen ? "max-sm:bg-black/10" : "pointer-events-none"}`}
+                    <div className={`sm:hidden inset-0 absolute duration-400 ${isSidebarOpen ? "max-sm:bg-black/10" : "pointer-events-none"}`}
                         onClick={() => setSidebarOpen(false)}
                     ></div>
                 </div>
@@ -114,19 +133,23 @@ function SuspenseOfDocs({ children }: { children: React.ReactNode }) {
     )
 }
 
-function UseOnNavigate({ onNavigate }: { onNavigate?: () => void }) {
+function UseOnNavigate({ onNavigateAll, onNavigateMaxSm }: { onNavigateAll?: (path: string) => void, onNavigateMaxSm?: () => void }) {
     const { pathname } = useLocation();
     const prevPath = useRef<string | null>(null);
 
     useEffect(() => {
-        if (prevPath.current === pathname) return; // only trigger when path changes
+        // Run checks whenever path changes (including first load)
+        if (prevPath.current === pathname) return;
         prevPath.current = pathname;
 
-        // Only trigger on small screens (<sm breakpoint)
-        if (window.innerWidth < 720) { // Tailwind 'sm' is 640px
-            onNavigate?.();
+        // 1. Trigger for ALL screens (Passes pathname so you can check logic)
+        onNavigateAll?.(pathname);
+
+        // 2. Trigger only for SMALL screens
+        if (window.innerWidth < 720) {
+            onNavigateMaxSm?.();
         }
-    }, [pathname, onNavigate]);
+    }, [pathname, onNavigateAll, onNavigateMaxSm]);
 
     return null;
 }
