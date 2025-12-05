@@ -1,11 +1,8 @@
 
 const Experiment: React.FC = () => {
     return (
-        <div className="flex flex-col bg-amber-400">
-            <h2 className="text-2xl font-bold">Introductory</h2>
-            <h1>sorry this site is still under construction</h1>
-            <h1>but meanwhile watch this site grow as I add/build things in this website</h1>
-            <h1>yes</h1>
+        <div className="py-5 px-8 shadow-sm flex flex-col min-h-[calc(93vh)] border-2 rounded-2xl border-gray-200 m-2">
+            <h2 className="text-2xl font-bold">Experiment</h2>
         </div>
     )
 }

@@ -49,6 +49,7 @@ To do list:
 [ ] - change icon to my icon
 [ ] - hear me out. Module icon in the left and on the right it says like codeblock update() gdt.Slider0.Value == 100, and sliding the slider would change the value 
 [ ] - on the container there would be a power button so, cpu.sincelastreload would reset. the button could play a meow sound if buttondown.
+[ ] - Interactive code examples at the very bottom
 */
 
 import React from "react";

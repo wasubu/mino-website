@@ -1,6 +1,8 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react"
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
 
+import SuspenseOfDocs from "./components/tools/SuspenseOfDocs"
+
 import Navbar from "./components/Navbar"
 import Sidebar from "./components/Sidebar"
 import Footer from "./components/Footer"
@@ -36,7 +38,7 @@ const App: React.FC = () => {
         "@8xl:px-80 @8xl:pt-8",
     ]
     const mainWinResponse = (
-        ` bg-amber-100 duration-300 
+        ` duration-300
         ${isSidebarOpen ? "" : ""}
         ${isPutPadding ? `${mainBreakPoints.join(" ")}` : ""}`
     )
@@ -110,26 +112,6 @@ function DocumentRoutes() {
                 <Route path="/slider" element={<Slider />} />
             </Routes>
         </SuspenseOfDocs>
-    )
-}
-
-function SuspenseOfDocs({ children }: { children: React.ReactNode }) {
-    return (
-        <Suspense
-            fallback={
-                <div className="py-2 px-1 flex flex-col gap-y-2 animate-[skeleton_1.3s_infinite_linear]">
-                    <div className="w-33 h-7 rounded-2xl  skeleton-box"></div>
-                    <div className="w-[80%] h-4 rounded-2xl  skeleton-box"></div>
-                    <div className="w-[50%] h-4 rounded-2xl skeleton-box"></div>
-                    <div className="w-[66%] h-4 rounded-2xl skeleton-box"></div>
-                    <div className="w-[66%] h-4 rounded-2xl"></div>
-                    <div className="w-[40%] h-4 rounded-2xl skeleton-box"></div>
-                    <div className="w-[30%] h-4 rounded-2xl skeleton-box"></div>
-                    <div className="w-[35%] h-4 rounded-2xl skeleton-box"></div>
-                    <div className="w-full h-30 rounded-xl skeleton-box"></div>
-                </div>
-            }
-        > {children} </Suspense>
     )
 }
 
