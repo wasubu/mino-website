@@ -1,4 +1,5 @@
 
+import RGScreen from "../components/RGmodules/RGScreen";
 import RGSlider from "../components/RGmodules/RGSlider";
 
 //current file name Experiment.tsx
@@ -13,6 +14,7 @@ const Experiment: React.FC = () => {
             <div className="flex flex-col gap-9">
                 <RGSlider className="absolute top-40 left-5"></RGSlider>
                 <RGSlider className="absolute top-40 left-5"></RGSlider>
+                <RGScreen className="absolute top-40 left-5" ></RGScreen>
             </div>
         </div>
     )
