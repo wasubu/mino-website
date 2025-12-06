@@ -10,7 +10,10 @@ const Experiment: React.FC = () => {
     return (
         <div className={pageStyle}>
             <h2 className="text-2xl font-bold">Experiment</h2>
-            <RGSlider className="absolute top-40"></RGSlider>
+            <div className="flex flex-col gap-9">
+                <RGSlider className="absolute top-40 left-5"></RGSlider>
+                <RGSlider className="absolute top-40 left-5"></RGSlider>
+            </div>
         </div>
     )
 }

@@ -3,12 +3,13 @@ import sliderHeadImg from "../../assets/sliderHead.png"
 import sliderBodyImg from "../../assets/sliderBody.png"
 
 const RGSlider: React.FC<{ className?: string }> = ({ className }) => {
-    const moduleScale = 6
+    const moduleScale = 4
     const sliderBodyWidth = 62 * moduleScale
     const sliderHeadWidth = 23 * moduleScale
     const headOffsetY = (14 * moduleScale - 12 * moduleScale) / 2
 
-    const sliderStyle = `${className} relative bg-amber-500`
+    const sliderStyle = `${className} relative`
+    const overflow = moduleScale
 
     const [value, setValue] = useState(0)
     const [dragging, setDragging] = useState(false)
@@ -25,9 +26,9 @@ const RGSlider: React.FC<{ className?: string }> = ({ className }) => {
 
             const rect = slider.getBoundingClientRect()
             const x = clamp(
-                e.clientX - rect.left - grabOffset,
-                - moduleScale,
-                sliderBodyWidth - sliderHeadWidth + moduleScale
+                e.clientX - rect.left - overflow - grabOffset,
+                0,
+                sliderBodyWidth - sliderHeadWidth + overflow * 2
             )
             setValue(x)
         },
@@ -35,12 +36,17 @@ const RGSlider: React.FC<{ className?: string }> = ({ className }) => {
     )
 
     useEffect(() => {
+        function stopDrag() {
+            setDragging(false)
+        }
+
         if (dragging) {
             window.addEventListener("mousemove", onDrag)
-            window.addEventListener("mouseup", () => setDragging(false))
+            window.addEventListener("mouseup", stopDrag)
         }
         return () => {
             window.removeEventListener("mousemove", onDrag)
+            window.removeEventListener("mouseup", stopDrag)
         }
     }, [dragging, onDrag])
 
@@ -48,17 +54,21 @@ const RGSlider: React.FC<{ className?: string }> = ({ className }) => {
         <div
             id="rg-slider-area"
             className={sliderStyle}
-            style={{ width: sliderBodyWidth }}
+            style={{
+                width: sliderBodyWidth + overflow * 2,
+                paddingLeft: overflow
+            }}
         >
             <img
                 src={sliderBodyImg}
                 draggable={false}
                 style={{ imageRendering: "pixelated", height: 14 * moduleScale }}
+                className="shadow-lg"
             />
 
             <img
                 src={sliderHeadImg}
-                className="absolute top-3.5"
+                className="absolute"
                 draggable={false}
                 style={{
                     imageRendering: "pixelated",
