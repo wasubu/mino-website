@@ -3,6 +3,7 @@
 @theme {
     --container-8xl: 88rem;
     --breakpoint-sm: 45rem;
+    --spacing-navY: 46px;
 }
 
 @layer utilities {
