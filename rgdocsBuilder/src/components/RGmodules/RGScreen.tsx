@@ -1,11 +1,11 @@
-import { Fragment } from "react"
+import { type JSX } from "react"
 import ScreenMain64by36 from "../../assets/screenMain64by32.png"
 import ScreenFrame64by36 from "../../assets/screenFrame64by32.png"
 
 const RGScreen: React.FC<{ className?: string }> = ({ className }) => {
     const moduleScale = 4
     const mainStyle = (`${className}
-        bg-amber-500 relative`
+        relative`
     )
     return (
         <div className={mainStyle} style={{ width: 69 * moduleScale }}>
@@ -22,7 +22,7 @@ const RGScreen: React.FC<{ className?: string }> = ({ className }) => {
                     imageRendering: "pixelated", height: 38 * moduleScale,
                     top: 2 * moduleScale
                 }}
-                className="shadow-lg absolute"
+                className="absolute"
             />
             <FillScreen color="bg-blue-500" scale={moduleScale}></FillScreen>
             <SetPixel x={64} y={0} color="bg-red-500" scale={moduleScale}></SetPixel>
@@ -33,14 +33,12 @@ const RGScreen: React.FC<{ className?: string }> = ({ className }) => {
 function FillScreen({ scale, color }: { scale: number; color: string }) {
     const screenXsize = 64
     const screenYsize = 36
-    const result: React.ReactNode[] = []
+    const result: JSX.Element[] = []
     for (let row = 0; row < screenYsize; row++) {
         for (let col = 0; col < screenXsize; col++) {
             const index = row * screenXsize + col
             result.push(
-                <Fragment key={index}>
-                    <SetPixel x={col} y={row} color={color} scale={scale} ></SetPixel>
-                </Fragment>
+                <SetPixel key={index} x={col} y={row} color={color} scale={scale} ></SetPixel>
             )
         }
     }
