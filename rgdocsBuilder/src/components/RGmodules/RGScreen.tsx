@@ -31,24 +31,23 @@ const RGScreen: React.FC<{ className?: string }> = ({ className }) => {
 
 function DrawCanvas({ scale }: { scale: number }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const offsetFill = 1.003 //added this cause when I fill the screen like red it won't cover up the screen so there would be a black line on the edge
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
+        const vid = canvas.getContext("2d");
+        if (!vid) return;
 
         // Base resolution
         canvas.width = 64;
         canvas.height = 36;
 
         // Physical scaled CSS size
-        canvas.style.width = `${64 * scale * offsetFill}px`;
-        canvas.style.height = `${36 * scale * offsetFill}px`;
+        canvas.style.width = `${64 * scale}px`;
+        canvas.style.height = `${36 * scale}px`;
 
-        ctx.imageSmoothingEnabled = false;
+        vid.imageSmoothingEnabled = false;
 
         let t = 0;
         let frameId: number;
@@ -56,15 +55,29 @@ function DrawCanvas({ scale }: { scale: number }) {
         const draw = () => {
             t += 0.01;
 
-            ctx.fillStyle = "black";
-            ctx.fillRect(0, 0, 64, 36);
+            vid.fillStyle = "rgb(0,0,100)";
+            vid.fillRect(0, 0, 64, 36);
 
             const rawY = Math.sin(t) * 16 + 16;
 
-            ctx.fillStyle = "red";
-            drawPixelRect(ctx, 30, rawY, 4, 4);
+            vid.fillStyle = "rgb(60,150,10)";
+            drawPixelRect(vid, 0, 18, 64, 1);
+            vid.fillStyle = "rgb(60,180,10)";
+            let lastX = 0;
+            let lastY = Math.round(Math.sin(0 / 10) * 15 + 18);
 
-            drawSetPixel(ctx, 0, 0, "red")
+            for (let col = 1; col < 64; col++) {
+                const y = Math.round(Math.sin(col / 10) * 15 + 18);
+                drawLine(vid, lastX, lastY, col, y, "red");
+
+                lastX = col;
+                lastY = y;
+            }
+
+            vid.fillStyle = "red";
+            drawPixelRect(vid, 30, rawY, 4, 4);
+
+            drawSetPixel(vid, 0, 0, "red")
 
             frameId = requestAnimationFrame(draw);
         };
@@ -76,18 +89,18 @@ function DrawCanvas({ scale }: { scale: number }) {
     return (
         <canvas
             ref={canvasRef}
-            className="absolute -translate-x-px"
+            className="absolute"
             style={{
                 top: 3 * scale,
                 left: 2 * scale,
+                transform: "scale(1.003)",
                 imageRendering: "pixelated",
             }}
         ></canvas>
     );
 }
 
-function drawPixelRect(
-    ctx: CanvasRenderingContext2D,
+function drawPixelRect(ctx: CanvasRenderingContext2D,
     x: number,
     y: number,
     w: number,
@@ -105,13 +118,57 @@ function drawSetPixel(
     ctx: CanvasRenderingContext2D,
     x: number,
     y: number,
-    color: string
+    color: string,
+    alpha?: number
 ) {
     const px = Math.round(x);
     const py = Math.round(y);
 
+    const oldAlpha = ctx.globalAlpha;
+
+    if (typeof alpha === "number") {
+        ctx.globalAlpha = alpha; // 0.0–1.0
+    }
+
     ctx.fillStyle = color;
     ctx.fillRect(px, py, 1, 1);
+
+    ctx.globalAlpha = oldAlpha;
+}
+
+function drawLine(
+    ctx: CanvasRenderingContext2D,
+    x0: number,
+    y0: number,
+    x1: number,
+    y1: number,
+    color: string
+) {
+    ctx.fillStyle = color;
+
+    let dx = Math.abs(x1 - x0);
+    let sx = x0 < x1 ? 1 : -1;
+    let dy = -Math.abs(y1 - y0);
+    let sy = y0 < y1 ? 1 : -1;
+    let error = dx + dy;
+
+    while (true) {
+        ctx.fillRect(x0, y0, 1, 1);
+
+        if (x0 === x1 && y0 === y1) break;
+
+        let e2 = 2 * error;
+
+        if (e2 >= dy) {
+            error += dy;
+            x0 += sx;
+        }
+
+        if (e2 <= dx) {
+            error += dx;
+            y0 += sy;
+        }
+    }
 }
 
 export default RGScreen
