@@ -5,7 +5,8 @@ import ScreenFrame64by36 from "../../assets/screenFrame64by32.png"
 const RGScreen: React.FC<{
     className?: string
     draw?: (vid: CanvasRenderingContext2D, t: number) => void
-}> = ({ className, draw }) => {
+    runOnce?: () => void
+}> = ({ className, draw = () => { }, runOnce }) => {
     const moduleScale = 7
     const mainStyle = (`${className}
         relative`
@@ -18,7 +19,7 @@ const RGScreen: React.FC<{
                 style={{ imageRendering: "pixelated", height: 42 * moduleScale }}
                 className="shadow-lg"
             />
-            <DrawCanvas scale={moduleScale} draw={draw}></DrawCanvas>
+            <DrawCanvas scale={moduleScale} draw={draw} runOnce={runOnce}></DrawCanvas>
             <img
                 src={ScreenFrame64by36}
                 draggable={false}
@@ -32,10 +33,11 @@ const RGScreen: React.FC<{
     )
 }
 
-function DrawCanvas({ scale, draw }: { scale: number; draw: (vid: CanvasRenderingContext2D, t: number) => void }) {
+function DrawCanvas({ scale, draw, runOnce }: { scale: number; draw: (vid: CanvasRenderingContext2D, t: number) => void, runOnce?: () => void }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
+        runOnce?.()
         const canvas = canvasRef.current;
         if (!canvas) return;
 
