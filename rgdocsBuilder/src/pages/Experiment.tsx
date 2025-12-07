@@ -28,35 +28,46 @@ const Experiment: React.FC = () => {
                     draw={
                         (vid, t) =>
                             myWaveDraw(vid, t, slider1Ref.current, slider2Ref.current)
-                    } runOnce={screenInitial}></RGScreen>
+                    }></RGScreen>
                 <h1 className="top-40 -translate-x-5">{slider1}</h1>
             </div>
         </div>
     )
 }
 
-const screenInitial = () => {
-    console.log("hi")
-}
+let posX = 0;
+let posY = 0;
+let velX = 0.2;
+let velY = 0.15;
+let hue = 0;
 
-const myWaveDraw = (vid: CanvasRenderingContext2D, t: number, slider1: number, slider2: number) => {
-    const xSpeed = slider1 / 100
-    const ySpeed = slider2 / 100
-    vid.fillStyle = `rgb(${slider1},0,${slider2})`;
+const myWaveDraw = (vid: CanvasRenderingContext2D, t: number, speedSlider: number, hueSlider: number) => {
+    // Update hue
+    hue = hueSlider * 2.2012
+    if (hue > 360) hue -= 360;
+    vid.fillStyle = `black`;
     vid.fillRect(0, 0, 64, 36);
 
-    // --- Square movement math ---
-    // Square will bounce/wander around the screen
-    const speedX = Math.sin(t * 8) * 0.5 * xSpeed + 0.5; // normalized 0→1
-    const speedY = Math.cos(t * 6) * 0.5 * ySpeed + 0.5; // normalized 0→1
+    // Apply speed slider as a multiplier to velocity
+    const speedFactor = 0.05 + speedSlider / 100;
+    let currentVelX = velX > 0 ? speedFactor : -speedFactor;
+    let currentVelY = velY > 0 ? speedFactor : -speedFactor;
 
-    const x = speedX * (64 - 6); // 6px square width
-    const y = speedY * (37 - 6); // 6px square height
+    // Move square
+    posX += currentVelX;
+    posY += currentVelY;
 
-    // --- Draw square ---
-    vid.fillStyle = "rgb(255, 40, 40)";
-    vid.fillRect(Math.floor(x), Math.floor(y), 6, 6);
+    // Bounce off edges and update persistent velocity
+    if (posX < 0) { posX = 0; velX = speedFactor; }
+    if (posX > 64 - 6) { posX = 64 - 6; velX = -speedFactor; }
+    if (posY < 0) { posY = 0; velY = speedFactor; }
+    if (posY > 36 - 6) { posY = 36 - 6; velY = -speedFactor; }
+
+    // Draw square
+    vid.fillStyle = `hsl(${hue}, 80%, 50%)`;
+    vid.fillRect(Math.floor(posX), Math.floor(posY), 6, 6);
 };
+
 
 
 export default Experiment;
