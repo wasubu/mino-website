@@ -2,7 +2,10 @@ import { useEffect, useRef } from "react"
 import ScreenMain64by36 from "../../assets/screenMain64by32.png"
 import ScreenFrame64by36 from "../../assets/screenFrame64by32.png"
 
-const RGScreen: React.FC<{ className?: string }> = ({ className }) => {
+const RGScreen: React.FC<{
+    className?: string
+    draw?: (vid: CanvasRenderingContext2D, t: number) => void
+}> = ({ className, draw }) => {
     const moduleScale = 7
     const mainStyle = (`${className}
         relative`
@@ -15,7 +18,7 @@ const RGScreen: React.FC<{ className?: string }> = ({ className }) => {
                 style={{ imageRendering: "pixelated", height: 42 * moduleScale }}
                 className="shadow-lg"
             />
-            <DrawCanvas scale={moduleScale}></DrawCanvas>
+            <DrawCanvas scale={moduleScale} draw={draw}></DrawCanvas>
             <img
                 src={ScreenFrame64by36}
                 draggable={false}
@@ -29,7 +32,7 @@ const RGScreen: React.FC<{ className?: string }> = ({ className }) => {
     )
 }
 
-function DrawCanvas({ scale }: { scale: number }) {
+function DrawCanvas({ scale, draw }: { scale: number; draw: (vid: CanvasRenderingContext2D, t: number) => void }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
@@ -52,37 +55,13 @@ function DrawCanvas({ scale }: { scale: number }) {
         let t = 0;
         let frameId: number;
 
-        const draw = () => {
+        const loop = () => {
             t += 0.01;
-
-            vid.fillStyle = "rgb(0,0,100)";
-            vid.fillRect(0, 0, 64, 36);
-
-            const rawY = Math.sin(t) * 16 + 16;
-
-            vid.fillStyle = "rgb(60,150,10)";
-            drawPixelRect(vid, 0, 18, 64, 1);
-            vid.fillStyle = "rgb(60,180,10)";
-            let lastX = 0;
-            let lastY = Math.round(Math.sin(0 / 10) * 15 + 18);
-
-            for (let col = 1; col < 64; col++) {
-                const y = Math.round(Math.sin(col / 10) * 15 + 18);
-                drawLine(vid, lastX, lastY, col, y, "red");
-
-                lastX = col;
-                lastY = y;
-            }
-
-            vid.fillStyle = "red";
-            drawPixelRect(vid, 30, rawY, 4, 4);
-
-            drawSetPixel(vid, 0, 0, "red")
-
-            frameId = requestAnimationFrame(draw);
+            draw(vid, t)
+            frameId = requestAnimationFrame(loop);
         };
 
-        draw();
+        loop();
         return () => cancelAnimationFrame(frameId);
     }, [scale]);
 
