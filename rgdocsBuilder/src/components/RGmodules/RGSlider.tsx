@@ -1,8 +1,12 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import sliderHeadImg from "../../assets/sliderHead.png"
 import sliderBodyImg from "../../assets/sliderBody.png"
 
-const RGSlider: React.FC<{ className?: string }> = ({ className }) => {
+const RGSlider: React.FC<{
+    className?: string,
+    value: number,
+    onChange: (v: number) => void
+}> = ({ className, onChange, value }) => {
     const moduleScale = 4
     const sliderBodyWidth = 62 * moduleScale
     const sliderHeadWidth = 23 * moduleScale
@@ -11,9 +15,9 @@ const RGSlider: React.FC<{ className?: string }> = ({ className }) => {
     const sliderStyle = `${className} relative`
     const overflow = moduleScale
 
-    const [value, setValue] = useState(0)
     const [dragging, setDragging] = useState(false)
     const [grabOffset, setGrabOffset] = useState(0)
+    const sliderRef = useRef<HTMLDivElement>(null);
 
     const clamp = (n: number, min: number, max: number) =>
         Math.max(min, Math.min(max, n))
@@ -21,7 +25,7 @@ const RGSlider: React.FC<{ className?: string }> = ({ className }) => {
     const onDrag = useCallback(
         (e: MouseEvent) => {
             if (!dragging) return
-            const slider = document.getElementById("rg-slider-area")
+            const slider = sliderRef.current
             if (!slider) return
 
             const rect = slider.getBoundingClientRect()
@@ -30,7 +34,7 @@ const RGSlider: React.FC<{ className?: string }> = ({ className }) => {
                 0,
                 sliderBodyWidth - sliderHeadWidth + overflow * 2
             )
-            setValue(x)
+            onChange(x)
         },
         [dragging, grabOffset, sliderBodyWidth, sliderHeadWidth]
     )
@@ -52,7 +56,7 @@ const RGSlider: React.FC<{ className?: string }> = ({ className }) => {
 
     return (
         <div
-            id="rg-slider-area"
+            ref={sliderRef}
             className={sliderStyle}
             style={{
                 width: sliderBodyWidth + overflow * 2,
@@ -83,6 +87,7 @@ const RGSlider: React.FC<{ className?: string }> = ({ className }) => {
                     setGrabOffset(e.clientX - rect.left)
                 }}
             />
+            <h1>{value}</h1>
         </div>
     )
 }
