@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import RGScreen from "../components/RGmodules/RGScreen";
 import RGSlider from "../components/RGmodules/RGSlider";
@@ -14,10 +13,19 @@ const Experiment: React.FC = () => {
     useEffect(() => { slider1Ref.current = slider1 }, [slider1])
     useEffect(() => { slider2Ref.current = slider2 }, [slider2])
 
+    const screen1Vars = useRef<Screen1Vars>({
+        posX: 0,
+        posY: 0,
+        velX: 1,  // Start moving right
+        velY: 1,  // Start moving down
+        hue: 0
+    })
+
     const pageStyle = (
         `relative min-h-[calc(100vh-var(--spacing-navY)-15px)] py-5 px-8 shadow-sm
         border-2 rounded-2xl border-gray-200 m-2 flex flex-col overflow-hidden`
     )
+
     return (
         <div className={pageStyle}>
             <h2 className="text-2xl font-bold">Experiment</h2>
@@ -27,21 +35,27 @@ const Experiment: React.FC = () => {
                 <RGScreen className="absolute top-40 left-5"
                     draw={
                         (vid, t) =>
-                            myWaveDraw(vid, t, slider1Ref.current, slider2Ref.current)
+                            screen1Loop(vid, t, slider1Ref.current, slider2Ref.current, screen1Vars.current)
                     }></RGScreen>
-                <h1 className="top-40 -translate-x-5">{slider1}</h1>
             </div>
         </div>
     )
 }
 
-let posX = 0;
-let posY = 0;
-let velX = 0.2;
-let velY = 0.15;
-let hue = 0;
-
-const myWaveDraw = (vid: CanvasRenderingContext2D, t: number, speedSlider: number, hueSlider: number) => {
+type Screen1Vars = {
+    posX: number;
+    posY: number;
+    velX: number; // Used to track direction (-1 or 1)
+    velY: number; // Used to track direction (-1 or 1)
+    hue: number;
+}
+const screen1Loop = (
+    vid: CanvasRenderingContext2D,
+    t: number, speedSlider: number,
+    hueSlider: number,
+    self: Screen1Vars
+) => {
+    let { posX, posY, velX, velY, hue } = self
     // Update hue
     hue = hueSlider * 2.2012
     if (hue > 360) hue -= 360;
@@ -49,7 +63,7 @@ const myWaveDraw = (vid: CanvasRenderingContext2D, t: number, speedSlider: numbe
     vid.fillRect(0, 0, 64, 36);
 
     // Apply speed slider as a multiplier to velocity
-    const speedFactor = 0.05 + speedSlider / 100;
+    const speedFactor = 0.05 + speedSlider / 50;
     let currentVelX = velX > 0 ? speedFactor : -speedFactor;
     let currentVelY = velY > 0 ? speedFactor : -speedFactor;
 
@@ -66,8 +80,7 @@ const myWaveDraw = (vid: CanvasRenderingContext2D, t: number, speedSlider: numbe
     // Draw square
     vid.fillStyle = `hsl(${hue}, 80%, 50%)`;
     vid.fillRect(Math.floor(posX), Math.floor(posY), 6, 6);
+    Object.assign(self, { posX, posY, velX, velY, hue });
 };
-
-
 
 export default Experiment;

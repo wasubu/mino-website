@@ -87,7 +87,7 @@ const RGSlider: React.FC<{
                     setGrabOffset(e.clientX - rect.left)
                 }}
             />
-            <h1>{value}</h1>
+            <h1>{Math.round(value)}</h1>
         </div>
     )
 }
