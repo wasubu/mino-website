@@ -1,3 +1,4 @@
+//Introductory.tsx - beginner guide
 const Introductory: React.FC = () => {
     return (
         <div className="flex flex-col">

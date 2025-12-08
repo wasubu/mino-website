@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../assets/RGdocLogo.webp"
 import type React from "react";
 
+//Sidebar.tsx - the sidebar of the docs
 const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
     const indentedItems = "ml-4 space-y-1"
     const scrollbarStyle = "[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-200/50 [&::-webkit-scrollbar-thumb:active]:bg-gray-200/100"

@@ -2,6 +2,7 @@ import myIcon from "../assets/logo.webp"
 import hamburgSVG from "../assets/hamburger.svg"
 import rgDocsLogo from "../assets/docsSmLogo.webp"
 
+//Navbar.tsx - the navbar of the docs, this is permanent and won't change
 const Navbar: React.FC<{ toggleSidebar: () => void }> = ({ toggleSidebar }) => {
     return (
         <header className="select-none sticky top-0 z-50 bg-white text-black shadow-sm">

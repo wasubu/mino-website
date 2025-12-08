@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import sliderHeadImg from "../../assets/sliderHead.png"
 import sliderBodyImg from "../../assets/sliderBody.png"
 
+//RGSlider.tsx - Interactive module for RetroGadget's Slider module
 const RGSlider: React.FC<{
     className?: string,
     value: number,

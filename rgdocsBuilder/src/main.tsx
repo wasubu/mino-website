@@ -32,17 +32,18 @@ To do list:
 [x] - welcome modules but instead of breakpoint xl to three - make it lg
 [x] - when sidebar is open in smaller screens, clicking on the main will close the sidebar
 [x] - work on the footer
+[x] - nav bar height has it's own var in tailwind
+[x] - don't use canvas or pixijs, just use react for interactive components
 
 [ ] - module dedicated page
 [ ] - new sidebar tab where you can search
 [ ] - include every module on the sidebar
+[ ] - put a comment in each page of what the file name is
 [ ] - maybe make nav bar transparent?
 [ ] - on the welcome's module, try to make the slider animate
 [ ] - "how to play" section, this section is special cause it's a slideshow
 [ ] - lua will be included in the docs, luau too
 [ ] - finalize footer
-[ ] - nav bar height has it's own var in tailwind
-[ ] - don't use canvas or pixijs, just use react for interactive components
 [ ] - no videos/gif but overing on them plays an animation, smooth in and out 
 [ ] - Cpu and other modules say gdt.Cpu0
 [ ] - in the interactive code inlude, obj.Type
@@ -51,6 +52,41 @@ To do list:
 [ ] - hear me out. Module icon in the left and on the right it says like codeblock update() gdt.Slider0.Value == 100, and sliding the slider would change the value 
 [ ] - on the container there would be a power button so, cpu.sincelastreload would reset. the button could play a meow sound if buttondown.
 [ ] - Interactive code examples at the very bottom
+// Built The Interactive Module Itself
+Misc:
+[ ] - Reality Chip
+[ ] - CPU Chip
+[ ] - Video Chip
+[ ] - ROM
+[ ] - Audio Chip
+[ ] - Keyboard Chip
+[ ] - Gamepad Chip
+[ ] - Magnetic Connector
+[ ] - Security Chip
+[ ] - Serial
+[ ] - Wifi Chip
+[ ] - Decoration
+Input:
+[ ] - DPad
+[x] - slider
+[ ] - Switch
+[ ] - Knob
+[ ] - Analog Stick
+[ ] - Keypad
+[ ] - Led Button
+[ ] - Webcam
+[ ] - ScreenButton
+Output:
+[ ] - Speaker
+[ ] - led
+[x] - screen
+[ ] - Led Matrix
+[ ] - Flash Memory
+[ ] - Power Button
+[ ] - Led Strip
+[ ] - Segment Display
+[ ] - Analog Guage
+[ ] - Lcd Display
 */
 
 import React from "react";

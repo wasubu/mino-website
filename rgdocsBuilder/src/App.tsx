@@ -26,6 +26,7 @@ const Slider = lazy(() => import("./pages/inputModules/Slider"));
 
 const Introductory = lazy(() => import("./pages/Introductory"));
 
+//App.tsx
 const App: React.FC = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(true)
     const [isPutPadding, setPutPadding] = useState(true)
