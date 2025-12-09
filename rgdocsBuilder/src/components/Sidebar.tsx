@@ -93,30 +93,6 @@ Output:
 * [ ] Lcd Display
 */
 
-function Dummy() {
-    const indentedItems = "ml-4 space-y-1"
-    return (
-        <>
-            <ElementGroup><ParentElement to="/output-modules">Output Modules</ParentElement>
-                <ul className={indentedItems}>
-                    <IndentedElement to="/led">Led</IndentedElement>
-                    <IndentedElement to="/speaker">Speaker</IndentedElement>
-                </ul>
-            </ElementGroup>
-            <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
-                <ul className={indentedItems}>
-                    <li>
-                        <IndentedElement to="/dpad">Dpad</IndentedElement>
-                    </li>
-                    <li>
-                        <IndentedElement to="/slider">Slider</IndentedElement>
-                    </li>
-                </ul>
-            </ElementGroup>
-        </>
-    )
-}
-
 function IndentedElement({ to, children }: { to: string; children: React.ReactNode }) {
     const linkClassCommon = "block px-3 py-2 rounded-md "
     const linkClass = ({ isActive }: { isActive: boolean }) =>

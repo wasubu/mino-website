@@ -1,6 +1,7 @@
 
 import ScreenMain64by32 from "../../assets/screenMain64by32.png"
 
+//DUMMY.tsx - a boilerplate for creating interactive modules
 const RGScreen: React.FC<{ className?: string }> = ({ className }) => {
     const moduleScale = 4
     const mainStyle = (`${className}

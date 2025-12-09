@@ -40,6 +40,7 @@ To do list:
 [ ] - include every module on the sidebar
 [ ] - put a comment in each page of what the file name is
 [ ] - maybe make nav bar transparent?
+[ ] - right click to access settings like dark mode. It has nice UI
 [ ] - on the welcome's module, try to make the slider animate
 [ ] - "how to play" section, this section is special cause it's a slideshow
 [ ] - lua will be included in the docs, luau too

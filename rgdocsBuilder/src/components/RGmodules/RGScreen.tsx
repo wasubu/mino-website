@@ -7,7 +7,7 @@ const RGScreen: React.FC<{
     className?: string
     draw?: (vid: CanvasRenderingContext2D, t: number) => void
 }> = ({ className, draw = () => { } }) => {
-    const moduleScale = 5.5
+    const moduleScale = 4.5
     const mainStyle = (`${className}
         relative`
     )

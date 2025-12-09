@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import RGDraw from "../lib/RGdraw";
 import RGScreen from "../components/RGmodules/RGScreen";
 import RGSlider from "../components/RGmodules/RGSlider";
-import Slider from "./inputModules/Slider";
 
 //Experiment.tsx - a temporary page for testing things
 const Experiment: React.FC = () => {
@@ -20,9 +19,10 @@ const Experiment: React.FC = () => {
         posY: 0,
         velX: 1,  // Start moving right
         velY: 1,  // Start moving down
-        hue: 0
+        hue: 0,
+        hueOffset: Math.random() * 359
     })
-    const screen2Vars = useRef<Screen1Vars>({
+    const screen2Vars = useRef<Screen2Vars>({
         posX: 0,
         posY: 0,
         velX: 1,  // Start moving right
@@ -62,6 +62,7 @@ type Screen1Vars = {
     velX: number; // Used to track direction (-1 or 1)
     velY: number; // Used to track direction (-1 or 1)
     hue: number;
+    hueOffset: number;
 }
 const drawScreen1 = (
     vid: CanvasRenderingContext2D,
@@ -69,7 +70,7 @@ const drawScreen1 = (
     hueSlider: number,
     self: Screen1Vars
 ) => {
-    let { posX, posY, velX, velY, hue } = self
+    let { posX, posY, velX, velY, hue, hueOffset } = self
     hue = hueSlider * 2.2012
     if (hue > 360) hue -= 360;
     vid.fillStyle = `black`;
@@ -92,16 +93,16 @@ const drawScreen1 = (
     const phase = t;
     const centerY = 36 / 2;
     for (let waveI = 0; waveI <= 10; waveI++) {
-        vid.fillStyle = `hsl(${hue + 30 * waveI}, 80%, ${50 - 3.8 * waveI}%)`;
+        vid.fillStyle = `hsl(${hue + 30 * waveI + hueOffset}, 80%, ${50 - 3.8 * waveI}%)`;
         for (let x = 0; x < 64; x++) {
             const y = centerY + Math.sin(x * frequency + phase - 0.25 * waveI) * amplitude;
             vid.fillRect(x, Math.floor(y), 1, 1);
         }
     }
-    vid.fillStyle = `hsl(${hue}, 80%, 50%)`;
+    vid.fillStyle = `hsl(${hue + hueOffset}, 80%, 50%)`;
     // vid.fillRect(posX, posY, 6, 6);
     vid.fillRect(Math.round(posX), Math.round(posY), 6, 6)
-    Object.assign(self, { posX, posY, velX, velY, hue });
+    Object.assign(self, { posX, posY, velX, velY, hue, hueOffset });
 };
 
 type Screen2Vars = {
@@ -158,7 +159,6 @@ const drawScreen2 = (
     // vid.fillRect(posX, posY, 6, 6);
     draw.rect(posX, posY, 6, 6)
     Object.assign(self, { posX, posY, velX, velY, hue });
-
 };
 
 

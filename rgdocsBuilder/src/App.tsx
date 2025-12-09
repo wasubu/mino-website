@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react"
+import { lazy, useEffect, useRef, useState } from "react"
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
 
 import SuspenseOfDocs from "./components/tools/SuspenseOfDocs"

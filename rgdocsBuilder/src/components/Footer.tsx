@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import logo from "../assets/logo.webp"
 
+//Footer.tsx - this will show on every page
 const Footer: React.FC = () => {
     const { pathname } = useLocation()
     const footerMarginOfPages: Record<string, string> = {

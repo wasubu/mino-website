@@ -4,7 +4,7 @@ import sliderBodyImg from "../../assets/sliderBody.png"
 
 //RGSlider.tsx - Interactive module for RetroGadget's Slider module
 const RGSlider: React.FC<{ className?: string, value: number, onChange: (v: number) => void }> = ({ className, onChange, value }) => {
-    const moduleScale = 3
+    const moduleScale = 4.5
     const sliderBodyWidth = 62 * moduleScale
     const sliderHeadWidth = 23 * moduleScale
     const headOffsetY = (14 * moduleScale - 12 * moduleScale) / 2
@@ -23,22 +23,25 @@ const RGSlider: React.FC<{ className?: string, value: number, onChange: (v: numb
     const pixelValue = (clamp(value, 0, 100) / 100) * maxPixelValue;
     const onDrag = useCallback(
         (e: MouseEvent) => {
-            if (!dragging) return
-            const slider = sliderRef.current
-            if (!slider) return
+            if (!dragging) return;
+            const slider = sliderRef.current;
+            if (!slider) return;
 
-            const rect = slider.getBoundingClientRect()
-            const maxPixelValue = sliderBodyWidth - sliderHeadWidth + overflow * 2
-            const x = clamp(
-                e.clientX - rect.left - overflow - grabOffset,
-                0,
-                maxPixelValue
-            )
-            const newValue = (x / maxPixelValue) * 100
-            onChange(newValue)
+            const rect = slider.getBoundingClientRect();
+            const maxPixelValue = sliderBodyWidth - sliderHeadWidth + overflow * 2;
+
+            // x = mouse relative to slider, minus where we clicked on handle
+            let x = e.clientX - rect.left - grabOffset;
+
+            // Clamp to slider bounds
+            x = clamp(x, 0, maxPixelValue);
+
+            // Convert to 0-100 value
+            const newValue = (x / maxPixelValue) * 100;
+            onChange(newValue);
         },
         [dragging, grabOffset, sliderBodyWidth, sliderHeadWidth]
-    )
+    );
 
     useEffect(() => {
         function stopDrag() {
