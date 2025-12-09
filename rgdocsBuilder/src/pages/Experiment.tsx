@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import RGDraw from "../lib/RGdraw";
 import RGScreen from "../components/RGmodules/RGScreen";
 import RGSlider from "../components/RGmodules/RGSlider";
+import Slider from "./inputModules/Slider";
 
 //Experiment.tsx - a temporary page for testing things
 const Experiment: React.FC = () => {
@@ -15,6 +16,13 @@ const Experiment: React.FC = () => {
     useEffect(() => { slider2Ref.current = slider2 }, [slider2])
 
     const screen1Vars = useRef<Screen1Vars>({
+        posX: 0,
+        posY: 0,
+        velX: 1,  // Start moving right
+        velY: 1,  // Start moving down
+        hue: 0
+    })
+    const screen2Vars = useRef<Screen1Vars>({
         posX: 0,
         posY: 0,
         velX: 1,  // Start moving right
@@ -41,7 +49,7 @@ const Experiment: React.FC = () => {
                 <RGScreen className="absolute top-20 left-5"
                     draw={
                         (vid, t) =>
-                            drawScreen2(vid, t, slider1Ref.current, slider2Ref.current, screen1Vars.current)
+                            drawScreen2(vid, t, slider1Ref.current, slider2Ref.current, screen2Vars.current)
                     }></RGScreen>
             </div>
         </div>
@@ -96,18 +104,31 @@ const drawScreen1 = (
     Object.assign(self, { posX, posY, velX, velY, hue });
 };
 
+type Screen2Vars = {
+    posX: number;
+    posY: number;
+    velX: number; // Used to track direction (-1 or 1)
+    velY: number; // Used to track direction (-1 or 1)
+    hue: number;
+}
 const drawScreen2 = (
     vid: CanvasRenderingContext2D,
     t: number, speedSlider: number,
     hueSlider: number,
     self: Screen1Vars
 ) => {
+    hueSlider = hueSlider * 1.8
+    speedSlider = speedSlider * 1.8
     const draw = new RGDraw(vid)
     let { posX, posY, velX, velY, hue } = self
     hue = hueSlider * 2.2012
     if (hue > 360) hue -= 360;
     vid.fillStyle = `black`;
     vid.fillRect(0, 0, 64, 36);
+    if (speedSlider === 180) {
+        vid.fillStyle = `green`;
+        vid.fillRect(0, 0, 64, 36);
+    }
 
     const speedFactor = 0.05 + speedSlider / 50;
     let currentVelX = velX > 0 ? speedFactor : -speedFactor;

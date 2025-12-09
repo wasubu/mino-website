@@ -4,7 +4,7 @@ import sliderBodyImg from "../../assets/sliderBody.png"
 
 //RGSlider.tsx - Interactive module for RetroGadget's Slider module
 const RGSlider: React.FC<{ className?: string, value: number, onChange: (v: number) => void }> = ({ className, onChange, value }) => {
-    const moduleScale = 4
+    const moduleScale = 3
     const sliderBodyWidth = 62 * moduleScale
     const sliderHeadWidth = 23 * moduleScale
     const headOffsetY = (14 * moduleScale - 12 * moduleScale) / 2
@@ -19,6 +19,8 @@ const RGSlider: React.FC<{ className?: string, value: number, onChange: (v: numb
     const clamp = (n: number, min: number, max: number) =>
         Math.max(min, Math.min(max, n))
 
+    const maxPixelValue = sliderBodyWidth - sliderHeadWidth + overflow * 2;
+    const pixelValue = (clamp(value, 0, 100) / 100) * maxPixelValue;
     const onDrag = useCallback(
         (e: MouseEvent) => {
             if (!dragging) return
@@ -26,12 +28,14 @@ const RGSlider: React.FC<{ className?: string, value: number, onChange: (v: numb
             if (!slider) return
 
             const rect = slider.getBoundingClientRect()
+            const maxPixelValue = sliderBodyWidth - sliderHeadWidth + overflow * 2
             const x = clamp(
                 e.clientX - rect.left - overflow - grabOffset,
                 0,
-                sliderBodyWidth - sliderHeadWidth + overflow * 2
+                maxPixelValue
             )
-            onChange(x)
+            const newValue = (x / maxPixelValue) * 100
+            onChange(newValue)
         },
         [dragging, grabOffset, sliderBodyWidth, sliderHeadWidth]
     )
@@ -74,7 +78,7 @@ const RGSlider: React.FC<{ className?: string, value: number, onChange: (v: numb
                 style={{
                     imageRendering: "pixelated",
                     height: 12 * moduleScale,
-                    left: value,
+                    left: pixelValue,
                     top: headOffsetY
                 }}
                 onMouseDown={(e) => {
