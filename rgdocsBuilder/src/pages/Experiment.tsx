@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import RGDraw from "../lib/RGdraw";
 import RGScreen from "../components/RGmodules/RGScreen";
 import RGSlider from "../components/RGmodules/RGSlider";
 
@@ -91,7 +92,7 @@ const screen1Loop = (
     }
     vid.fillStyle = `hsl(${hue}, 80%, 50%)`;
     // vid.fillRect(posX, posY, 6, 6);
-    drawPixelRect(vid, posX, posY, 6, 6)
+    vid.fillRect(Math.round(posX), Math.round(posY), 6, 6)
     Object.assign(self, { posX, posY, velX, velY, hue });
 };
 
@@ -101,6 +102,7 @@ const screen2Loop = (
     hueSlider: number,
     self: Screen1Vars
 ) => {
+    const draw = new RGDraw(vid)
     let { posX, posY, velX, velY, hue } = self
     hue = hueSlider * 2.2012
     if (hue > 360) hue -= 360;
@@ -127,85 +129,16 @@ const screen2Loop = (
         vid.fillStyle = `hsl(${hue + 30 * waveI}, 80%, ${50 - 3.8 * waveI}%)`;
         for (let x = 0; x < 64; x++) {
             const y = centerY + Math.sin(x * frequency + phase - 0.25 * waveI) * amplitude;
-            drawPixelRect(vid, x, y, 1, 1);
+            draw.rect(x, y, 1, 1);
         }
     }
 
     vid.fillStyle = `hsl(${hue}, 80%, 50%)`;
     // vid.fillRect(posX, posY, 6, 6);
-    drawPixelRect(vid, posX, posY, 6, 6)
+    draw.rect(posX, posY, 6, 6)
     Object.assign(self, { posX, posY, velX, velY, hue });
+
 };
 
-function drawPixelRect(ctx: CanvasRenderingContext2D,
-    x: number,
-    y: number,
-    w: number,
-    h: number
-) {
-    const sx = Math.round(x);
-    const sy = Math.round(y);
-    const sw = Math.round(w);
-    const sh = Math.round(h);
-
-    ctx.fillRect(sx, sy, sw, sh);
-}
-
-function drawSetPixel(
-    ctx: CanvasRenderingContext2D,
-    x: number,
-    y: number,
-    color: string,
-    alpha?: number
-) {
-    const px = Math.round(x);
-    const py = Math.round(y);
-
-    const oldAlpha = ctx.globalAlpha;
-
-    if (typeof alpha === "number") {
-        ctx.globalAlpha = alpha; // 0.0–1.0
-    }
-
-    ctx.fillStyle = color;
-    ctx.fillRect(px, py, 1, 1);
-
-    ctx.globalAlpha = oldAlpha;
-}
-
-function drawLine(
-    ctx: CanvasRenderingContext2D,
-    x0: number,
-    y0: number,
-    x1: number,
-    y1: number,
-    color: string
-) {
-    ctx.fillStyle = color;
-
-    let dx = Math.abs(x1 - x0);
-    let sx = x0 < x1 ? 1 : -1;
-    let dy = -Math.abs(y1 - y0);
-    let sy = y0 < y1 ? 1 : -1;
-    let error = dx + dy;
-
-    while (true) {
-        ctx.fillRect(x0, y0, 1, 1);
-
-        if (x0 === x1 && y0 === y1) break;
-
-        let e2 = 2 * error;
-
-        if (e2 >= dy) {
-            error += dy;
-            x0 += sx;
-        }
-
-        if (e2 <= dx) {
-            error += dx;
-            y0 += sy;
-        }
-    }
-}
 
 export default Experiment;
