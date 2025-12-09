@@ -36,12 +36,12 @@ const Experiment: React.FC = () => {
                 <RGScreen className="absolute top-20 left-5"
                     draw={
                         (vid, t) =>
-                            screen1Loop(vid, t, slider1Ref.current, slider2Ref.current, screen1Vars.current)
+                            drawScreen1(vid, t, slider1Ref.current, slider2Ref.current, screen1Vars.current)
                     }></RGScreen>
                 <RGScreen className="absolute top-20 left-5"
                     draw={
                         (vid, t) =>
-                            screen2Loop(vid, t, slider1Ref.current, slider2Ref.current, screen1Vars.current)
+                            drawScreen2(vid, t, slider1Ref.current, slider2Ref.current, screen1Vars.current)
                     }></RGScreen>
             </div>
         </div>
@@ -55,7 +55,7 @@ type Screen1Vars = {
     velY: number; // Used to track direction (-1 or 1)
     hue: number;
 }
-const screen1Loop = (
+const drawScreen1 = (
     vid: CanvasRenderingContext2D,
     t: number, speedSlider: number,
     hueSlider: number,
@@ -96,7 +96,7 @@ const screen1Loop = (
     Object.assign(self, { posX, posY, velX, velY, hue });
 };
 
-const screen2Loop = (
+const drawScreen2 = (
     vid: CanvasRenderingContext2D,
     t: number, speedSlider: number,
     hueSlider: number,
