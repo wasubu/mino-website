@@ -3,11 +3,7 @@ import sliderHeadImg from "../../assets/sliderHead.png"
 import sliderBodyImg from "../../assets/sliderBody.png"
 
 //RGSlider.tsx - Interactive module for RetroGadget's Slider module
-const RGSlider: React.FC<{
-    className?: string,
-    value: number,
-    onChange: (v: number) => void
-}> = ({ className, onChange, value }) => {
+const RGSlider: React.FC<{ className?: string, value: number, onChange: (v: number) => void }> = ({ className, onChange, value }) => {
     const moduleScale = 4
     const sliderBodyWidth = 62 * moduleScale
     const sliderHeadWidth = 23 * moduleScale
