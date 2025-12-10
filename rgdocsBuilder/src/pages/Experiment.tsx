@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import RGDraw from "../lib/RGdraw";
 import RGScreen from "../components/RGmodules/RGScreen";
 import RGSlider from "../components/RGmodules/RGSlider";
+import RGPowerButton from "../components/RGmodules/RGPowerButton";
 
 //Experiment.tsx - a temporary page for testing things
 const Experiment: React.FC = () => {
@@ -51,6 +52,7 @@ const Experiment: React.FC = () => {
                         (vid, t) =>
                             drawScreen2(vid, t, slider1Ref.current, slider2Ref.current, screen2Vars.current)
                     }></RGScreen>
+                <RGPowerButton></RGPowerButton>
             </div>
         </div>
     )
