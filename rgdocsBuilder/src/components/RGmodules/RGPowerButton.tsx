@@ -5,12 +5,12 @@ import PowerButtonPressedImg from "../../assets/powerButton pressed.png"
 import PowerButtonMarkNormal from "../../assets/powerButton mark normal.png"
 import PowerButtonMarkPressed from "../../assets/powerButton mark pressed.png"
 
-const MODULE_SCALE = 4
+const MODULE_SCALE = 4.5
 
 //DUMMY.tsx - a boilerplate for creating interactive modules
 const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
     const [pressed, setPressed] = useState(false)
-    // const [isOn, setIsOn] = useState(false)
+    const [isOn, setIsOn] = useState(true)
 
     useEffect(() => {
         const images = [
@@ -25,6 +25,7 @@ const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
 
     const handleMouseDown = () => {
         setPressed(true)
+        setIsOn(prev => !prev)
 
         const handleMouseUp = () => {
             setPressed(false)
@@ -61,9 +62,11 @@ const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
                 className="absolute top-0 left-0 select-none"
             />
             <div
-                className=" absolute top-0 mask-no-repeat mask-contain mask-center "
+                className="absolute top-0 mask-no-repeat mask-contain mask-center "
                 style={{
-                    backgroundColor: `rgba(220, 38, 38, ${pressed ? "0" : "0.8"})`,
+                    backgroundColor: isOn
+                        ? `rgba(65, 254, 40, ${pressed ? "0" : "0.8"})` // green
+                        : `rgba(220, 58, 58, ${pressed ? "0" : "0.8"})`, // red
                     width: 19 * MODULE_SCALE,
                     height: 19 * MODULE_SCALE,
                     WebkitMaskImage: `url(${PowerButtonMarkNormal})`,
@@ -73,9 +76,11 @@ const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
                 }}
             />
             <div
-                className=" absolute top-0 mask-no-repeat mask-contain mask-center "
+                className="absolute top-0 mask-no-repeat mask-contain mask-center "
                 style={{
-                    backgroundColor: `rgba(220, 38, 38, ${pressed ? "0.8" : "0"})`,
+                    backgroundColor: isOn
+                        ? `rgba(35, 234, 20, ${pressed ? "0.8" : "0"})` // green
+                        : `rgba(200, 48, 48, ${pressed ? "0.8" : "0"})`, // red
                     width: 19 * MODULE_SCALE,
                     height: 19 * MODULE_SCALE,
                     WebkitMaskImage: `url(${PowerButtonMarkPressed})`,

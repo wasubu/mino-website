@@ -33,7 +33,7 @@ const Experiment: React.FC = () => {
 
     const pageStyle = (
         `relative min-h-[calc(100vh-var(--spacing-navY)-15px+150px)] py-5 px-8 shadow-sm
-        border-2 rounded-2xl border-gray-200 m-2 flex flex-col overflow-hidden`
+        border-2 rounded-2xl border-gray-200 m-3 flex flex-col overflow-hidden`
     )
 
     return (
@@ -52,7 +52,7 @@ const Experiment: React.FC = () => {
                         (vid, t) =>
                             drawScreen2(vid, t, slider1Ref.current, slider2Ref.current, screen2Vars.current)
                     }></RGScreen>
-                <RGPowerButton></RGPowerButton>
+                <RGPowerButton className="absolute bottom-145 left-95"></RGPowerButton>
             </div>
         </div>
     )
@@ -97,7 +97,7 @@ const drawScreen1 = (
     for (let waveI = 0; waveI <= 10; waveI++) {
         vid.fillStyle = `hsl(${hue + 30 * waveI + hueOffset}, 80%, ${50 - 3.8 * waveI}%)`;
         for (let x = 0; x < 64; x++) {
-            const y = centerY + Math.sin(x * frequency + phase - 0.25 * waveI) * amplitude;
+            const y = centerY + Math.cos(x * frequency + phase - 0.25 * waveI) * amplitude;
             vid.fillRect(x, Math.floor(y), 1, 1);
         }
     }
