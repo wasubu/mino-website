@@ -116,7 +116,7 @@ const drawScreen2 = (
     vid: CanvasRenderingContext2D,
     t: number, speedSlider: number,
     hueSlider: number,
-    self: Screen1Vars
+    self: Screen2Vars
 ) => {
     hueSlider = hueSlider * 1.8
     speedSlider = speedSlider * 1.8
