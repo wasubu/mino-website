@@ -130,7 +130,7 @@ const RGSlider: React.FC<RGSliderProps> = React.memo(({ className, onChange, val
     const headStyle = useMemo(() => ({
         imageRendering: "pixelated" as const,
         height: 12 * MODULE_SCALE,
-        transform: `translate3d(${getPixelFromValue(value)}px, ${HEAD_OFFSET_Y}px, 0)`
+        transform: `translate3d(${getPixelFromValue(value)}px, ${HEAD_OFFSET_Y}px, 0)`,
     }), [value, getPixelFromValue])
 
     return (

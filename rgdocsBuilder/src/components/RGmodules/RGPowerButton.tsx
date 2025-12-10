@@ -39,12 +39,17 @@ const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
     )
 
     return (
-        <div className={mainStyle} style={{ width: 16 * MODULE_SCALE }}>
+        <div className={mainStyle} style={{
+            width: 16 * MODULE_SCALE,
+            filter: "drop-shadow(3px 4px 7px rgba(0,0,0,0.1))",
+        }}>
             <img
                 src={PowerButtonBodyImg}
                 draggable={false}
                 onDragStart={(e) => e.preventDefault()}
-                style={{ imageRendering: "pixelated", height: 19 * MODULE_SCALE }}
+                style={{
+                    imageRendering: "pixelated", height: 19 * MODULE_SCALE,
+                }}
                 className="select-none"
             />
             <img

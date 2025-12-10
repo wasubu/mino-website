@@ -12,12 +12,14 @@ const RGScreen: React.FC<{
         relative`
     )
     return (
-        <div className={mainStyle} style={{ width: 69 * moduleScale }}>
+        <div className={mainStyle} style={{
+            width: 69 * moduleScale,
+            filter: "drop-shadow(3px 4px 7px rgba(0,0,0,0.1))",
+        }}>
             <img
                 src={ScreenMain64by36}
                 draggable={false}
                 style={{ imageRendering: "pixelated", height: 42 * moduleScale }}
-                className="shadow-lg"
             />
             <DrawCanvas scale={moduleScale} draw={draw}></DrawCanvas>
             <img
