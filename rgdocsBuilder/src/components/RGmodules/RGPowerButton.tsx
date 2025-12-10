@@ -5,7 +5,7 @@ import PowerButtonPressedImg from "../../assets/powerButton pressed.png"
 import PowerButtonMarkNormal from "../../assets/powerButton mark normal.png"
 import PowerButtonMarkPressed from "../../assets/powerButton mark pressed.png"
 
-const MODULE_SCALE = 4.5
+const MODULE_SCALE = 4
 
 //DUMMY.tsx - a boilerplate for creating interactive modules
 const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
@@ -34,8 +34,9 @@ const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
     }
 
     const mainStyle = (`${className}
-        bg-amber-500 relative`
+        relative`
     )
+
     return (
         <div className={mainStyle} style={{ width: 16 * MODULE_SCALE }}>
             <img
@@ -52,7 +53,7 @@ const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
                 style={{ imageRendering: "pixelated", height: 19 * MODULE_SCALE }}
                 className="absolute top-0 left-0 select-none"
             />
-            <img
+            <img // I keep this cause it has shadow
                 src={pressed ? PowerButtonMarkPressed : PowerButtonMarkNormal}
                 draggable={false}
                 onDragStart={(e) => e.preventDefault()}
@@ -62,13 +63,23 @@ const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
             <div
                 className=" absolute top-0 mask-no-repeat mask-contain mask-center "
                 style={{
-                    backgroundColor: "rgba(220, 38, 38, 0.8)",
+                    backgroundColor: `rgba(220, 38, 38, ${pressed ? "0" : "0.8"})`,
                     width: 19 * MODULE_SCALE,
                     height: 19 * MODULE_SCALE,
-                    WebkitMaskImage: `url(${pressed ? PowerButtonMarkPressed : PowerButtonMarkNormal
-                        })`,
-                    maskImage: `url(${pressed ? PowerButtonMarkPressed : PowerButtonMarkNormal
-                        })`,
+                    WebkitMaskImage: `url(${PowerButtonMarkNormal})`,
+                    maskImage: `url(${PowerButtonMarkNormal})`,
+                    left: -1.5 * MODULE_SCALE,
+                    imageRendering: "pixelated",
+                }}
+            />
+            <div
+                className=" absolute top-0 mask-no-repeat mask-contain mask-center "
+                style={{
+                    backgroundColor: `rgba(220, 38, 38, ${pressed ? "0.8" : "0"})`,
+                    width: 19 * MODULE_SCALE,
+                    height: 19 * MODULE_SCALE,
+                    WebkitMaskImage: `url(${PowerButtonMarkPressed})`,
+                    maskImage: `url(${PowerButtonMarkPressed})`,
                     left: -1.5 * MODULE_SCALE,
                     imageRendering: "pixelated",
                 }}
