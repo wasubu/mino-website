@@ -1,31 +1,47 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import PowerButtonBodyImg from "../../assets/powerButton body.png"
 import PowerButtonNormalImg from "../../assets/powerButton normal.png"
 import PowerButtonPressedImg from "../../assets/powerButton pressed.png"
-import PowerButtonMarkNormal from "../../assets/powerButton mark normal.png"
-import PowerButtonMarkPressed from "../../assets/powerButton mark pressed.png"
+import PowerButtonMarkNormalImg from "../../assets/powerButton mark normal.png"
+import PowerButtonMarkPressedImg from "../../assets/powerButton mark pressed.png"
 
-const MODULE_SCALE = 4.5
+import PowerOnSnd from "../../assets/powerbutton on.opus"
+import PowerOffSnd from "../../assets/powerbutton off.opus"
+
+
+const MODULE_SCALE = 3.7
 
 //DUMMY.tsx - a boilerplate for creating interactive modules
 const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
     const [pressed, setPressed] = useState(false)
     const [isOn, setIsOn] = useState(true)
 
+    const audioOnRef = React.useRef<HTMLAudioElement | null>(null)
+    const audioOffRef = React.useRef<HTMLAudioElement | null>(null)
+
     useEffect(() => {
-        const images = [
-            PowerButtonMarkNormal,
-            PowerButtonMarkPressed
-        ]
-        images.forEach(src => {
-            const img = new Image()
-            img.src = src
-        })
+        audioOnRef.current = new Audio(PowerOnSnd)
+        audioOffRef.current = new Audio(PowerOffSnd)
     }, [])
 
     const handleMouseDown = () => {
         setPressed(true)
-        setIsOn(prev => !prev)
+        const nextIsOn = !isOn;
+        setIsOn(nextIsOn);
+
+        if (nextIsOn) {
+            const audio = audioOnRef.current;
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play().catch(e => console.log(e));
+            }
+        } else {
+            const audio = audioOffRef.current;
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play().catch(e => console.log(e));
+            }
+        }
 
         const handleMouseUp = () => {
             setPressed(false)
@@ -60,7 +76,7 @@ const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
                 className="absolute top-0 left-0 select-none"
             />
             <img // I keep this cause it has shadow
-                src={pressed ? PowerButtonMarkPressed : PowerButtonMarkNormal}
+                src={pressed ? PowerButtonMarkPressedImg : PowerButtonMarkNormalImg}
                 draggable={false}
                 onDragStart={(e) => e.preventDefault()}
                 style={{ imageRendering: "pixelated", height: 19 * MODULE_SCALE }}
@@ -74,8 +90,8 @@ const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
                         : `rgba(220, 58, 58, ${pressed ? "0" : "0.8"})`, // red
                     width: 19 * MODULE_SCALE,
                     height: 19 * MODULE_SCALE,
-                    WebkitMaskImage: `url(${PowerButtonMarkNormal})`,
-                    maskImage: `url(${PowerButtonMarkNormal})`,
+                    WebkitMaskImage: `url(${PowerButtonMarkNormalImg})`,
+                    maskImage: `url(${PowerButtonMarkNormalImg})`,
                     left: -1.5 * MODULE_SCALE,
                     imageRendering: "pixelated",
                 }}
@@ -88,12 +104,29 @@ const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
                         : `rgba(200, 48, 48, ${pressed ? "0.8" : "0"})`, // red
                     width: 19 * MODULE_SCALE,
                     height: 19 * MODULE_SCALE,
-                    WebkitMaskImage: `url(${PowerButtonMarkPressed})`,
-                    maskImage: `url(${PowerButtonMarkPressed})`,
+                    WebkitMaskImage: `url(${PowerButtonMarkPressedImg})`,
+                    maskImage: `url(${PowerButtonMarkPressedImg})`,
                     left: -1.5 * MODULE_SCALE,
                     imageRendering: "pixelated",
                 }}
             />
+            <div
+                className="absolute top-[61%] left-1/2 pointer-events-none"
+                style={{
+                    width: 11 * MODULE_SCALE,
+                    height: 11 * MODULE_SCALE,
+                    transform: "translate(-50%, -50%)",
+                    borderRadius: "50%",
+                    background: isOn
+                        ? "rgba(80, 255, 80, 0.4)"  // green glow
+                        : "rgba(255, 60, 60, 0.4)", // red glow
+                    filter: "blur(13px)",           // softness of glow
+                    mixBlendMode: "screen",         // ⭐ blend option
+                    // opacity: pressed ? 0 : 1,       // hide glow when pressed
+                    zIndex: 3,
+                }}
+            />
+
             <div
                 draggable={false}
                 onDragStart={(e) => e.preventDefault()}

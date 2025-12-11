@@ -54,7 +54,7 @@ function RGModule({ text, children }: { text: string; children?: React.ReactNode
 
     const moduleStyle = "z-0 relative transition-shadow transition-transform hover:z-50 bg-gray-200 duration-200 hover:shadow-md hover:scale-125 h-[165px] rounded-md"
     const moduleContainer = (
-        "rounded-md overflow-hidden p-0 h-full w-full flex flex-col items-center justify-center"
+        "cursor-pointer rounded-md overflow-hidden p-0 h-full w-full flex flex-col items-center justify-center"
     )
     const moduleArtContainer = "flex-[7.5] w-full"
     const moduleTextContainer = "flex-[2.5]  w-full flex justify-center items-center"
