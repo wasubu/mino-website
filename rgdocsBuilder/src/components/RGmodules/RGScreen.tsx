@@ -76,7 +76,7 @@ function DrawCanvas({ scale, draw, powerState = false }: {
 
         loop();
         return () => cancelAnimationFrame(frameId);
-    }, [scale, draw, powerState]);
+    }, [scale, powerState]);
 
     return (
         <canvas
