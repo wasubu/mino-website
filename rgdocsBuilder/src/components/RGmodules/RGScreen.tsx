@@ -6,8 +6,9 @@ import ScreenFrame64by36 from "../../assets/screenFrame64by32.png"
 const RGScreen: React.FC<{
     className?: string
     draw?: (vid: CanvasRenderingContext2D, t: number) => void
-}> = ({ className, draw = () => { } }) => {
-    const moduleScale = 4.5
+    powerState?: boolean
+}> = ({ className, draw = () => { }, powerState = true }) => {
+    const moduleScale = 4
     const mainStyle = (`${className}
         relative`
     )
@@ -21,7 +22,7 @@ const RGScreen: React.FC<{
                 draggable={false}
                 style={{ imageRendering: "pixelated", height: 42 * moduleScale }}
             />
-            <DrawCanvas scale={moduleScale} draw={draw}></DrawCanvas>
+            <DrawCanvas powerState={powerState} scale={moduleScale} draw={draw}></DrawCanvas>
             <img
                 src={ScreenFrame64by36}
                 draggable={false}
@@ -35,7 +36,11 @@ const RGScreen: React.FC<{
     )
 }
 
-function DrawCanvas({ scale, draw }: { scale: number; draw: (vid: CanvasRenderingContext2D, t: number) => void, runOnce?: () => void }) {
+function DrawCanvas({ scale, draw, powerState = false }: {
+    scale: number;
+    draw: (vid: CanvasRenderingContext2D, t: number) => void, runOnce?: () => void
+    powerState?: boolean;
+}) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
@@ -59,6 +64,11 @@ function DrawCanvas({ scale, draw }: { scale: number; draw: (vid: CanvasRenderin
         let frameId: number;
 
         const loop = () => {
+            if (!powerState) {
+                vid.fillStyle = "black"
+                vid.fillRect(0, 0, 64, 36)
+                return
+            }
             t += 0.01;
             draw(vid, t)
             frameId = requestAnimationFrame(loop);
@@ -66,7 +76,7 @@ function DrawCanvas({ scale, draw }: { scale: number; draw: (vid: CanvasRenderin
 
         loop();
         return () => cancelAnimationFrame(frameId);
-    }, [scale]);
+    }, [scale, draw, powerState]);
 
     return (
         <canvas

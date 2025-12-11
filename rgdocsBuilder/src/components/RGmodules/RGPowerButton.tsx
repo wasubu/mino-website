@@ -9,10 +9,13 @@ import PowerOnSnd from "../../assets/powerbutton on.opus"
 import PowerOffSnd from "../../assets/powerbutton off.opus"
 
 
-const MODULE_SCALE = 3.7
+const MODULE_SCALE = 3.1
 
 //DUMMY.tsx - a boilerplate for creating interactive modules
-const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
+const RGPowerButton: React.FC<{
+    className?: string
+    onToggle?: (state: boolean) => void
+}> = ({ className, onToggle }) => {
     const [pressed, setPressed] = useState(false)
     const [isOn, setIsOn] = useState(true)
 
@@ -28,6 +31,8 @@ const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
         setPressed(true)
         const nextIsOn = !isOn;
         setIsOn(nextIsOn);
+
+        onToggle?.(nextIsOn);
 
         if (nextIsOn) {
             const audio = audioOnRef.current;
@@ -86,7 +91,7 @@ const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
                 className="absolute top-0 mask-no-repeat mask-contain mask-center "
                 style={{
                     backgroundColor: isOn
-                        ? `rgba(65, 254, 40, ${pressed ? "0" : "0.8"})` // green
+                        ? `rgba(65, 250, 40, ${pressed ? "0" : "0.8"})` // green
                         : `rgba(220, 58, 58, ${pressed ? "0" : "0.8"})`, // red
                     width: 19 * MODULE_SCALE,
                     height: 19 * MODULE_SCALE,
@@ -118,11 +123,10 @@ const RGPowerButton: React.FC<{ className?: string }> = ({ className }) => {
                     transform: "translate(-50%, -50%)",
                     borderRadius: "50%",
                     background: isOn
-                        ? "rgba(80, 255, 80, 0.4)"  // green glow
-                        : "rgba(255, 60, 60, 0.4)", // red glow
+                        ? "rgba(80, 255, 80, 0.3)"  // green glow
+                        : "rgba(255, 60, 60, 0.3)", // red glow
                     filter: "blur(13px)",           // softness of glow
                     mixBlendMode: "screen",         // ⭐ blend option
-                    // opacity: pressed ? 0 : 1,       // hide glow when pressed
                     zIndex: 3,
                 }}
             />

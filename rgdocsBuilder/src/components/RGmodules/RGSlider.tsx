@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useCallback, useMemo } from "react"
 import sliderHeadImg from "../../assets/sliderHead.png"
 import sliderBodyImg from "../../assets/sliderBody.png"
 
-const MODULE_SCALE = 4.5
+const MODULE_SCALE = 4
 const BODY_WIDTH = 62 * MODULE_SCALE
 const HEAD_WIDTH = 23 * MODULE_SCALE
 const OVERFLOW = MODULE_SCALE

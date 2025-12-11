@@ -6,6 +6,7 @@ import RGPowerButton from "../components/RGmodules/RGPowerButton";
 
 //Experiment.tsx - a temporary page for testing things
 const Experiment: React.FC = () => {
+    const [powerState, setPowerState] = useState(true)
     const [slider1, setSlider1] = useState(0)
     const [slider2, setSlider2] = useState(0)
 
@@ -31,6 +32,26 @@ const Experiment: React.FC = () => {
         hue: 0
     })
 
+    useEffect(() => {
+        if (!powerState) {
+            screen1Vars.current = {
+                posX: 0,
+                posY: 0,
+                velX: 1,
+                velY: 1,
+                hue: 0,
+                hueOffset: Math.random() * 359,
+            };
+            screen2Vars.current = {
+                posX: 0,
+                posY: 0,
+                velX: 1,
+                velY: 1,
+                hue: 0,
+            };
+        }
+    }, [powerState])
+
     const pageStyle = (
         `relative min-h-[calc(100vh-var(--spacing-navY)-15px+150px)] py-5 px-8 shadow-sm
         border-2 rounded-2xl border-gray-200 m-3 flex flex-col overflow-hidden`
@@ -43,16 +64,21 @@ const Experiment: React.FC = () => {
                 <RGSlider className="absolute top-20 left-5" value={slider1} onChange={setSlider1}></RGSlider>
                 <RGSlider className="absolute top-20 left-5" value={slider2} onChange={setSlider2}></RGSlider>
                 <RGScreen className="absolute top-20 left-5"
+                    powerState={powerState}
                     draw={
                         (vid, t) =>
                             drawScreen1(vid, t, slider1Ref.current, slider2Ref.current, screen1Vars.current)
                     }></RGScreen>
                 <RGScreen className="absolute top-20 left-5"
+                    powerState={powerState}
                     draw={
                         (vid, t) =>
                             drawScreen2(vid, t, slider1Ref.current, slider2Ref.current, screen2Vars.current)
                     }></RGScreen>
-                <RGPowerButton className="absolute bottom-145 left-95"></RGPowerButton>
+                <RGPowerButton className="absolute bottom-142 left-85" onToggle={(state) => {
+                    setPowerState(state)
+                    console.log("Button is now:", state ? "ON" : "OFF")
+                }}></RGPowerButton>
             </div>
         </div>
     )
