@@ -31,6 +31,8 @@ const Experiment: React.FC = () => {
         velY: 1,  // Start moving down
         hue: 0
     })
+    const screen3Vars = useRef<Screen3Vars>({
+    })
 
     useEffect(() => {
         if (!powerState) {
@@ -48,6 +50,8 @@ const Experiment: React.FC = () => {
                 velX: 1,
                 velY: 1,
                 hue: 0,
+            };
+            screen3Vars.current = {
             };
         }
     }, [powerState])
@@ -75,7 +79,14 @@ const Experiment: React.FC = () => {
                         (vid, t) =>
                             drawScreen2(vid, t, slider1Ref.current, slider2Ref.current, screen2Vars.current)
                     }></RGScreen>
-                <RGPowerButton className="absolute bottom-142 left-85" onToggle={(state) => {
+                <RGScreen className="absolute bottom-75 left-81"
+                    draw={
+                        (vid, t) => drawScreen3(vid, t, screen3Vars.current)
+                    }
+                    powerState={powerState}
+                    type="64x64"
+                ></RGScreen>
+                <RGPowerButton className="absolute bottom-185 left-85" onToggle={(state) => {
                     setPowerState(state)
                     console.log("Button is now:", state ? "ON" : "OFF")
                 }}></RGPowerButton>
@@ -184,10 +195,26 @@ const drawScreen2 = (
     }
 
     vid.fillStyle = `hsl(${hue}, 80%, 50%)`;
-    // vid.fillRect(posX, posY, 6, 6);
     draw.rect(posX, posY, 6, 6)
     Object.assign(self, { posX, posY, velX, velY, hue });
 };
 
+type Screen3Vars = {
+}
+const drawScreen3 = (
+    vid: CanvasRenderingContext2D,
+    t: number,
+    self: Screen3Vars
+) => {
+    vid.fillStyle = `black`;
+    vid.fillRect(0, 0, 64, 64);
+    const paddingX = 35
+    const paddingY = 15
+    vid.fillStyle = `yellow`;
+    vid.fillRect(paddingX, paddingY, 64 - paddingX * 2, 36 - paddingY * 2);
+    vid.fillStyle = "white"
+    vid.font = "12px monospace"
+    vid.fillText(`t = ${Math.round(t * 100) / 100}`, 3, 62, 98)
+};
 
 export default Experiment;

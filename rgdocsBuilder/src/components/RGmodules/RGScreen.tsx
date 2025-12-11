@@ -2,32 +2,62 @@ import { useEffect, useRef } from "react"
 import ScreenMain64by36 from "../../assets/screenMain64by32.png"
 import ScreenFrame64by36 from "../../assets/screenFrame64by32.png"
 
+import ScreenMain64by64 from "../../assets/screenMain64by64.png"
+import ScreenFrame64by64 from "../../assets/screenFrame64by64.png"
+
+type ScreenType = "64x36" | "64x64";
+
+const SCREEN_CONFIG: Record<ScreenType, {
+    width: number
+    height: number
+    bodyImg: string
+    frameImg: string
+}> = {
+    "64x36": {
+        width: 64, height: 36,
+        bodyImg: ScreenMain64by36,
+        frameImg: ScreenFrame64by36
+    },
+    "64x64": {
+        width: 64, height: 64,
+        bodyImg: ScreenMain64by64,
+        frameImg: ScreenFrame64by64
+    }
+}
+
 //RGScreen.tsx - Interactive module for RetroGadget's Screen module
 const RGScreen: React.FC<{
     className?: string
     draw?: (vid: CanvasRenderingContext2D, t: number) => void
     powerState?: boolean
-}> = ({ className, draw = () => { }, powerState = true }) => {
+    type?: ScreenType
+}> = ({ className, draw = () => { }, powerState = true, type = "64x36" }) => {
     const moduleScale = 4
     const mainStyle = (`${className}
-        relative`
+       bg-amber-500 relative`
     )
+
+    const { width, height, bodyImg, frameImg } = SCREEN_CONFIG[type]
     return (
         <div className={mainStyle} style={{
-            width: 69 * moduleScale,
+            width: (width + 5) * moduleScale,
             filter: "drop-shadow(3px 4px 7px rgba(0,0,0,0.1))",
         }}>
             <img
-                src={ScreenMain64by36}
-                draggable={false}
-                style={{ imageRendering: "pixelated", height: 42 * moduleScale }}
-            />
-            <DrawCanvas powerState={powerState} scale={moduleScale} draw={draw}></DrawCanvas>
-            <img
-                src={ScreenFrame64by36}
+                src={bodyImg}
                 draggable={false}
                 style={{
-                    imageRendering: "pixelated", height: 38 * moduleScale,
+                    imageRendering: "pixelated",
+                    height: (height + 6) * moduleScale
+                }}
+            />
+            <DrawCanvas powerState={powerState} width={width} height={height} scale={moduleScale} draw={draw}></DrawCanvas>
+            <img
+                src={frameImg}
+                draggable={false}
+                style={{
+                    imageRendering: "pixelated",
+                    height: (height + 2) * moduleScale,
                     top: 2 * moduleScale
                 }}
                 className="absolute"
@@ -36,10 +66,12 @@ const RGScreen: React.FC<{
     )
 }
 
-function DrawCanvas({ scale, draw, powerState = false }: {
-    scale: number;
+function DrawCanvas({ scale, width, height, draw, powerState = false }: {
+    scale: number
     draw: (vid: CanvasRenderingContext2D, t: number) => void, runOnce?: () => void
-    powerState?: boolean;
+    powerState?: boolean
+    width: number
+    height: number
 }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -51,12 +83,12 @@ function DrawCanvas({ scale, draw, powerState = false }: {
         if (!vid) return;
 
         // Base resolution
-        canvas.width = 64;
-        canvas.height = 36;
+        canvas.width = width;
+        canvas.height = height;
 
         // Physical scaled CSS size
-        canvas.style.width = `${64 * scale}px`;
-        canvas.style.height = `${36 * scale}px`;
+        canvas.style.width = `${width * scale}px`;
+        canvas.style.height = `${height * scale}px`;
 
         vid.imageSmoothingEnabled = false;
 
@@ -66,7 +98,7 @@ function DrawCanvas({ scale, draw, powerState = false }: {
         const loop = () => {
             if (!powerState) {
                 vid.fillStyle = "black"
-                vid.fillRect(0, 0, 64, 36)
+                vid.fillRect(0, 0, width, height)
                 return
             }
             t += 0.01;
