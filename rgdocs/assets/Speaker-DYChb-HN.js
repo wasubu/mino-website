@@ -1,1 +1,0 @@
-import{j as s}from"./index-BY2ZsoiL.js";const t=()=>s.jsxs("div",{className:"flex flex-col",children:[s.jsx("h2",{className:"text-2xl font-bold",children:"This is the speaker"}),s.jsx("h1",{children:"sorry this site is still under construction"}),s.jsx("h1",{children:"but meanwhile watch this site grow as I add/build things in this website"})]});export{t as default};

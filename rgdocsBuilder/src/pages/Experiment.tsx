@@ -81,7 +81,7 @@ const Experiment: React.FC = () => {
                     }></RGScreen>
                 <RGScreen className="absolute bottom-75 left-81"
                     draw={
-                        (vid, t) => drawScreen3(vid, t, screen3Vars.current)
+                        (vid, t) => drawScreen3(vid, t) // , screen3Vars.current
                     }
                     powerState={powerState}
                     type="64x64"
@@ -204,7 +204,7 @@ type Screen3Vars = {
 const drawScreen3 = (
     vid: CanvasRenderingContext2D,
     t: number,
-    self: Screen3Vars
+    // self: Screen3Vars
 ) => {
     vid.fillStyle = `black`;
     vid.fillRect(0, 0, 64, 64);
