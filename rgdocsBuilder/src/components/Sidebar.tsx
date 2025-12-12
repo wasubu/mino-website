@@ -14,11 +14,11 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
                 <img src={logo} alt="logo" className="mt-7 mb-7 w-50 h-fit " />
             </div>
             <nav className={`h-full overflow-y-auto py-4 px-4 pt-37 ${scrollbarStyle}`}>
-                <ul className="space-y-1">
-                    <ParentElement to="/">Welcome!</ParentElement>
-                    <ParentElement to="/introductory">Introductory</ParentElement>
-                    <ParentElement to="/experiment">Experiment</ParentElement>
-                    <ParentElement to="/retro-gadget-tutorials">Retro Gadget Tutorials</ParentElement>
+                <ul className="space-y-1 pb-9">
+                    <TopElement to="/">Welcome!</TopElement>
+                    <TopElement to="/introductory">Introductory</TopElement>
+                    <TopElement to="/experiment">Experiment</TopElement>
+                    <TopElement to="/retro-gadget-tutorials">Retro Gadget Tutorials</TopElement>
                     <ElementGroup><ParentElement to="/misc-modules">Misc Modules</ParentElement>
                         <ul className={indentedItems}>
                             <IndentedElement to="/cpu">CPU</IndentedElement>
@@ -32,24 +32,37 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
                             <IndentedElement to="/magneticconnector">Magnetic Connector</IndentedElement>
                             <IndentedElement to="/securitychip">Security Chip</IndentedElement>
                             <IndentedElement to="/serial">Serial</IndentedElement>
+                            <IndentedElement to="/decoration">Decoration</IndentedElement>
+                            <IndentedElement to="/powerbutton">Power Button</IndentedElement>
                         </ul>
                     </ElementGroup>
                     <ElementGroup><ParentElement to="/output-modules">Output Modules</ParentElement>
                         <ul className={indentedItems}>
                             <IndentedElement to="/led">Led</IndentedElement>
                             <IndentedElement to="/speaker">Speaker</IndentedElement>
+                            <IndentedElement to="/ledmatrix">Led Matrix</IndentedElement>
+                            <IndentedElement to="/flashmemory">Flash Memory</IndentedElement>
+                            <IndentedElement to="/speaker">Speaker</IndentedElement>
+                            <IndentedElement to="/ledstrip">Led Strip</IndentedElement>
+                            <IndentedElement to="/segmentdisplay">Segment Display</IndentedElement>
+                            <IndentedElement to="/analogguage">Analog Guage</IndentedElement>
+                            <IndentedElement to="/lcddisplay">Lcd Display</IndentedElement>
                         </ul>
                     </ElementGroup>
                     <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
                         <ul className={indentedItems}>
-                            <li>
-                                <IndentedElement to="/dpad">Dpad</IndentedElement>
-                            </li>
-                            <li>
-                                <IndentedElement to="/slider">Slider</IndentedElement>
-                            </li>
+                            <IndentedElement to="/dpad">Dpad</IndentedElement>
+                            <IndentedElement to="/slider">Slider</IndentedElement>
+                            <IndentedElement to="/switch">Switch</IndentedElement>
+                            <IndentedElement to="/knob">Knob</IndentedElement>
+                            <IndentedElement to="/analogstick">Analog Stick</IndentedElement>
+                            <IndentedElement to="/keypad">Keypad</IndentedElement>
+                            <IndentedElement to="/ledbutton">Led Button</IndentedElement>
+                            <IndentedElement to="/webcam">Webcam</IndentedElement>
+                            <IndentedElement to="/screenbutton">Screen Button</IndentedElement>
                         </ul>
                     </ElementGroup>
+                    <TopElement to="/rgassets">RG Assets</TopElement>
                 </ul>
             </nav >
         </div>
@@ -68,50 +81,63 @@ Misc:
 * [x] Magnetic Connector
 * [x] Security Chip
 * [x] Serial
-* [ ] Wifi Chip
-* [ ] Decoration
+* [x] Wifi Chip
+* [x] Decoration
+* [x] Power Button
 Input:
 * [x] DPad
 * [x] slider
-* [ ] Switch
-* [ ] Knob
-* [ ] Analog Stick
-* [ ] Keypad
-* [ ] Led Button
-* [ ] Webcam
-* [ ] ScreenButton
+* [x] Switch
+* [x] Knob
+* [x] Analog Stick
+* [x] Keypad
+* [x] Led Button
+* [x] Webcam
+* [x] ScreenButton
 Output:
 * [x] Speaker
 * [x] led
-* [ ] screen
-* [ ] Led Matrix
-* [ ] Flash Memory
-* [ ] Power Button
-* [ ] Led Strip
-* [ ] Segment Display
-* [ ] Analog Guage
+* [x] screen
+* [x] Led Matrix
+* [x] Flash Memory
+* [x] Led Strip
+* [x] Segment Display
+* [x] Analog Guage
 * [ ] Lcd Display
 */
 
+const LINK_CLASS_COMMON = "block px-3 py-2 rounded-md "
 function IndentedElement({ to, children }: { to: string; children: React.ReactNode }) {
-    const linkClassCommon = "block px-3 py-2 rounded-md "
     const linkClass = ({ isActive }: { isActive: boolean }) =>
-        `${linkClassCommon} border-l-2 hover:bg-blue-100 hover:border-blue-300 ${isActive ? "bg-gray-200 font-semibold border-gray-400" : "border-gray-200"}`;
+        `${LINK_CLASS_COMMON} border-l-2 hover:bg-blue-100 hover:border-blue-300 ${isActive ? "bg-gray-200 font-semibold border-gray-400" : "border-gray-200"}`;
     return (
-        <NavLink to={to} className={linkClass}>
+        <li>
+            <NavLink to={to} className={linkClass}>
+                {children}
+            </NavLink>
+        </li>
+    )
+}
+
+function ParentElement({ to, children }: { to: string; children: React.ReactNode }) {
+    const linkClassBold = ({ isActive }: { isActive: boolean }) =>
+        `${LINK_CLASS_COMMON} font-semibold hover:bg-blue-100 ${isActive ? "bg-gray-200 font-bold" : ""}`;
+    return (
+        <NavLink to={to} className={linkClassBold} end>
             {children}
         </NavLink>
     )
 }
 
-function ParentElement({ to, children }: { to: string; children: React.ReactNode }) {
-    const linkClassCommon = "block px-3 py-2 rounded-md "
+function TopElement({ to, children }: { to: string; children: React.ReactNode }) {
     const linkClassBold = ({ isActive }: { isActive: boolean }) =>
-        `${linkClassCommon} font-semibold hover:bg-blue-100 ${isActive ? "bg-gray-200 font-bold" : ""}`;
+        `${LINK_CLASS_COMMON} font-semibold hover:bg-blue-100 ${isActive ? "bg-gray-200 font-bold" : ""}`;
     return (
-        <NavLink to={to} className={linkClassBold} end>
-            {children}
-        </NavLink>
+        <li>
+            <NavLink to={to} className={linkClassBold} end>
+                {children}
+            </NavLink>
+        </li>
     )
 }
 

@@ -45,6 +45,7 @@ To do list:
 [ ] - "how to play" section, this section is special cause it's a slideshow
 [ ] - lua will be included in the docs, luau too
 [ ] - finalize footer
+[ ] - openning the sidebar will jump and scroll to the current pages route
 [ ] - no videos/gif but overing on them plays an animation, smooth in and out 
 [ ] - Cpu and other modules say gdt.Cpu0
 [ ] - in the interactive code inlude, obj.Type
@@ -83,7 +84,7 @@ Output:
 [x] - screen
 [ ] - Led Matrix
 [ ] - Flash Memory
-[ ] - Power Button
+[x] - Power Button
 [ ] - Led Strip
 [ ] - Segment Display
 [ ] - Analog Guage
