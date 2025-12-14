@@ -70,18 +70,18 @@ const Experiment: React.FC = () => {
                 <RGScreen className="absolute top-20 left-5"
                     powerState={powerState}
                     draw={
-                        (vid, t) =>
-                            drawScreen1(vid, t, slider1Ref.current, slider2Ref.current, screen1Vars.current)
+                        (vid, t, screen) =>
+                            drawScreen1(vid, t, slider1Ref.current, slider2Ref.current, screen1Vars.current, screen)
                     }></RGScreen>
                 <RGScreen className="absolute top-20 left-5"
                     powerState={powerState}
                     draw={
-                        (vid, t) =>
-                            drawScreen2(vid, t, slider1Ref.current, slider2Ref.current, screen2Vars.current)
+                        (vid, t, screen) =>
+                            drawScreen2(vid, t, slider1Ref.current, slider2Ref.current, screen2Vars.current, screen)
                     }></RGScreen>
                 <RGScreen className="absolute bottom-75 left-81"
                     draw={
-                        (vid, t) => drawScreen3(vid, t) // , screen3Vars.current
+                        (vid, t, screen) => drawScreen3(vid, t, screen) // , screen3Vars.current
                     }
                     powerState={powerState}
                     type="64x64"
@@ -95,6 +95,8 @@ const Experiment: React.FC = () => {
     )
 }
 
+type ScreenInfo = { width: number, height: number }
+
 type Screen1Vars = {
     posX: number;
     posY: number;
@@ -107,13 +109,14 @@ const drawScreen1 = (
     vid: CanvasRenderingContext2D,
     t: number, speedSlider: number,
     hueSlider: number,
-    self: Screen1Vars
+    self: Screen1Vars,
+    screen: ScreenInfo
 ) => {
     let { posX, posY, velX, velY, hue, hueOffset } = self
     hue = hueSlider * 2.2012
     if (hue > 360) hue -= 360;
     vid.fillStyle = `black`;
-    vid.fillRect(0, 0, 64, 36);
+    vid.fillRect(0, 0, screen.width, screen.height);
 
     const speedFactor = 0.05 + speedSlider / 50;
     let currentVelX = velX > 0 ? speedFactor : -speedFactor;
@@ -123,23 +126,22 @@ const drawScreen1 = (
     posY += currentVelY;
 
     if (posX < 0) { posX = 0; velX = speedFactor; }
-    if (posX > 64 - 6) { posX = 64 - 6; velX = -speedFactor; }
+    if (posX > screen.width - 6) { posX = screen.width - 6; velX = -speedFactor; }
     if (posY < 0) { posY = 0; velY = speedFactor; }
-    if (posY > 36 - 6) { posY = 36 - 6; velY = -speedFactor; }
+    if (posY > screen.height - 6) { posY = screen.height - 6; velY = -speedFactor; }
 
     const amplitude = 18 * hueSlider / 164;
     const frequency = 0.1 * speedSlider / 164 + 0.05;
     const phase = t;
-    const centerY = 36 / 2;
+    const centerY = screen.height / 2;
     for (let waveI = 0; waveI <= 10; waveI++) {
         vid.fillStyle = `hsl(${hue + 30 * waveI + hueOffset}, 80%, ${50 - 3.8 * waveI}%)`;
-        for (let x = 0; x < 64; x++) {
+        for (let x = 0; x < screen.width; x++) {
             const y = centerY + Math.cos(x * frequency + phase - 0.25 * waveI) * amplitude;
             vid.fillRect(x, Math.floor(y), 1, 1);
         }
     }
     vid.fillStyle = `hsl(${hue + hueOffset}, 80%, 50%)`;
-    // vid.fillRect(posX, posY, 6, 6);
     vid.fillRect(Math.round(posX), Math.round(posY), 6, 6)
     Object.assign(self, { posX, posY, velX, velY, hue, hueOffset });
 };
@@ -155,7 +157,8 @@ const drawScreen2 = (
     vid: CanvasRenderingContext2D,
     t: number, speedSlider: number,
     hueSlider: number,
-    self: Screen2Vars
+    self: Screen2Vars,
+    screen: ScreenInfo
 ) => {
     hueSlider = hueSlider * 1.8
     speedSlider = speedSlider * 1.8
@@ -164,10 +167,10 @@ const drawScreen2 = (
     hue = hueSlider * 2.2012
     if (hue > 360) hue -= 360;
     vid.fillStyle = `black`;
-    vid.fillRect(0, 0, 64, 36);
+    vid.fillRect(0, 0, screen.width, screen.height);
     if (speedSlider === 180) {
         vid.fillStyle = `green`;
-        vid.fillRect(0, 0, 64, 36);
+        vid.fillRect(0, 0, screen.width, screen.height);
     }
 
     const speedFactor = 0.05 + speedSlider / 50;
@@ -178,17 +181,17 @@ const drawScreen2 = (
     posY += currentVelY;
 
     if (posX < 0) { posX = 0; velX = speedFactor; }
-    if (posX > 64 - 6) { posX = 64 - 6; velX = -speedFactor; }
+    if (posX > screen.width - 6) { posX = screen.width - 6; velX = -speedFactor; }
     if (posY < 0) { posY = 0; velY = speedFactor; }
-    if (posY > 36 - 6) { posY = 36 - 6; velY = -speedFactor; }
+    if (posY > screen.height - 6) { posY = screen.height - 6; velY = -speedFactor; }
 
     const amplitude = 18 * hueSlider / 164;
     const frequency = 0.1 * speedSlider / 164 + 0.05;
     const phase = t;
-    const centerY = 36 / 2;
+    const centerY = screen.height / 2;
     for (let waveI = 0; waveI <= 10; waveI++) {
         vid.fillStyle = `hsl(${hue + 30 * waveI}, 80%, ${50 - 3.8 * waveI}%)`;
-        for (let x = 0; x < 64; x++) {
+        for (let x = 0; x < screen.width; x++) {
             const y = centerY + Math.sin(x * frequency + phase - 0.25 * waveI) * amplitude;
             draw.rect(x, y, 1, 1);
         }
@@ -204,10 +207,10 @@ type Screen3Vars = {
 const drawScreen3 = (
     vid: CanvasRenderingContext2D,
     t: number,
-    // self: Screen3Vars
+    screen: ScreenInfo,
 ) => {
     vid.fillStyle = `black`;
-    vid.fillRect(0, 0, 64, 64);
+    vid.fillRect(0, 0, screen.width, screen.height);
     const paddingX = 35
     const paddingY = 15
     vid.fillStyle = `yellow`;

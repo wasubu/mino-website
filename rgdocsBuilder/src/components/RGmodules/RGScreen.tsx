@@ -25,13 +25,28 @@ const SCREEN_CONFIG: Record<ScreenType, {
     }
 }
 
+type ScreenInfo = {
+    width: number
+    height: number
+}
+
+const noopDraw = (
+    _vid: CanvasRenderingContext2D,
+    _t: number,
+    _screen: ScreenInfo
+) => { }
+
 //RGScreen.tsx - Interactive module for RetroGadget's Screen module
 const RGScreen: React.FC<{
     className?: string
-    draw?: (vid: CanvasRenderingContext2D, t: number) => void
+    draw?: (
+        vid: CanvasRenderingContext2D,
+        t: number,
+        screen: ScreenInfo
+    ) => void
     powerState?: boolean
     type?: ScreenType
-}> = ({ className, draw = () => { }, powerState = true, type = "64x36" }) => {
+}> = ({ className, draw = noopDraw, powerState = true, type = "64x36" }) => {
     const moduleScale = 4
     const mainStyle = (`${className}
        bg-amber-500 relative`
@@ -68,7 +83,11 @@ const RGScreen: React.FC<{
 
 function DrawCanvas({ scale, width, height, draw, powerState = false }: {
     scale: number
-    draw: (vid: CanvasRenderingContext2D, t: number) => void, runOnce?: () => void
+    draw: (
+        vid: CanvasRenderingContext2D,
+        t: number,
+        screen: ScreenInfo
+    ) => void, runOnce?: () => void
     powerState?: boolean
     width: number
     height: number
@@ -81,7 +100,6 @@ function DrawCanvas({ scale, width, height, draw, powerState = false }: {
 
         const vid = canvas.getContext("2d");
         if (!vid) return;
-
         // Base resolution
         canvas.width = width;
         canvas.height = height;
@@ -95,6 +113,8 @@ function DrawCanvas({ scale, width, height, draw, powerState = false }: {
         let t = 0;
         let frameId: number;
 
+        const screenInfo = { width, height }
+
         const loop = () => {
             if (!powerState) {
                 vid.fillStyle = "black"
@@ -102,7 +122,7 @@ function DrawCanvas({ scale, width, height, draw, powerState = false }: {
                 return
             }
             t += 0.01;
-            draw(vid, t)
+            draw(vid, t, screenInfo)
             frameId = requestAnimationFrame(loop);
         };
 
