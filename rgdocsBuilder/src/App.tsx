@@ -1,7 +1,8 @@
-import { lazy, useEffect, useRef, useState } from "react"
+import { lazy, useContext, useEffect, useRef, useState } from "react"
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
 
 import SuspenseOfDocs from "./components/tools/SuspenseOfDocs"
+import { useContextMenu } from "./components/tools/ContextMenuProvider"
 
 import Navbar from "./components/Navbar"
 import Sidebar from "./components/Sidebar"
@@ -28,6 +29,8 @@ const Introductory = lazy(() => import("./pages/Introductory"));
 
 //App.tsx
 const App: React.FC = () => {
+    const { openMenu } = useContextMenu()
+
     const [isSidebarOpen, setSidebarOpen] = useState(true)
     const [isPutPadding, setPutPadding] = useState(true)
 
@@ -76,7 +79,18 @@ const App: React.FC = () => {
                         <Sidebar isOpen={isSidebarOpen} />
                     </div>
 
-                    <main className={mainStyle} id="scroll-container">
+                    <main
+                        className={mainStyle} id="scroll-container"
+                        onContextMenu={(e) => {
+                            openMenu(
+                                [
+                                    { label: "Back", onClick: () => window.history.back() },
+                                    { label: "Forward", onClick: () => window.history.forward() },
+                                    { label: "Reload", onClick: () => window.location.reload() },
+                                ],
+                                e
+                            )
+                        }}>
                         <div className={mainWinResponse}> {/*to make it scroll*/}
                             <div className="min-h-[calc(100vh-120px)]">
                                 <DocumentRoutes></DocumentRoutes>
