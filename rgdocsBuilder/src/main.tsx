@@ -11,6 +11,7 @@ To do list:
 [-] - docutmentRoutes.json contains each element. element has to: name: component:
 [-] - smaller screens, clicking an item in the sidebar would close it
 [-] - make a custom breakpoint, after-breakpoint and before-breakpoint
+[-] - maybe make nav bar transparent?
 [x] - fix the folder structure of cpu and reality chip
 [x] - rename Modules to Misc Modules
 [x] - hamburg menu breaking on smaller screens
@@ -34,12 +35,11 @@ To do list:
 [x] - work on the footer
 [x] - nav bar height has it's own var in tailwind
 [x] - don't use canvas or pixijs, just use react for interactive components
+[x] - include every module on the sidebar
+[x] - put a comment in each page of what the file name is
 
 [ ] - module dedicated page
 [ ] - new sidebar tab where you can search
-[ ] - include every module on the sidebar
-[ ] - put a comment in each page of what the file name is
-[ ] - maybe make nav bar transparent?
 [ ] - right click to access settings like dark mode. It has nice UI
 [ ] - on the welcome's module, try to make the slider animate
 [ ] - "how to play" section, this section is special cause it's a slideshow

@@ -64,32 +64,36 @@ const Experiment: React.FC = () => {
     return (
         <div className={pageStyle}>
             <h2 className="text-2xl font-bold">Experiment</h2>
-            <div className="flex flex-col gap-9">
-                <RGSlider className="absolute top-20 left-5" value={slider1} onChange={setSlider1}></RGSlider>
-                <RGSlider className="absolute top-20 left-5" value={slider2} onChange={setSlider2}></RGSlider>
-                <RGScreen className="absolute top-20 left-5"
+            <div className="flex flex-wrap justify-center gap-3 pt-15 ">
+                <div className="flex flex-col gap-1">
+                    <RGSlider className="" value={slider1} onChange={setSlider1}></RGSlider>
+                    <RGSlider className="" value={slider2} onChange={setSlider2}></RGSlider>
+                </div>
+                <div className="flex justify-center items-center">
+                    <RGPowerButton className="" onToggle={(state) => {
+                        setPowerState(state)
+                        console.log("Button is now:", state ? "ON" : "OFF")
+                    }}></RGPowerButton>
+                </div>
+                <RGScreen className=""
                     powerState={powerState}
                     draw={
                         (vid, t, screen) =>
                             drawScreen1(vid, t, slider1Ref.current, slider2Ref.current, screen1Vars.current, screen)
                     }></RGScreen>
-                <RGScreen className="absolute top-20 left-5"
+                <RGScreen className=""
                     powerState={powerState}
                     draw={
                         (vid, t, screen) =>
                             drawScreen2(vid, t, slider1Ref.current, slider2Ref.current, screen2Vars.current, screen)
                     }></RGScreen>
-                <RGScreen className="absolute bottom-75 left-81"
+                <RGScreen className=""
                     draw={
                         (vid, t, screen) => drawScreen3(vid, t, screen) // , screen3Vars.current
                     }
                     powerState={powerState}
                     type="64x64"
                 ></RGScreen>
-                <RGPowerButton className="absolute bottom-185 left-85" onToggle={(state) => {
-                    setPowerState(state)
-                    console.log("Button is now:", state ? "ON" : "OFF")
-                }}></RGPowerButton>
             </div>
         </div>
     )

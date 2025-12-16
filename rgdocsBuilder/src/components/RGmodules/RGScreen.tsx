@@ -47,9 +47,9 @@ const RGScreen: React.FC<{
     powerState?: boolean
     type?: ScreenType
 }> = ({ className, draw = noopDraw, powerState = true, type = "64x36" }) => {
-    const moduleScale = 4
+    const moduleScale = 3.9
     const mainStyle = (`${className}
-       bg-amber-500 relative`
+       relative`
     )
 
     const { width, height, bodyImg, frameImg } = SCREEN_CONFIG[type]

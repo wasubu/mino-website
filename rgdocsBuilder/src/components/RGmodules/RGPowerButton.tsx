@@ -80,13 +80,13 @@ const RGPowerButton: React.FC<{
                 style={{ imageRendering: "pixelated", height: 19 * MODULE_SCALE }}
                 className="absolute top-0 left-0 select-none"
             />
-            <img // I keep this cause it has shadow
+            {/* <img // I keep this cause it has shadow
                 src={pressed ? PowerButtonMarkPressedImg : PowerButtonMarkNormalImg}
                 draggable={false}
                 onDragStart={(e) => e.preventDefault()}
                 style={{ imageRendering: "pixelated", height: 19 * MODULE_SCALE }}
                 className="absolute top-0 left-0 select-none"
-            />
+            /> */}
             <div
                 className="absolute top-0 mask-no-repeat mask-contain mask-center "
                 style={{
