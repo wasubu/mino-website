@@ -164,13 +164,17 @@ function DrawCanvas({ scale, width, height, draw, powerState = false }: {
 
         const screenInfo: ScreenInfo = { width, height, touch: touchRef.current }
 
+        let lastTime = performance.now()
         const loop = () => {
+            const now = performance.now()
+            const dt = (now - lastTime) / 1000
+            lastTime = now
             if (!powerState) {
                 vid.fillStyle = "black"
                 vid.fillRect(0, 0, width, height)
                 return
             }
-            t += 0.01;
+            t += dt;
             draw(vid, t, screenInfo)
             frameId = requestAnimationFrame(loop);
         };
