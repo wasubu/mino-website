@@ -25,9 +25,16 @@ const SCREEN_CONFIG: Record<ScreenType, {
     }
 }
 
+type TouchInfo = {
+    x: number
+    y: number
+    state: boolean
+}
+
 type ScreenInfo = {
     width: number
     height: number
+    touch?: TouchInfo
 }
 
 const noopDraw = (
@@ -49,7 +56,7 @@ const RGScreen: React.FC<{
 }> = ({ className, draw = noopDraw, powerState = true, type = "64x36" }) => {
     const moduleScale = 3.9
     const mainStyle = (`${className}
-       relative`
+       relative shrink-0`
     )
 
     const { width, height, bodyImg, frameImg } = SCREEN_CONFIG[type]
@@ -75,7 +82,7 @@ const RGScreen: React.FC<{
                     height: (height + 2) * moduleScale,
                     top: 2 * moduleScale
                 }}
-                className="absolute"
+                className="absolute pointer-events-none"
             />
         </div>
     )
@@ -93,6 +100,11 @@ function DrawCanvas({ scale, width, height, draw, powerState = false }: {
     height: number
 }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const touchRef = useRef<TouchInfo>({
+        x: 0,
+        y: 0,
+        state: false
+    })
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -110,10 +122,47 @@ function DrawCanvas({ scale, width, height, draw, powerState = false }: {
 
         vid.imageSmoothingEnabled = false;
 
+        const getTouchPos = (e: PointerEvent) => {
+            const rect = canvas.getBoundingClientRect()
+            const IsInside = (
+                e.clientX >= rect.left &&
+                e.clientX <= rect.right &&
+                e.clientY >= rect.top &&
+                e.clientY <= rect.bottom
+            )
+            if (!IsInside) return false
+            const x = Math.floor(
+                ((e.clientX - rect.left) / rect.width) * width
+            )
+            const y = Math.floor(
+                ((e.clientY - rect.top) / rect.height) * height
+            )
+            touchRef.current.x = Math.max(0, Math.min(width - 1, x))
+            touchRef.current.y = Math.max(0, Math.min(height - 1, y))
+            return true
+        }
+        const onPointerDown = (e: PointerEvent) => {
+            canvas.setPointerCapture(e.pointerId)
+            touchRef.current.state = true
+            getTouchPos(e)
+        }
+        const onPointerMove = (e: PointerEvent) => {
+            if (!touchRef.current.state) return
+            getTouchPos(e)
+        }
+        const onPointerUp = (e: PointerEvent) => {
+            touchRef.current.state = false
+            canvas.setPointerCapture(e.pointerId)
+        }
+
+        canvas.addEventListener("pointerdown", onPointerDown)
+        canvas.addEventListener("pointermove", onPointerMove)
+        window.addEventListener("pointerup", onPointerUp)
+
         let t = 0;
         let frameId: number;
 
-        const screenInfo = { width, height }
+        const screenInfo: ScreenInfo = { width, height, touch: touchRef.current }
 
         const loop = () => {
             if (!powerState) {
@@ -127,7 +176,12 @@ function DrawCanvas({ scale, width, height, draw, powerState = false }: {
         };
 
         loop();
-        return () => cancelAnimationFrame(frameId);
+        return () => {
+            cancelAnimationFrame(frameId)
+            canvas.removeEventListener("pointerdown", onPointerDown)
+            canvas.removeEventListener("pointermove", onPointerMove)
+            window.removeEventListener("pointerup", onPointerUp)
+        };
     }, [scale, powerState]);
 
     return (
@@ -137,8 +191,9 @@ function DrawCanvas({ scale, width, height, draw, powerState = false }: {
             style={{
                 top: 3 * scale,
                 left: 2 * scale,
-                transform: "scale(1.003)",
+                transform: "scale(1.005)",
                 imageRendering: "pixelated",
+                touchAction: "none"
             }}
         ></canvas>
     );

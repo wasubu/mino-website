@@ -103,7 +103,17 @@ const Experiment: React.FC = () => {
     )
 }
 
-type ScreenInfo = { width: number, height: number }
+type TouchInfo = {
+    x: number
+    y: number
+    state: boolean
+}
+
+type ScreenInfo = {
+    width: number
+    height: number
+    touch?: TouchInfo
+}
 
 type Screen1Vars = {
     posX: number;
@@ -219,10 +229,9 @@ const drawScreen3 = (
 ) => {
     vid.fillStyle = `black`;
     vid.fillRect(0, 0, screen.width, screen.height);
-    const paddingX = 35
-    const paddingY = 15
+    const { x: touchX, y: touchY } = screen.touch
     vid.fillStyle = `yellow`;
-    vid.fillRect(paddingX, paddingY, 64 - paddingX * 2, 36 - paddingY * 2);
+    vid.fillRect(touchX, touchY, 6, 6);
     vid.fillStyle = "white"
     vid.font = "12px monospace"
     vid.fillText(`t = ${Math.round(t * 100) / 100}`, 3, 62, 98)
