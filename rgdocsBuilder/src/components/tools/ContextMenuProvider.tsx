@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState, type KeyboardEvent } from "react"
+import React, { createContext, useContext, useEffect, useRef, useState, type KeyboardEvent } from "react"
 
 type MenuItem = {
     label: string
@@ -19,14 +19,30 @@ const ContextMenuContext = createContext<{
 
 export function ContextMenuProvider({ children }: { children: React.ReactNode }) {
     const [menu, setMenu] = useState<MenuState | null>(null)
+    const selectedTextRef = useRef("")
 
     const openMenu = (items: MenuItem[], e: React.MouseEvent) => {
         e.preventDefault()
         e.stopPropagation()
+        selectedTextRef.current = getSelectedText()
+        const finalItems: MenuItem[] = []
+        if (selectedTextRef.current.trim().length > 0) {
+            finalItems.push({
+                label: "Copy",
+                onClick: async () => {
+                    try {
+                        await navigator.clipboard.writeText(selectedTextRef.current)
+                    } catch (err) {
+                        console.warn("Clipboard write failed", err)
+                    }
+                    closeMenu()
+                }
+            })
+        }
         setMenu({
             x: e.clientX,
             y: e.clientY,
-            items
+            items: [...finalItems, ...items]
         })
     }
 
@@ -75,6 +91,10 @@ export function ContextMenuProvider({ children }: { children: React.ReactNode })
             )}
         </ContextMenuContext.Provider>
     )
+}
+
+function getSelectedText() {
+    return window.getSelection()?.toString() ?? ""
 }
 
 

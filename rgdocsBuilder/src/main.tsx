@@ -42,8 +42,10 @@ To do list:
 [ ] - new sidebar tab where you can search
 [ ] - right click to access settings like dark mode. It has nice UI
 [ ] - on the welcome's module, try to make the slider animate
+[ ] - put your logo in the right click menu
 [ ] - "how to play" section, this section is special cause it's a slideshow
 [ ] - lua will be included in the docs, luau too
+[ ] - make the background of context menu slightly transparent
 [ ] - finalize footer
 [ ] - make this installable on android devices
 [ ] - openning the sidebar will jump and scroll to the current pages route

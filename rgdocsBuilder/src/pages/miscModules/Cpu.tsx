@@ -1,7 +1,9 @@
+import PageHeaderText from "../../components/tools/PageHeaderText";
+
 const Cpu: React.FC = () => {
     return (
         <div>
-            <h2 className="text-2xl font-bold">CPU Module</h2>
+            <PageHeaderText>CPU Module</PageHeaderText>
             <p>Documentation for the CPU module goes here...</p>
             <h2 className="text-2xl font-bold">CPU Module</h2>
             <h2 className="text-2xl font-bold">CPU Module</h2>

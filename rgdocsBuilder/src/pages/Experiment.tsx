@@ -3,9 +3,13 @@ import RGDraw from "../lib/RGdraw";
 import RGScreen from "../components/RGmodules/RGScreen";
 import RGSlider from "../components/RGmodules/RGSlider";
 import RGPowerButton from "../components/RGmodules/RGPowerButton";
+import { useContextMenu } from "../components/tools/ContextMenuProvider";
+import PageHeaderText from "../components/tools/PageHeaderText";
 
 //Experiment.tsx - a temporary page for testing things
 const Experiment: React.FC = () => {
+    const { openMenu } = useContextMenu()
+
     const [powerState, setPowerState] = useState(true)
     const [slider1, setSlider1] = useState(0)
     const [slider2, setSlider2] = useState(0)
@@ -63,7 +67,7 @@ const Experiment: React.FC = () => {
 
     return (
         <div className={pageStyle}>
-            <h2 className="text-2xl font-bold">Experiment</h2>
+            <PageHeaderText>Experiment</PageHeaderText>
             <div className="flex flex-wrap justify-center gap-3 pt-15 ">
                 <div className="flex flex-col gap-1">
                     <RGSlider className="" value={slider1} onChange={setSlider1}></RGSlider>

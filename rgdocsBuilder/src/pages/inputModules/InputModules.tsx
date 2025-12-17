@@ -1,7 +1,9 @@
+import PageHeaderText from "../../components/tools/PageHeaderText";
+
 const InputModules: React.FC = () => {
     return (
         <div className="flex flex-col">
-            <h2 className="text-2xl font-bold">Input Modules</h2>
+            <PageHeaderText>Input Modules</PageHeaderText>
             <h1>sorry this site is still under construction</h1>
             <h1>but meanwhile watch this site grow as I add/build things in this website</h1>
         </div>

@@ -39,7 +39,6 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
                     <ElementGroup><ParentElement to="/output-modules">Output Modules</ParentElement>
                         <ul className={indentedItems}>
                             <IndentedElement to="/led">Led</IndentedElement>
-                            <IndentedElement to="/speaker">Speaker</IndentedElement>
                             <IndentedElement to="/ledmatrix">Led Matrix</IndentedElement>
                             <IndentedElement to="/flashmemory">Flash Memory</IndentedElement>
                             <IndentedElement to="/speaker">Speaker</IndentedElement>
