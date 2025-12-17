@@ -227,11 +227,12 @@ const drawScreen3 = (
     t: number,
     screen: ScreenInfo,
 ) => {
+    const draw = new RGDraw(vid)
     vid.fillStyle = `black`;
     vid.fillRect(0, 0, screen.width, screen.height);
     const { x: touchX, y: touchY } = screen.touch
     vid.fillStyle = `yellow`;
-    vid.fillRect(touchX, touchY, 6, 6);
+    draw.rect(touchX, touchY, 6, 6);
     vid.fillStyle = "white"
     vid.font = "12px monospace"
     vid.fillText(`t = ${Math.round(t * 100) / 100}`, 3, 62, 98)

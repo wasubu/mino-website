@@ -133,8 +133,8 @@ function DrawCanvas({ scale, width, height, draw, powerState = false }: {
             if (!IsInside) return false
             const x = Math.floor(
                 ((e.clientX - rect.left) / rect.width) * width
-            )
-            const y = Math.floor(
+            ) | 0
+            const y = (
                 ((e.clientY - rect.top) / rect.height) * height
             )
             touchRef.current.x = Math.max(0, Math.min(width - 1, x))
@@ -152,7 +152,7 @@ function DrawCanvas({ scale, width, height, draw, powerState = false }: {
         }
         const onPointerUp = (e: PointerEvent) => {
             touchRef.current.state = false
-            canvas.setPointerCapture(e.pointerId)
+            canvas.releasePointerCapture(e.pointerId)
         }
 
         canvas.addEventListener("pointerdown", onPointerDown)
@@ -181,7 +181,7 @@ function DrawCanvas({ scale, width, height, draw, powerState = false }: {
             canvas.removeEventListener("pointerdown", onPointerDown)
             canvas.removeEventListener("pointermove", onPointerMove)
             window.removeEventListener("pointerup", onPointerUp)
-        };
+        }
     }, [scale, powerState]);
 
     return (
