@@ -68,7 +68,7 @@ const App: React.FC = () => {
             <div className="flex flex-col h-screen overflow-hidden">
                 {/* Show this Navbar when over sm */}
                 <Navbar toggleSidebar={() => setSidebarOpen(sidebarOpen => !sidebarOpen)} />
-                <div className="fixed top-[46px] sm:hidden z-10 ">
+                <div className="fixed top-navY sm:hidden z-10 ">
                     <Sidebar isOpen={isSidebarOpen} />
                 </div>
 

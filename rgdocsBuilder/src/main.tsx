@@ -47,6 +47,9 @@ To do list:
 [ ] - finalize footer
 [ ] - make this installable on android devices
 [ ] - openning the sidebar will jump and scroll to the current pages route
+[ ] - the two sidebar doesn't share the scroll location
+[ ] - the context menu show items with a togle mark like darkmode
+[ ] - dark mode support
 [ ] - no videos/gif but overing on them plays an animation, smooth in and out 
 [ ] - Cpu and other modules say gdt.Cpu0
 [ ] - in the interactive code inlude, obj.Type
@@ -55,6 +58,7 @@ To do list:
 [ ] - hear me out. Module icon in the left and on the right it says like codeblock update() gdt.Slider0.Value == 100, and sliding the slider would change the value 
 [ ] - on the container there would be a power button so, cpu.sincelastreload would reset. the button could play a meow sound if buttondown.
 [ ] - Interactive code examples at the very bottom
+
 // Built The Interactive Module Itself
 Misc:
 [ ] - Reality Chip
