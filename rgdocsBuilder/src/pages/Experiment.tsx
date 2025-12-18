@@ -230,7 +230,9 @@ const drawScreen3 = (
     const draw = new RGDraw(vid)
     vid.fillStyle = `black`;
     vid.fillRect(0, 0, screen.width, screen.height);
-    const { x: touchX, y: touchY } = screen.touch
+    // const { x: touchX, y: touchY } = screen.touch
+    const touchX = screen.touch?.x ?? 0
+    const touchY = screen.touch?.y ?? 0
     vid.fillStyle = `yellow`;
     draw.rect(touchX, touchY, 6, 6);
     vid.fillStyle = "white"

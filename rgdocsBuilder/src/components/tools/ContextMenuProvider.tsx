@@ -15,6 +15,7 @@ type MenuState = {
 const ContextMenuContext = createContext<{
     openMenu: (items: MenuItem[], e: React.MouseEvent) => void
     closeMenu: () => void
+    isOpen: boolean
 } | null>(null)
 
 export function ContextMenuProvider({ children }: { children: React.ReactNode }) {
@@ -69,7 +70,7 @@ export function ContextMenuProvider({ children }: { children: React.ReactNode })
 
 
     return (
-        <ContextMenuContext.Provider value={{ openMenu, closeMenu }}>
+        <ContextMenuContext.Provider value={{ openMenu, closeMenu, isOpen: !!menu }}>
             {children}
             {menu && (
                 <ul
