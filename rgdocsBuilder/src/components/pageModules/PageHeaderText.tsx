@@ -6,7 +6,7 @@ const PageHeaderText = ({ children, className }: {
     className?: string
 }) => {
     const { openMenu } = useContextMenu()
-    const mainStyle = "cursor-pointer inline-block font-bold hover:text-blue-600 text-2xl"
+    const mainStyle = "duration-100 cursor-pointer inline-block font-bold hover:text-blue-600 text-2xl"
     return (
         <div>
             <h2

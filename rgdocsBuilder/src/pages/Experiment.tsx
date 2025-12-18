@@ -5,6 +5,7 @@ import RGSlider from "../components/RGmodules/RGSlider";
 import RGPowerButton from "../components/RGmodules/RGPowerButton";
 import { useContextMenu } from "../components/tools/ContextMenuProvider";
 import PageHeaderText from "../components/pageModules/PageHeaderText";
+import RGSpeaker from "../components/RGmodules/RGSpeaker";
 
 //Experiment.tsx - a temporary page for testing things
 const Experiment: React.FC = () => {
@@ -98,6 +99,7 @@ const Experiment: React.FC = () => {
                     powerState={powerState}
                     type="64x64"
                 ></RGScreen>
+                <RGSpeaker></RGSpeaker>
             </div>
         </div>
     )
