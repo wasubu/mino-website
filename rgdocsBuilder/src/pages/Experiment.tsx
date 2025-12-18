@@ -4,7 +4,7 @@ import RGScreen from "../components/RGmodules/RGScreen";
 import RGSlider from "../components/RGmodules/RGSlider";
 import RGPowerButton from "../components/RGmodules/RGPowerButton";
 import { useContextMenu } from "../components/tools/ContextMenuProvider";
-import PageHeaderText from "../components/tools/PageHeaderText";
+import PageHeaderText from "../components/pageModules/PageHeaderText";
 
 //Experiment.tsx - a temporary page for testing things
 const Experiment: React.FC = () => {

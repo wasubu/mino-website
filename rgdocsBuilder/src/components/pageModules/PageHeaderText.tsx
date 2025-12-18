@@ -1,4 +1,4 @@
-import { useContextMenu } from "./ContextMenuProvider"
+import { useContextMenu } from "../tools/ContextMenuProvider"
 
 //PageHeaderText.tsx - a temporary page for testing things
 const PageHeaderText = ({ children, className }: {

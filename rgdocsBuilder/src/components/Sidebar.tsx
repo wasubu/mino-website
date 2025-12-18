@@ -16,23 +16,23 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
             <nav className={`h-full overflow-y-auto py-4 px-4 pt-37 ${scrollbarStyle}`}>
                 <ul className="space-y-1 pb-9">
                     <TopElement to="/">Welcome!</TopElement>
-                    <TopElement to="/introductory">Introductory</TopElement>
+                    {/* <TopElement to="/introductory">Introductory</TopElement> */}
                     <TopElement to="/experiment">Experiment</TopElement>
                     <TopElement to="/retro-gadget-tutorials">Retro Gadget Tutorials</TopElement>
                     <ElementGroup><ParentElement to="/misc-modules">Misc Modules</ParentElement>
                         <ul className={indentedItems}>
                             <IndentedElement to="/cpu">CPU</IndentedElement>
-                            <IndentedElement to="/videochip">Video Chip</IndentedElement>
-                            <IndentedElement to="/wifichip">Wifi Chip</IndentedElement>
+                            {/* <IndentedElement to="/videochip">Video Chip</IndentedElement> */}
+                            {/* <IndentedElement to="/wifichip">Wifi Chip</IndentedElement> */}
                             <IndentedElement to="/audiochip">Audio Chip</IndentedElement>
-                            <IndentedElement to="/rom">ROM</IndentedElement>
-                            <IndentedElement to="/realitychip">Reality Chip</IndentedElement>
+                            {/* <IndentedElement to="/rom">ROM</IndentedElement> */}
+                            {/* <IndentedElement to="/realitychip">Reality Chip</IndentedElement> */}
                             <IndentedElement to="/keyboardchip">Keyboard Chip</IndentedElement>
-                            <IndentedElement to="/gamepadchip">Gamepad Chip</IndentedElement>
-                            <IndentedElement to="/magneticconnector">Magnetic Connector</IndentedElement>
-                            <IndentedElement to="/securitychip">Security Chip</IndentedElement>
-                            <IndentedElement to="/serial">Serial</IndentedElement>
-                            <IndentedElement to="/decoration">Decoration</IndentedElement>
+                            {/* <IndentedElement to="/gamepadchip">Gamepad Chip</IndentedElement> */}
+                            {/* <IndentedElement to="/magneticconnector">Magnetic Connector</IndentedElement> */}
+                            {/* <IndentedElement to="/securitychip">Security Chip</IndentedElement> */}
+                            {/* <IndentedElement to="/serial">Serial</IndentedElement> */}
+                            {/* <IndentedElement to="/decoration">Decoration</IndentedElement> */}
                             <IndentedElement to="/powerbutton">Power Button</IndentedElement>
                         </ul>
                     </ElementGroup>
@@ -40,28 +40,28 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
                         <ul className={indentedItems}>
                             <IndentedElement to="/led">Led</IndentedElement>
                             <IndentedElement to="/ledmatrix">Led Matrix</IndentedElement>
-                            <IndentedElement to="/flashmemory">Flash Memory</IndentedElement>
+                            {/* <IndentedElement to="/flashmemory">Flash Memory</IndentedElement> */}
                             <IndentedElement to="/speaker">Speaker</IndentedElement>
-                            <IndentedElement to="/ledstrip">Led Strip</IndentedElement>
-                            <IndentedElement to="/segmentdisplay">Segment Display</IndentedElement>
-                            <IndentedElement to="/analogguage">Analog Guage</IndentedElement>
-                            <IndentedElement to="/lcddisplay">Lcd Display</IndentedElement>
+                            {/* <IndentedElement to="/ledstrip">Led Strip</IndentedElement> */}
+                            {/* <IndentedElement to="/segmentdisplay">Segment Display</IndentedElement> */}
+                            {/* <IndentedElement to="/analogguage">Analog Guage</IndentedElement> */}
+                            {/* <IndentedElement to="/lcddisplay">Lcd Display</IndentedElement> */}
                         </ul>
                     </ElementGroup>
                     <ElementGroup><ParentElement to="/input-modules">Input Modules</ParentElement>
                         <ul className={indentedItems}>
                             <IndentedElement to="/dpad">Dpad</IndentedElement>
                             <IndentedElement to="/slider">Slider</IndentedElement>
-                            <IndentedElement to="/switch">Switch</IndentedElement>
+                            {/* <IndentedElement to="/switch">Switch</IndentedElement> */}
                             <IndentedElement to="/knob">Knob</IndentedElement>
-                            <IndentedElement to="/analogstick">Analog Stick</IndentedElement>
+                            {/* <IndentedElement to="/analogstick">Analog Stick</IndentedElement> */}
                             <IndentedElement to="/keypad">Keypad</IndentedElement>
                             <IndentedElement to="/ledbutton">Led Button</IndentedElement>
-                            <IndentedElement to="/webcam">Webcam</IndentedElement>
+                            {/* <IndentedElement to="/webcam">Webcam</IndentedElement> */}
                             <IndentedElement to="/screenbutton">Screen Button</IndentedElement>
                         </ul>
                     </ElementGroup>
-                    <TopElement to="/rgassets">RG Assets</TopElement>
+                    {/* <TopElement to="/rgassets">RG Assets</TopElement> */}
                 </ul>
             </nav >
         </div>

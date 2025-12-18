@@ -1,4 +1,4 @@
-import PageHeaderText from "../../components/tools/PageHeaderText";
+import PageHeaderText from "../../components/pageModules/PageHeaderText";
 
 const OutputModules: React.FC = () => {
     return (

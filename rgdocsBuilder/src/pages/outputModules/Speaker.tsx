@@ -1,4 +1,4 @@
-import PageHeaderText from "../../components/tools/PageHeaderText";
+import PageHeaderText from "../../components/pageModules/PageHeaderText";
 
 const Speaker: React.FC = () => {
     return (

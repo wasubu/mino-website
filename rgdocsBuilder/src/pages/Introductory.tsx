@@ -1,4 +1,4 @@
-import PageHeaderText from "../components/tools/PageHeaderText";
+import PageHeaderText from "../components/pageModules/PageHeaderText";
 
 //Introductory.tsx - beginner guide
 const Introductory: React.FC = () => {

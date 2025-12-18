@@ -1,4 +1,4 @@
-import PageHeaderText from "../components/tools/PageHeaderText";
+import PageHeaderText from "../components/pageModules/PageHeaderText";
 
 //RetroGadgetTutorial.tsx - here find other third party tutorials
 const Welcome: React.FC = () => {

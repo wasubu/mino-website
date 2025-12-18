@@ -37,18 +37,21 @@ To do list:
 [x] - don't use canvas or pixijs, just use react for interactive components
 [x] - include every module on the sidebar
 [x] - put a comment in each page of what the file name is
+[x] - put your logo in the right click menu
 
 [ ] - module dedicated page
 [ ] - new sidebar tab where you can search
 [ ] - right click to access settings like dark mode. It has nice UI
 [ ] - on the welcome's module, try to make the slider animate
-[ ] - put your logo in the right click menu
 [ ] - "how to play" section, this section is special cause it's a slideshow
+[ ] - think of a way to make right click menu be more unique
 [ ] - lua will be included in the docs, luau too
 [ ] - make the background of context menu slightly transparent
+[ ] - inert html for making right click not interact with other
 [ ] - finalize footer
 [ ] - make this installable on android devices
 [ ] - openning the sidebar will jump and scroll to the current pages route
+[ ] - on the welcome page there will be two shapes, orange on the left bottom and green on the top left, I'm thinking making it parallax
 [ ] - the two sidebar doesn't share the scroll location
 [ ] - the context menu show items with a togle mark like darkmode
 [ ] - dark mode support
