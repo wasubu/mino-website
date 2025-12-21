@@ -5,13 +5,19 @@ import ScreenFrame64by36 from "../../assets/screenFrame64by32.png"
 import ScreenMain64by64 from "../../assets/screenMain64by64.png"
 import ScreenFrame64by64 from "../../assets/screenFrame64by64.png"
 
-type ScreenType = "64x36" | "64x64";
+import ScreenMain40by40 from "../../assets/screenMain40by40.png"
+import ScreenFrame40by40 from "../../assets/screenFrame40by40.png"
+
+type ScreenType = "64x36" | "64x64" | "40x40";
 
 const SCREEN_CONFIG: Record<ScreenType, {
     width: number
     height: number
     bodyImg: string
     frameImg: string
+    bodyScaleOffset?: number
+    frameYoffset?: number
+    frameScaleOffset?: number
 }> = {
     "64x36": {
         width: 64, height: 36,
@@ -22,6 +28,14 @@ const SCREEN_CONFIG: Record<ScreenType, {
         width: 64, height: 64,
         bodyImg: ScreenMain64by64,
         frameImg: ScreenFrame64by64
+    },
+    "40x40": {
+        width: 40, height: 40,
+        bodyImg: ScreenMain40by40,
+        frameImg: ScreenFrame40by40,
+        bodyScaleOffset: 7,
+        frameYoffset: 0,
+        frameScaleOffset: 7
     }
 }
 
@@ -59,7 +73,11 @@ const RGScreen: React.FC<{
        relative shrink-0`
     )
 
-    const { width, height, bodyImg, frameImg } = SCREEN_CONFIG[type]
+    const {
+        width, height, bodyImg, frameImg,
+        frameYoffset = 2, bodyScaleOffset = 6,
+        frameScaleOffset = 2
+    } = SCREEN_CONFIG[type]
     return (
         <div className={mainStyle} style={{
             width: (width + 5) * moduleScale,
@@ -70,7 +88,7 @@ const RGScreen: React.FC<{
                 draggable={false}
                 style={{
                     imageRendering: "pixelated",
-                    height: (height + 6) * moduleScale
+                    height: (height + bodyScaleOffset) * moduleScale
                 }}
             />
             <DrawCanvas powerState={powerState} width={width} height={height} scale={moduleScale} draw={draw}></DrawCanvas>
@@ -79,8 +97,8 @@ const RGScreen: React.FC<{
                 draggable={false}
                 style={{
                     imageRendering: "pixelated",
-                    height: (height + 2) * moduleScale,
-                    top: 2 * moduleScale
+                    height: (height + frameScaleOffset) * moduleScale,
+                    top: frameYoffset * moduleScale
                 }}
                 className="absolute pointer-events-none"
             />
@@ -88,7 +106,9 @@ const RGScreen: React.FC<{
     )
 }
 
-function DrawCanvas({ scale, width, height, draw, powerState = false }: {
+function DrawCanvas({
+    scale, width, height, draw, powerState = false
+}: {
     scale: number
     draw: (
         vid: CanvasRenderingContext2D,

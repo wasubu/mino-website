@@ -3,13 +3,13 @@ import RGDraw from "../lib/RGdraw";
 import RGScreen from "../components/RGmodules/RGScreen";
 import RGSlider from "../components/RGmodules/RGSlider";
 import RGPowerButton from "../components/RGmodules/RGPowerButton";
-import { useContextMenu } from "../components/tools/ContextMenuProvider";
+// import { useContextMenu } from "../components/tools/ContextMenuProvider";
 import PageHeaderText from "../components/pageModules/PageHeaderText";
 import RGSpeaker from "../components/RGmodules/RGSpeaker";
 
 //Experiment.tsx - a temporary page for testing things
 const Experiment: React.FC = () => {
-    const { openMenu } = useContextMenu()
+    // const { openMenu } = useContextMenu()
 
     const [powerState, setPowerState] = useState(true)
     const [slider1, setSlider1] = useState(0)
@@ -22,7 +22,7 @@ const Experiment: React.FC = () => {
     useEffect(() => { slider2Ref.current = slider2 }, [slider2])
 
     const screen1Vars = useRef<Screen1Vars>({
-        posX: 0,
+        posX: 16,
         posY: 0,
         velX: 1,  // Start moving right
         velY: 1,  // Start moving down
@@ -42,7 +42,7 @@ const Experiment: React.FC = () => {
     useEffect(() => {
         if (!powerState) {
             screen1Vars.current = {
-                posX: 0,
+                posX: 16,
                 posY: 0,
                 velX: 1,
                 velY: 1,
@@ -82,6 +82,7 @@ const Experiment: React.FC = () => {
                 </div>
                 <RGScreen className=""
                     powerState={powerState}
+                    type="40x40"
                     draw={
                         (vid, t, screen) =>
                             drawScreen1(vid, t, slider1Ref.current, slider2Ref.current, screen1Vars.current, screen)
@@ -132,13 +133,14 @@ const drawScreen1 = (
     self: Screen1Vars,
     screen: ScreenInfo
 ) => {
+    t *= 0.4
     let { posX, posY, velX, velY, hue, hueOffset } = self
     hue = hueSlider * 2.2012
     if (hue > 360) hue -= 360;
     vid.fillStyle = `black`;
     vid.fillRect(0, 0, screen.width, screen.height);
 
-    const speedFactor = 0.05 + speedSlider / 50;
+    const speedFactor = 0.05 + speedSlider / 50
     let currentVelX = velX > 0 ? speedFactor : -speedFactor;
     let currentVelY = velY > 0 ? speedFactor : -speedFactor;
 
@@ -150,7 +152,7 @@ const drawScreen1 = (
     if (posY < 0) { posY = 0; velY = speedFactor; }
     if (posY > screen.height - 6) { posY = screen.height - 6; velY = -speedFactor; }
 
-    const amplitude = 18 * hueSlider / 164;
+    const amplitude = 95 - (28 * hueSlider / 164)
     const frequency = 0.1 * speedSlider / 164 + 0.05;
     const phase = t;
     const centerY = screen.height / 2;
